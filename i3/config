@@ -1,0 +1,235 @@
+# i3 config file (v4)
+#
+# Please see http://i3wm.org/docs/userguide.html for a complete reference!
+
+set $mod Mod1
+
+# Font for window titles. Will also be used by the bar unless a different font
+# is used in the bar {} block below.
+font pango:monospace 8
+
+# This font is widely installed, provides lots of unicode glyphs, right-to-left
+# text rendering and scalability on retina/hidpi displays (thanks to pango).
+#font pango:DejaVu Sans Mono 8
+
+# Before i3 v4.8, we used to recommend this one as the default:
+# font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
+# The font above is very space-efficient, that is, it looks good, sharp and
+# clear in small sizes. However, its unicode glyph coverage is limited, the old
+# X core fonts rendering does not support right-to-left and this being a bitmap
+# font, it doesn’t scale on retina/hidpi displays.
+
+# Use Mouse+$mod to drag floating windows to their wanted position
+floating_modifier $mod
+
+###############################################################################
+# Selection
+###############################################################################
+
+# start a terminal
+#bindsym $mod+Return exec i3-sensible-terminal
+bindsym $mod+Return exec konsole
+
+# start dmenu (a program launcher)
+bindsym $mod+BackSpace exec dmenu_run
+bindsym Super_L exec dmenu_run
+
+# split containers
+bindsym $mod+r split h; layout tabbed
+bindsym $mod+e split h
+bindsym $mod+w split v
+
+# change container layout (stacked, tabbed, toggle split)
+#bindsym $mod+s layout stacking
+bindsym $mod+f layout tabbed
+bindsym $mod+d layout splith
+bindsym $mod+s layout splitv
+
+# change focus with VIM/arrow keys
+bindsym $mod+h focus left
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+l focus right
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+
+# Cycle next/prev/new workspace on output
+bindsym $mod+u workspace next_on_output
+bindsym $mod+i workspace prev_on_output
+bindsym $mod+o exec --no-startup-id ~/.config/i3/new-workspace.sh
+
+# focus the parent/child/float
+bindsym $mod+n focus parent
+bindsym $mod+m focus child
+bindsym $mod+b focus mode_toggle
+
+# Change monitor
+bindsym $mod+space focus output left
+
+
+###############################################################################
+# Repositioning
+###############################################################################
+
+# move window with VIM/arrow keys
+bindsym $mod+Shift+h move left
+bindsym $mod+Shift+j move down
+bindsym $mod+Shift+k move up
+bindsym $mod+Shift+l move right
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+# Move to next/prev/new workspace
+bindsym $mod+Shift+u move container to workspace next_on_output; workspace next_on_output
+bindsym $mod+Shift+i move container to workspace prev_on_output; workspace prev_on_output
+bindsym $mod+Shift+o exec --no-startup-id ~/.config/i3/move-to-new-workspace.sh
+
+# toggle tiling/floating
+bindsym $mod+Shift+b floating toggle
+
+# Move Container to next ouput
+bindsym $mod+Shift+BackSpace move container to output left; focus output left
+
+# enter fullscreen mode for the focused container
+bindsym $mod+Shift+Return fullscreen toggle
+
+# move focused workspace to other screen
+bindsym $mod+Shift+space move workspace to output left
+
+# kill focused window
+bindsym $mod+Shift+q kill
+# reload the configuration file
+bindsym $mod+Shift+c reload
+# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
+bindsym $mod+Shift+r restart
+# exit i3 (logs you out of your X session)
+bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'Do you really want to exit i3 and end your X session?' -b 'Yes, exit i3' 'i3-msg exit'"
+
+
+##############################################################################
+# Resize Mode
+##############################################################################
+# resize window (you can also use the mouse for that)
+mode "resize" {
+        # These bindings trigger as soon as you enter the resize mode
+
+        # Pressing left will shrink the window’s width.
+        # Pressing right will grow the window’s width.
+        # Pressing up will shrink the window’s height.
+        # Pressing down will grow the window’s height.
+        bindsym h resize shrink width 10 px or 10 ppt
+        bindsym j resize grow height 10 px or 10 ppt
+        bindsym k resize shrink height 10 px or 10 ppt
+        bindsym l resize grow width 10 px or 10 ppt
+
+        # same bindings, but for the arrow keys
+        bindsym Left resize shrink width 10 px or 10 ppt
+        bindsym Down resize grow height 10 px or 10 ppt
+        bindsym Up resize shrink height 10 px or 10 ppt
+        bindsym Right resize grow width 10 px or 10 ppt
+
+        # back to normal: Enter or Escape
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+		bindsym Tab mode "default"
+		bindsym $mod+Tab mode "default"
+}
+
+bindsym $mod+Tab mode "resize"
+
+
+##############################################################################
+# Workspace Mode
+##############################################################################
+
+# Switch to workspaces with number keys
+bindsym $mod+1 workspace number 1
+bindsym $mod+2 workspace number 2
+bindsym $mod+3 workspace number 3
+bindsym $mod+4 workspace number 4
+bindsym $mod+5 workspace number 5
+bindsym $mod+6 workspace number 6
+bindsym $mod+7 workspace number 7
+bindsym $mod+8 workspace number 8
+bindsym $mod+9 workspace number 9
+bindsym $mod+0 workspace number 0
+
+# move focused container to workspace with number keys
+bindsym $mod+Shift+1 move container to workspace number 1
+bindsym $mod+Shift+2 move container to workspace number 2
+bindsym $mod+Shift+3 move container to workspace number 3
+bindsym $mod+Shift+4 move container to workspace number 4
+bindsym $mod+Shift+5 move container to workspace number 5
+bindsym $mod+Shift+6 move container to workspace number 6
+bindsym $mod+Shift+7 move container to workspace number 7
+bindsym $mod+Shift+8 move container to workspace number 8
+bindsym $mod+Shift+9 move container to workspace number 9
+bindsym $mod+Shift+0 move container to workspace number 0
+
+# Assign specific workspaces
+#Doesn't seem work
+#assign [class="com-mathworks-util-PostVMInit" title="^Fig"] 0 Figures
+
+mode "workspace mode" {
+	# Change to workspace
+	bindsym a workspace number 1
+	bindsym s workspace number 2
+	bindsym d workspace number 3
+	bindsym f workspace number 4
+	bindsym g workspace number 5
+	bindsym h workspace number 6
+	bindsym j workspace number 7
+	bindsym k workspace number 8
+	bindsym l workspace number 9
+	bindsym odiaeresis workspace number 0
+
+	# Move container to workspace 
+	bindsym q move container to workspace number 1
+	bindsym w move container to workspace number 2
+	bindsym e move container to workspace number 3
+	bindsym r move container to workspace number 4
+	bindsym t move container to workspace number 5
+	bindsym y move container to workspace number 6
+	bindsym u move container to workspace number 7
+	bindsym i move container to workspace number 8
+	bindsym o move container to workspace number 9
+	bindsym p move container to workspace number 0
+
+	# Exit out of workspace mode
+	bindsym Escape mode "default"
+	bindsym Return mode "default"
+}
+
+bindsym $mod+Escape mode "workspace mode"
+
+
+
+##############################################################################
+# General System Stuff
+##############################################################################
+
+# Setup monitor layout
+exec --no-startup-id xrandr --output HDMI-1 --primary --right-of HDMI-2
+
+# Set mouse speed
+exec --no-startup-id xset m 1 0
+exec --no-startup-id xinput --set-prop 'Logitech USB-PS/2 Optical Mouse' 'libinput Accel Profile Enabled' 0 1
+exec --no-startup-id xinput --set-prop 'Logitech USB-PS/2 Optical Mouse' 'Coordinate Transformation Matrix' 1.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 1.0
+
+#Volume control
+bindsym XF86AudioRaiseVolume exec amixer -q -D pulse set Master 2.5%+
+bindsym XF86AudioLowerVolume exec amixer -q -D pulse set Master 2.5%-
+
+#Keyboard layout
+#bindsym $mod+Mod1+Shift+Control+e exec setxkbmap gb
+#bindsym $mod+Mod1+Shift+Control+s exec setxkbmap se
+
+# Start i3bar to display a workspace bar (plus the system information i3status
+# finds out, if available)
+bar {
+        status_command i3status
+}
