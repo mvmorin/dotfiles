@@ -1,0 +1,12 @@
+" Main dispatch script, performs som simple setup to keep things portable then
+" calls sub-scripts
+let $MYVIMRUNTIME = fnamemodify(expand("$MYVIMRC"), ":p:h")
+set nocompatible	"Needed by vundle and needs to be set before viminfo
+filetype off		"Needed by vundle
+set viminfo+=n$MYVIMRUNTIME/.viminfo
+
+
+"Call sub-scripts
+source $MYVIMRUNTIME/man_plugins.vimrc "Make sure all plugins are loaded first
+source $MYVIMRUNTIME/style.vimrc
+source $MYVIMRUNTIME/behaviour.vimrc
