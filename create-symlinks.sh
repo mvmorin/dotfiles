@@ -28,4 +28,4 @@ for file in $files; do
 	ln -s $dir/$file ~/$file
 done
 
-echo -e "\nDone, delete $oldir if everything is ok."
+echo -e "\nDone, delete $olddir if everything is ok."
