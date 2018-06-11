@@ -58,7 +58,7 @@ bindsym $mod+Right focus right
 # Cycle next/prev/new workspace on output
 bindsym $mod+u workspace next_on_output
 bindsym $mod+i workspace prev_on_output
-bindsym $mod+o exec --no-startup-id ~/.config/i3/new-workspace.sh
+bindsym $mod+o exec --no-startup-id ~/.i3/new-workspace.sh
 
 # focus the parent/child/float
 bindsym $mod+n focus parent
@@ -86,7 +86,7 @@ bindsym $mod+Shift+Right move right
 # Move to next/prev/new workspace
 bindsym $mod+Shift+u move container to workspace next_on_output; workspace next_on_output
 bindsym $mod+Shift+i move container to workspace prev_on_output; workspace prev_on_output
-bindsym $mod+Shift+o exec --no-startup-id ~/.config/i3/move-to-new-workspace.sh
+bindsym $mod+Shift+o exec --no-startup-id ~/.i3/move-to-new-workspace.sh
 
 # toggle tiling/floating
 bindsym $mod+Shift+b floating toggle
