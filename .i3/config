@@ -2,7 +2,7 @@
 #
 # Please see http://i3wm.org/docs/userguide.html for a complete reference!
 
-set $mod Mod1
+set $mod Mod4
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
@@ -32,7 +32,6 @@ bindsym $mod+Return exec konsole
 
 # start dmenu (a program launcher)
 bindsym $mod+BackSpace exec dmenu_run
-bindsym Super_L exec dmenu_run
 
 # split containers
 bindsym $mod+e split h; layout tabbed
@@ -212,7 +211,7 @@ bindsym $mod+minus mode "workspace mode"
 ##############################################################################
 
 # Setup monitor layout
-exec --no-startup-id xrandr --output HDMI-1 --primary --right-of HDMI-2
+exec --no-startup-id xrandr --output HDMI-1 --primary --output HDMI-2 --pos -1200x-40 --rotate left
 
 # Set mouse speed
 exec --no-startup-id xset m 1 0
