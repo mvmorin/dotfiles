@@ -206,13 +206,8 @@ bindsym $mod+minus mode "workspace mode"
 # General System Stuff
 ##############################################################################
 
-# Setup monitor layout
-exec --no-startup-id xrandr --output HDMI-1 --primary --output HDMI-2 --pos -1200x-40 --rotate left
-
-# Set mouse speed
-exec --no-startup-id xset m 1 0
-exec --no-startup-id xinput --set-prop 'Logitech USB-PS/2 Optical Mouse' 'libinput Accel Profile Enabled' 0 1
-exec --no-startup-id xinput --set-prop 'Logitech USB-PS/2 Optical Mouse' 'Coordinate Transformation Matrix' 1.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 1.0
+# Machine specific setup (monitor, mouse etc.)
+exec --no-startup-id ~/.i3/pcsettings.sh
 
 #Volume control
 bindsym XF86AudioRaiseVolume exec amixer -q -D pulse set Master 2.5%+
