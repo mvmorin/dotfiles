@@ -8,7 +8,7 @@
 ########## Variables
 dir=~/dotfiles                    # dotfiles directory
 olddir=~/dotfiles_old             # old dotfiles backup directory
-files=".bashrc .bash_profile .vim .i3"    # list of files/folders to symlink
+files=".bashrc .bash_profile .vim .i3 .julia/config/startup.jl"    # list of files/folders to symlink
 
 ##########
 
