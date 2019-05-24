@@ -3,6 +3,7 @@ atreplinit() do repl
 
 	ENV["PLOTS*DEFAULT*BACKEND"] = "GR"
 	@eval using Plots
+	@eval gr(color_palette=:darktest)
 	#@eval using LinearAlgebra
 	#@eval using BenchmarkTools
 
