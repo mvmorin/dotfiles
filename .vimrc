@@ -28,6 +28,13 @@ call plug#begin('~/.vim/plugged')
 	Plug 'mboughaba/i3config.vim' "May need some help identifying the filetype
 call plug#end()
 
+if has('Win32')
+	"Don't use cmd.exe on windows, make sure some sort of bash exists in path,
+	"git comes with a functional one
+	set shell=bash
+	set shellslash
+endif
+
 " Set colorscheme
 set termguicolors
 set bg=dark
