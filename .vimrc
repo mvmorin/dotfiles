@@ -35,9 +35,9 @@ set bg=dark
 "let g:gruvbox_contrast_dark='hard' | colo gruvbox
 "colo nord
 "colo dracula
-colo onedark
+"colo onedark
 "colo neodark
-"colo OceanicNext
+colo OceanicNext
 "colo solarized
 
 
