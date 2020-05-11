@@ -1,4 +1,4 @@
-"Remove vi, compatibility first since it overrides a bunch of settings
+"Remove vi compatibility first since it overrides a bunch of settings
 set nocompatible
 
 let mapleader=" "
@@ -7,11 +7,8 @@ let mapleader=" "
 set rtp+=$HOME/.vim
 set viminfo+=n$HOME/.vim/.viminfo
 
-" Load plugins, using vim-plug, see github.com/junegunn/vim-plug
-" Script located in .vim/autoload
-" :PlugInstall to install
-" :PlugUpdate to update
-" :PlugClean to remove old packages
+" Load plugins, using vim-plug, see github.com/junegunn/vim-plug. Script located
+" in .vim/autoload. Commands :PlugInstall, :PlugUpdate, :PlugClean
 call plug#begin('~/.vim/plugged')
 
 	" Colorschemes to try out
@@ -53,7 +50,6 @@ set encoding=utf-8
 filetype plugin indent on
 syntax on
 set backspace=indent,eol,start
-set cursorline
 
 "Setup tabs
 set tabstop=4
@@ -63,7 +59,6 @@ set noexpandtab
 
 "Setup textwidth
 set textwidth=80 "Insert newline after <textwidth>
-set colorcolumn=80
 set wrap "Virtual wrap to window size
 set linebreak "wrap at full words
 set breakindent "match wrap to indent level
@@ -73,11 +68,13 @@ set showbreak=>
 set showmatch "Flash matching bracket
 set matchtime=5
 set incsearch
-set hlsearch
+"set hlsearch
 set ignorecase
 set smartcase
 
 "Set status, gui-options and decorations
+set cursorline
+let &colorcolumn=&textwidth
 set number relativenumber
 set showcmd
 set laststatus=2
@@ -92,7 +89,7 @@ set statusline+=%=
 set statusline+=Line:\ %l\/%L\ Col:\ %c\/%{&textwidth}\ "
 
 "netrw setup
-let g:netrw_banner = 1
+let g:netrw_banner = 0
 let g:netrw_hide = 0
 let g:netrw_liststyle = 3
 
