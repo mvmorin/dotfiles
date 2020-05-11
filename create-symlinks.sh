@@ -6,11 +6,10 @@
 ############################
 
 ########## Variables
-dir=~/dotfiles                    # dotfiles directory
-olddir=~/dotfiles_old             # old dotfiles backup directory
-files=".bashrc .bash_profile .vim .i3 .julia/config/startup.jl"    # list of files/folders to symlink
+dir=~/dotfiles
+olddir=~/dotfiles_old
+files=".bashrc .bash_profile .vimrc .vim .i3 .julia/config/startup.jl"
 
-##########
 
 # create dotfiles_old in homedir
 echo "Creating $olddir for backup of any existing dotfiles."
@@ -20,7 +19,7 @@ mkdir -p $olddir
 cd $dir
 
 # move any existing dotfiles in homedir to dotfiles_old directory, then create
-# symlinks 
+# symlinks
 echo -e "\nCreating symlink to dotfiles, backing up any already existing files."
 for file in $files; do
 	mv ~/$file ~/dotfiles_old/
