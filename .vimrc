@@ -161,4 +161,5 @@ augroup netrw_key_bindings
 	autocmd!
 	autocmd FileType netrw map <buffer> + gn
 	autocmd FileType netrw noremap <buffer> <leader>e :Rexplore<CR>
+	autocmd FileType netrw noremap <buffer> cd exec 'cd' b:netrw_curdir
 augroup END
