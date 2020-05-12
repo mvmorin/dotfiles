@@ -1,4 +1,4 @@
-"Remove vi compatibility first since it overrides a bunch of settings
+" Remove vi compatibility first since it overrides a bunch of settings
 set nocompatible
 
 let mapleader=" "
@@ -48,30 +48,31 @@ colo OceanicNext
 "colo solarized
 
 
-"ToDo: Autoindenting/formatting, commenting/folding, short cuts, spellchecking,
-"file search (ctrlp?), basic gitintegration, marks
+" ToDo: Autoindenting/formatting, commenting/folding, spellchecking, file search
+" (ctrlp?), basic gitintegration, marks
 
-"Basics
+
+" Basics
 set fileformats=unix,dos "Set default fileformat order
 set encoding=utf-8
 filetype plugin indent on
 syntax on
 set backspace=indent,eol,start
 
-"Setup tabs
+" Setup tabs
 set tabstop=4
 set shiftwidth=4
 set softtabstop=4
 set noexpandtab
 
-"Setup textwidth
+" Setup textwidth
 set textwidth=80 "Insert newline after <textwidth>
 set wrap "Virtual wrap to window size
 set linebreak "wrap at full words
 set breakindent "match wrap to indent level
 set showbreak=>
 
-"Search, highlight etc
+" Search, highlight etc
 set showmatch "Flash matching bracket
 set matchtime=5
 set incsearch
@@ -79,7 +80,7 @@ set incsearch
 set ignorecase
 set smartcase
 
-"Set status, gui-options and decorations
+" Set status, gui-options and decorations
 set cursorline
 let &colorcolumn=&textwidth
 set number relativenumber
@@ -88,36 +89,76 @@ set laststatus=2
 if has('gui_running')
 	set guioptions-=m "Remove menu bar
 	set guioptions-=T "Remove toolbar
-	set lines=45 columns=100
+"	set lines=45 columns=100
 	set guifont=Consolas:h11
 endif
 set statusline=%m\ %n)\ %f\ %y\/[%{&ff}]\ %L\ lines
 set statusline+=%=
 set statusline+=Line:\ %l\/%L\ Col:\ %c\/%{&textwidth}\ "
 
-"netrw setup
+" netrw setup
 let g:netrw_banner = 0
-let g:netrw_hide = 0
 let g:netrw_liststyle = 3
 
-"Command auto completion
+" Command auto completion
 set wildmode=longest,list,full
 
-"Open new splits below or to the right
-set splitbelow splitright
-
-"No bell
+" No bell
 set belloff=all
 
-"Remove trailing whitespaces
-autocmd BufWritePre * %s/\s\+$//e
+" Copy to system clipboard
+vnoremap <leader>y "*Y :let @+=@*<CR>
+nnoremap <leader>p "*]p
 
-"Copy to system clipboard
-vnoremap <C-c> "*Y :let @+=@*<CR>
-nnoremap <C-v> "*]p
+" Simple cd to file dir
+command Cd cd %:p:h
 
-"Working with buffers
+" Shift lines width auto indent
+vnoremap J :m '>+1<CR>gv=gv
+vnoremap K :m '<-2<CR>gv=gv
+
+" Windows
+set splitbelow splitright
+nnoremap <leader>h <C-w>h
+nnoremap <leader>j <C-w>j
+nnoremap <leader>k <C-w>k
+nnoremap <leader>l <C-w>l
+
+nnoremap <leader>H <C-w>H
+nnoremap <leader>J <C-w>J
+nnoremap <leader>K <C-w>K
+nnoremap <leader>L <C-w>L
+
+nnoremap <leader>= <C-w>=
+nnoremap <leader><CR> <C-w><bar>
+nnoremap <C-h> <C-w>2<
+nnoremap <C-l> <C-w>2>
+nnoremap <C-j> <C-w>2-
+nnoremap <C-k> <C-w>2+
+
+" Buffers
 set hidden
+nnoremap <leader>y :b#<CR>
+nnoremap <leader>u :bn<CR>
+nnoremap <leader>i :bp<CR>
+command Bd b#<bar>bd#
 
-"File specific stuff
-autocmd FileType tex setlocal textwidth=0 cc=0 spell spelllang=en_us
+augroup file_specific_formating
+	autocmd!
+	autocmd FileType tex setlocal textwidth=0 cc=0 spell spelllang=en_us
+augroup END
+
+augroup file_pre_post_processing
+	autocmd!
+	"Remove trailing whitespaces
+	autocmd BufWritePre * %s/\s\+$//e
+augroup END
+
+" netrw hack. Need to interact with netrw in order to call Rexplore. This
+" interaction I deem safe.
+nmap <leader>e :Explore<CR> /\.\.\/<CR>j<CR>
+augroup netrw_key_bindings
+	autocmd!
+	autocmd FileType netrw map <buffer> + gn
+	autocmd FileType netrw noremap <buffer> <leader>e :Rexplore<CR>
+augroup END
