@@ -96,9 +96,6 @@ set statusline=%m\ %n)\ %f\ %y\/[%{&ff}]\ %L\ lines
 set statusline+=%=
 set statusline+=Line:\ %l\/%L\ Col:\ %c\/%{&textwidth}\ "
 
-" netrw setup
-let g:netrw_banner = 0
-let g:netrw_liststyle = 3
 
 " Command auto completion
 set wildmode=longest,list,full
@@ -154,12 +151,17 @@ augroup file_pre_post_processing
 	autocmd BufWritePre * %s/\s\+$//e
 augroup END
 
-" netrw hack. Need to interact with netrw in order to call Rexplore. This
-" interaction I deem safe.
-nmap <leader>e :Explore<CR> /\.\.\/<CR>j<CR>
+" netrw setup
+nnoremap <leader>e :Lexplore<CR>
+let g:netrw_banner = 0
+let g:netrw_liststyle = 3
 augroup netrw_key_bindings
 	autocmd!
-	autocmd FileType netrw map <buffer> + gn
-	autocmd FileType netrw noremap <buffer> <leader>e :Rexplore<CR>
-	autocmd FileType netrw noremap <buffer> cd exec 'cd' b:netrw_curdir
+	autocmd FileType netrw vert resize 35
+	autocmd FileType netrw setlocal cc=0
+	autocmd FileType netrw nmap <buffer> + gn
+	autocmd FileType netrw nnoremap <buffer> cd :exec 'cd' b:netrw_curdir<CR>
+	autocmd FileType netrw nnoremap <buffer> <C-h> <C-w>2<
+	autocmd FileType netrw nnoremap <buffer> <C-l> <C-w>2>
 augroup END
+
