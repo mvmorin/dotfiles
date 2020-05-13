@@ -4,7 +4,7 @@ set nocompatible
 let mapleader=" "
 
 " Set paths for compability with both unix and windows, before loading plugins
-set rtp+=$HOME/.vim
+set rtp^=$HOME/.vim
 set viminfo+=n$HOME/.vim/.viminfo
 
 " Load plugins, using vim-plug, see github.com/junegunn/vim-plug. Script located
@@ -20,6 +20,7 @@ call plug#begin('~/.vim/plugged')
 	Plug 'KeitaNakamura/neodark.vim'
 	Plug 'mhartington/oceanic-next'
 	Plug 'altercation/vim-colors-solarized'
+	Plug 'tomasiser/vim-code-dark'
 
 	"Special formating
 "	Plug 'whatyouhide/vim-lengthmatters'
@@ -46,6 +47,7 @@ colo nord
 "colo neodark
 "colo OceanicNext
 "colo solarized
+"colo codedark
 
 
 " ToDo: Autoindenting/formatting, commenting/folding, spellchecking, file search
@@ -142,7 +144,8 @@ command Bd b#<bar>bd#
 
 augroup file_specific_formating
 	autocmd!
-	autocmd FileType tex setlocal textwidth=0 cc=0 spell spelllang=en_us
+	autocmd FileType tex setlocal textwidth=0 cc=0 spell spelllang=en_us,sv_se
+	autocmd FileType markdown setlocal spell spelllang=en_us,sv_se
 augroup END
 
 augroup file_pre_post_processing
