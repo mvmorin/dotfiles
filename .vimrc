@@ -40,11 +40,11 @@ set termguicolors
 set bg=dark
 "colo desert "semi-decent default
 "let g:gruvbox_contrast_dark='hard' | colo gruvbox
-"colo nord
+colo nord
 "colo dracula
 "colo onedark
 "colo neodark
-colo OceanicNext
+"colo OceanicNext
 "colo solarized
 
 
@@ -128,10 +128,10 @@ nnoremap <leader>L <C-w>L
 
 nnoremap <leader>= <C-w>=
 nnoremap <leader><CR> <C-w><bar>
-nnoremap <C-h> <C-w>2<
-nnoremap <C-l> <C-w>2>
-nnoremap <C-j> <C-w>2-
-nnoremap <C-k> <C-w>2+
+nnoremap <C-h> <C-w>5<
+nnoremap <C-l> <C-w>5>
+nnoremap <C-j> <C-w>5-
+nnoremap <C-k> <C-w>5+
 
 " Buffers
 set hidden
@@ -152,16 +152,13 @@ augroup file_pre_post_processing
 augroup END
 
 " netrw setup
-nnoremap <leader>e :Lexplore<CR>
-let g:netrw_banner = 0
+nnoremap <leader>e :Explore<CR>
+let g:netrw_banner=0
 let g:netrw_liststyle = 3
 augroup netrw_key_bindings
 	autocmd!
-	autocmd FileType netrw vert resize 35
+	autocmd FileType netrw nnoremap <buffer> <leader>e :Rexplore<CR>
 	autocmd FileType netrw setlocal cc=0
 	autocmd FileType netrw nmap <buffer> + gn
 	autocmd FileType netrw nnoremap <buffer> cd :exec 'cd' b:netrw_curdir<CR>
-	autocmd FileType netrw nnoremap <buffer> <C-h> <C-w>2<
-	autocmd FileType netrw nnoremap <buffer> <C-l> <C-w>2>
 augroup END
-
