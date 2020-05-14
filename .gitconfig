@@ -1,0 +1,15 @@
+[core]
+	autocrlf = input
+[user]
+	email = martin.morin@control.lth.se
+	name = Martin Morin
+[diff]
+	tool = vimdiff
+[difftool]
+	prompt = false
+[difftool "vimdiff"]
+	cmd = vimdiff +1 \"$REMOTE\" \"$LOCAL\"
+[merge]
+	tool = vimdiff
+[mergetool]
+	keepBackup = false
