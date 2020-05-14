@@ -155,7 +155,7 @@ augroup file_specific_formating
 	autocmd!
 	autocmd BufRead,BufNewFile *.tex, setlocal filetype=tex
 	autocmd FileType latex,tex,plaintex setlocal textwidth=0 cc=0 spell spelllang=en_us
-	autocmd FileType markdown setlocal spell spelllang=en_us,sv_se
+	autocmd FileType markdown setlocal spell spelllang=en_us,sv
 augroup END
 
 augroup file_pre_post_processing
