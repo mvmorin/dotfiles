@@ -22,16 +22,19 @@ call plug#begin('~/.vim/plugged')
 	Plug 'altercation/vim-colors-solarized'
 	Plug 'tomasiser/vim-code-dark'
 
-	"Special formating
-"	Plug 'whatyouhide/vim-lengthmatters'
-"	Plug 'sheerun/vim-polyglot' "Automatic downloading of language syntax pkgs
+	" Extensions
+	Plug 'tpope/vim-commentary' " gc+motion to comment/uncomment
+	Plug 'tpope/vim-fugitive' " :Git <command> to run git commands from vim
+
+	" Formatting and Syntax
+	Plug 'mboughaba/i3config.vim' " May need some help identifying the filetype
+"	Plug 'sheerun/vim-polyglot' " Automatic downloading of language syntax pkgs
 "	Plug 'JuliaEditorSupport/julia-vim'
-	Plug 'mboughaba/i3config.vim' "May need some help identifying the filetype
 call plug#end()
 
 if has('Win32')
-	"Don't use cmd.exe on windows, make sure some sort of bash exists in path,
-	"git comes with a functional one
+	" Don't use cmd.exe on windows, make sure some sort of bash exists in path,
+	" git comes with a functional one
 	set shell=bash
 	set shellslash
 endif
@@ -41,18 +44,17 @@ set termguicolors
 set bg=dark
 "colo desert "semi-decent default
 "let g:gruvbox_contrast_dark='hard' | colo gruvbox
-colo nord
+"colo nord
 "colo dracula
-"colo onedark
+colo onedark
 "colo neodark
 "colo OceanicNext
 "colo solarized
 "colo codedark
 
 
-" ToDo: Autoindenting/formatting, commenting/folding, spellchecking, file search
-" (ctrlp?), basic gitintegration, marks
-
+" ToLearn: Autoindenting/formatting, spellchecking, file search (ctrlp?), marks,
+" folding
 
 " Basics
 set fileformats=unix,dos "Set default fileformat order
@@ -60,6 +62,8 @@ set encoding=utf-8
 filetype plugin indent on
 syntax on
 set backspace=indent,eol,start
+set autoread
+set scrolloff=3
 
 " Setup tabs
 set tabstop=4
@@ -91,16 +95,21 @@ set laststatus=2
 if has('gui_running')
 	set guioptions-=m "Remove menu bar
 	set guioptions-=T "Remove toolbar
-"	set lines=45 columns=100
+	set lines=45 columns=100
 	set guifont=Consolas:h11
 endif
 set statusline=%m\ %n)\ %f\ %y\/[%{&ff}]\ %L\ lines
 set statusline+=%=
 set statusline+=Line:\ %l\/%L\ Col:\ %c\/%{&textwidth}\ "
 
-
 " Command auto completion
 set wildmode=longest,list,full
+
+" Basic insertmode word completion
+set completeopt=longest,menuone
+inoremap <expr> <S-Tab> pumvisible() ? "\<Down>" : "\<C-n>"
+imap <expr> <CR> pumvisible() ? "\<C-y>" : "\<CR>"
+imap <expr> <Esc> pumvisible() ? "\<C-e>" : "\<Esc>"
 
 " No bell
 set belloff=all
@@ -144,7 +153,7 @@ command Bd b#<bar>bd#
 
 augroup file_specific_formating
 	autocmd!
-	autocmd FileType tex setlocal textwidth=0 cc=0 spell spelllang=en_us,sv_se
+	autocmd FileType tex setlocal textwidth=0 cc=0 spell spelllang=en_us
 	autocmd FileType markdown setlocal spell spelllang=en_us,sv_se
 augroup END
 
