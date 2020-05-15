@@ -110,9 +110,8 @@ set wildmode=longest,list,full
 
 " Basic insertmode word completion
 set completeopt=longest,menuone
-inoremap <expr> <S-Tab> pumvisible() ? "\<Down>" : "\<C-n>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<Esc>" : "\<C-n>"
 imap <expr> <CR> pumvisible() ? "\<C-y>" : "\<CR>"
-imap <expr> <Esc> pumvisible() ? "\<C-e>" : "\<Esc>"
 
 " No bell
 set belloff=all
