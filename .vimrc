@@ -22,6 +22,9 @@ call plug#begin('~/.vim/plugged')
 	Plug 'altercation/vim-colors-solarized'
 	Plug 'tomasiser/vim-code-dark'
 
+	" Simple mode
+	Plug 'junegunn/goyo.vim'
+
 	" Extensions
 	Plug 'tpope/vim-commentary' " gc+motion to comment/uncomment
 	Plug 'tpope/vim-fugitive' " :Git <command> to run git commands from vim
@@ -46,9 +49,9 @@ set bg=dark
 "let g:gruvbox_contrast_dark='hard' | colo gruvbox
 "colo nord
 "colo dracula
-colo onedark
+"colo onedark
 "colo neodark
-"colo OceanicNext
+colo OceanicNext
 "colo solarized
 "colo codedark
 
@@ -126,7 +129,7 @@ vnoremap J :m '>+1<CR>gv=gv
 vnoremap K :m '<-2<CR>gv=gv
 
 " Windows
-set splitbelow splitright
+"set splitbelow splitright
 nnoremap <leader>h <C-w>h
 nnoremap <leader>j <C-w>j
 nnoremap <leader>k <C-w>k
@@ -151,13 +154,11 @@ nnoremap <leader>u :bn<CR>
 nnoremap <leader>i :bp<CR>
 command Bd b#<bar>bd#
 
-augroup file_specific_formating
-	autocmd!
-	autocmd BufRead,BufNewFile *.tex, setlocal filetype=tex
-	autocmd FileType latex,tex,plaintex setlocal textwidth=0 cc=0 spell spelllang=en_us
-	autocmd FileType markdown setlocal spell spelllang=en_us,sv
-augroup END
+" Spelling
+set spelllang=en_us,sv
+nnoremap <leader>s :set spell!<CR>
 
+" Pre/post processing
 augroup file_pre_post_processing
 	autocmd!
 	"Remove trailing whitespaces
@@ -174,4 +175,13 @@ augroup netrw_key_bindings
 	autocmd FileType netrw setlocal cc=0
 	autocmd FileType netrw nmap <buffer> + gn
 	autocmd FileType netrw nnoremap <buffer> cd :exec 'cd' b:netrw_curdir<CR>
+augroup END
+
+" Tex and markdown
+let g:tex_stylish=1
+augroup file_specific_formating
+	autocmd!
+	autocmd BufRead,BufNewFile *.tex, setlocal filetype=tex
+	autocmd FileType latex,tex,plaintex setlocal textwidth=0 cc=0 spell
+	autocmd FileType markdown setlocal spell
 augroup END

@@ -7,9 +7,9 @@
 	tool = vimdiff
 [difftool]
 	prompt = false
-[difftool "vimdiff"]
-	cmd = vimdiff +1 \"$REMOTE\" \"$LOCAL\"
 [merge]
 	tool = vimdiff
 [mergetool]
 	keepBackup = false
+[difftool "vimdiff"]
+	cmd = vim -d \"$LOCAL\" \"$REMOTE\" -c \"wincmd l | 1\"
