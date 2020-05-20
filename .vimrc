@@ -32,7 +32,7 @@ call plug#begin('~/.vim/plugged')
 	" Formatting and Syntax
 	Plug 'mboughaba/i3config.vim' " May need some help identifying the filetype
 "	Plug 'sheerun/vim-polyglot' " Automatic downloading of language syntax pkgs
-"	Plug 'JuliaEditorSupport/julia-vim'
+	Plug 'JuliaEditorSupport/julia-vim'
 call plug#end()
 
 if has('Win32')
@@ -56,8 +56,7 @@ colo OceanicNext
 "colo codedark
 
 
-" ToLearn: Autoindenting/formatting, spellchecking, file search (ctrlp?), marks,
-" folding
+" ToLearn: Autoindenting/formatting, file search (ctrlp?), marks, folding
 
 " Basics
 set fileformats=unix,dos "Set default fileformat order
@@ -75,10 +74,11 @@ set softtabstop=4
 set noexpandtab
 
 " Setup textwidth
-set textwidth=80 "Insert newline after <textwidth>
-set wrap "Virtual wrap to window size
-set linebreak "wrap at full words
-set breakindent "match wrap to indent level
+set textwidth=80
+set formatoptions-=t "don't indent text/code
+set wrap "virtual wrap to window size
+set linebreak "virtual wrap at full words
+set breakindent "match virtual wrap to indent level
 set showbreak=>
 
 " Search, highlight etc
@@ -96,8 +96,7 @@ set number relativenumber
 set showcmd
 set laststatus=2
 if has('gui_running')
-	set guioptions-=m "Remove menu bar
-	set guioptions-=T "Remove toolbar
+	set guioptions= " Remove all gui items
 	set lines=45 columns=100
 	set guifont=Consolas:h11
 endif
@@ -105,12 +104,13 @@ set statusline=%m\ %n)\ %f\ %y\/[%{&ff}]\ %L\ lines
 set statusline+=%=
 set statusline+=Line:\ %l\/%L\ Col:\ %c\/%{&textwidth}\ "
 
-" Command auto completion
+" Command/file auto completion
+set path+=**
 set wildmode=longest,list,full
 
 " Basic insertmode word completion
 set completeopt=longest,menuone
-inoremap <expr> <S-Tab> pumvisible() ? "\<Esc>" : "\<C-n>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-e>" : "\<C-n>"
 imap <expr> <CR> pumvisible() ? "\<C-y>" : "\<CR>"
 
 " No bell
@@ -178,9 +178,15 @@ augroup END
 
 " Tex and markdown
 let g:tex_stylish=1
-augroup file_specific_formating
+augroup tex_and_markdown
 	autocmd!
 	autocmd BufRead,BufNewFile *.tex, setlocal filetype=tex
 	autocmd FileType latex,tex,plaintex setlocal textwidth=0 cc=0 spell
-	autocmd FileType markdown setlocal spell
+	autocmd FileType markdown setlocal spell formatoptions+=t
+augroup END
+
+" Julia
+augroup julia_code
+	autocmd!
+	autocmd FileType julia setlocal commentstring=#\ %s
 augroup END
