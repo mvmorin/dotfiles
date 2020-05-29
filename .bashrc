@@ -1,3 +1,6 @@
+# If not running interactively, don't do anything
+[[ "$-" != *i* ]] && return
+
 # History
 HISTCONTROL=ignoreboth
 shopt -s histappend
