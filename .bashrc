@@ -37,8 +37,9 @@ export PS1="$PS1_BASE""$PS1_GIT""\[$(tput setaf 5)\]\$ \[$(tput sgr0)\]"
 # Aliases
 alias grep='grep -r --color=auto'
 
-alias ls='ls --color=auto'
-alias ll='ls -hAlF --group-directories-first'
-alias la='ls -hA --group-directories-first'
+alias ls='ls --color=auto --group-directories-first -hF'
+alias l='ls -l'
+alias ll='ls -Al'
+alias la='ls -A'
 
 alias :q="exit"
