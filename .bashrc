@@ -1,72 +1,41 @@
-# ~/.bashrc: executed by bash(1) for non-login shells.
-
-# If not running interactively, don't do anything
-case $- in
-    *i*) ;;
-      *) return;;
-esac
-
-# don't put duplicate lines or lines starting with space in the history.
+# History
 HISTCONTROL=ignoreboth
-# append to the history file, don't overwrite it
 shopt -s histappend
-# Set history length
 HISTSIZE=1000
 HISTFILESIZE=2000
 
-# check the window size after each command and update if necessary
+# Behavior
 shopt -s checkwinsize
+shopt -s autocd
+stty -ixon # Disable ctrl-s and ctrl-q.
 
-# set variable identifying the chroot you work in (used in the prompt below)
-if [ -z "${debian_chroot:-}" ] && [ -r /etc/debian_chroot ]; then
-    debian_chroot=$(cat /etc/debian_chroot)
+# Base prompt
+PS1_BASE="\[$(tput setaf 5)\][\[$(tput setaf 4)\]\u@\h\[$(tput setaf 6)\] \W\[$(tput setaf 5)\]]"
+
+# Git completion and prompt
+GIT_EXEC_PATH="$(git --exec-path 2>/dev/null)"
+GIT_BASE_PATH="${GIT_EXEC_PATH%/libexec/git-core}"
+
+if test -d "$GIT_BASE_PATH/share/git/completion"; then
+	GIT_COMPLETION_PATH="$GIT_BASE_PATH/share/git/completion"
+elif test -d "$GIT_BASE_PATH/share/git-core/contrib/completion"; then
+	GIT_COMPLETION_PATH="$GIT_BASE_PATH/share/git-core/contrib/completion"
 fi
 
-# set a fancy prompt (non-color, unless we know we "want" color)
-case "$TERM" in
-    xterm-color) color_prompt=yes;;
-esac
-
-if [ "$color_prompt" = yes ]; then
-    PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
-else
-    PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
-fi
-unset color_prompt
-
-# If this is an xterm set the title to user@host:dir
-case "$TERM" in
-xterm*|rxvt*)
-    PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@\h: \w\a\]$PS1"
-    ;;
-*)
-    ;;
-esac
-
-# enable color support of ls and also add handy aliases
-if [ -x /usr/bin/dircolors ]; then
-    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
-    alias ls='ls --color=auto'
-
-	alias grep='grep --color=auto'
-    alias fgrep='fgrep --color=auto'
-    alias egrep='egrep --color=auto'
+if test ! -z "$GIT_COMPLETION_PATH"; then
+	source "$GIT_COMPLETION_PATH/git-completion.bash"
+	source "$GIT_COMPLETION_PATH/git-prompt.sh"
+	PS1_GIT='$(__git_ps1 " \[$(tput setaf 5)\](\[$(tput setaf 2)\]%s\[$(tput setaf 5)\])")'
 fi
 
-# some more ls aliases
-alias ll='ls -alF'
-alias la='ls -A'
-alias l='ls -CFl'
-alias lh='ls -Cld .?*'
+# Finish prompt
+export PS1="$PS1_BASE""$PS1_GIT""\[$(tput setaf 5)\]\$ \[$(tput sgr0)\]"
 
-# Alias definitions.
-if [ -f ~/.bash_aliases ]; then
-    . ~/.bash_aliases
-fi
+# Aliases
+alias grep='grep -r --color=auto'
 
-export VISUAL=vim
-export EDITOR="$VISUAL"
+alias ls='ls --color=auto'
+alias ll='ls -hAlF --group-directories-first'
+alias la='ls -hA --group-directories-first'
 
 alias :q="exit"
-
-cd ~
