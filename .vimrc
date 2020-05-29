@@ -45,15 +45,15 @@ endif
 " Set colorscheme
 set termguicolors
 set bg=dark
-"colo desert "semi-decent default
-"let g:gruvbox_contrast_dark='hard' | colo gruvbox
-"colo nord
-"colo dracula
-"colo onedark
-"colo neodark
-colo OceanicNext
-"colo solarized
-"colo codedark
+" colo desert "semi-decent default
+" let g:gruvbox_contrast_dark='hard' | colo gruvbox
+colo nord
+" colo dracula
+" colo onedark
+" colo neodark
+" colo OceanicNext
+" colo solarized
+" colo codedark
 
 
 " ToLearn: Autoindenting/formatting, file search (ctrlp?), marks, folding
@@ -117,7 +117,7 @@ imap <expr> <CR> pumvisible() ? "\<C-y>" : "\<CR>"
 set belloff=all
 
 " Copy to system clipboard
-vnoremap <leader>y "*Y :let @+=@*<CR>
+vnoremap <leader>y "*y :let @+=@*<CR>
 nnoremap <leader>p "*]p
 
 " Simple cd to file dir
