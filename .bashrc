@@ -13,9 +13,10 @@ shopt -s autocd
 stty -ixon # Disable ctrl-s and ctrl-q.
 
 # Base prompt
-PS1_BASE="\[$(tput setaf 5)\][\[$(tput setaf 4)\]\u@\h\[$(tput setaf 6)\] \W\[$(tput setaf 5)\]]"
+PS1_BASE="\[\e[35m\][\[\e[34m\]\u@\h\[\e[36m\] \W\[\e[35m\]]"
 
 # Git completion and prompt
+PS1_GIT=""
 GIT_EXEC_PATH="$(git --exec-path 2>/dev/null)"
 GIT_BASE_PATH="${GIT_EXEC_PATH%/libexec/git-core}"
 
@@ -28,11 +29,11 @@ fi
 if test ! -z "$GIT_COMPLETION_PATH"; then
 	source "$GIT_COMPLETION_PATH/git-completion.bash"
 	source "$GIT_COMPLETION_PATH/git-prompt.sh"
-	PS1_GIT='$(__git_ps1 " \[$(tput setaf 5)\](\[$(tput setaf 2)\]%s\[$(tput setaf 5)\])")'
+	PROMPT_COMMAND='PS1_GIT=$(__git_ps1 " \e[35m(\e[32m%s\e[35m)")'
 fi
 
 # Finish prompt
-export PS1="$PS1_BASE""$PS1_GIT""\[$(tput setaf 5)\]\$ \[$(tput sgr0)\]"
+export PS1="$PS1_BASE"'$PS1_GIT'"\[\e[35m\]\$ \[\e[00m\]"
 
 # Aliases
 alias grep='grep -r --color=auto'
