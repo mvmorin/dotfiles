@@ -36,7 +36,8 @@ fi
 export PS1="$PS1_BASE"'$PS1_GIT'"\[\e[35m\]\$ \[\e[00m\]"
 
 # Aliases
-alias grep='grep -r --color=auto'
+alias grep='grep --color=auto'
+alias rgrep='grep -r --color=auto'
 
 alias ls='ls --color=auto --group-directories-first -hF'
 alias l='ls -l'
