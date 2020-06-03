@@ -98,7 +98,9 @@ set laststatus=2
 if has('gui_running')
 	set guioptions= " Remove all gui items
 	set lines=45 columns=100
-	set guifont=Consolas:h11
+	if has('Win32')
+		set guifont=Consolas:h11
+	endif
 endif
 set statusline=%m\ %n)\ %f\ %y\/[%{&ff}]\ %L\ lines
 set statusline+=%=
