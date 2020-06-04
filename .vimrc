@@ -97,12 +97,12 @@ set showcmd
 set laststatus=2
 if has('gui_running')
 	set guioptions= " Remove all gui items
-	set lines=45 columns=100
 	if has('Win32')
+		set lines=45 columns=100
 		set guifont=Consolas:h11
 	endif
 endif
-set statusline=%m\ %n)\ %f\ %y\/[%{&ff}]\ %L\ lines
+set statusline=%m\ %n)\ %f\ %y\ [%{&ff}]\ [%{&encoding}]\ %L\ lines
 set statusline+=%=
 set statusline+=Line:\ %l\/%L\ Col:\ %c\/%{&textwidth}\ "
 
@@ -191,4 +191,10 @@ augroup END
 augroup julia_code
 	autocmd!
 	autocmd FileType julia setlocal commentstring=#\ %s
+augroup END
+
+" i3 config
+augroup i3_config_file
+	autocmd!
+	autocmd BufNewFile,BufRead *i3/config set filetype=i3config
 augroup END
