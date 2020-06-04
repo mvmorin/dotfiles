@@ -247,6 +247,7 @@ client.background $unfocus_bg
 
 bar {
 	status_command i3status -c ~/.i3/status.conf
+	position top
 
 	colors {
 		background $unfocus_bg
