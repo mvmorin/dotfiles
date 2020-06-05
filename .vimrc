@@ -43,6 +43,8 @@ if has('Win32')
 endif
 
 " Set colorscheme
+set t_8f=[38;2;%lu;%lu;%lum " set foreground color for correct truecolor in terminals
+set t_8b=[48;2;%lu;%lu;%lum " set background color for correct truecolor in terminals
 set termguicolors
 set bg=dark
 " colo desert "semi-decent default
