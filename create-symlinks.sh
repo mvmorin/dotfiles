@@ -8,7 +8,7 @@
 ########## Variables
 dir=~/dotfiles
 olddir=~/dotfiles_old
-files=".bashrc .bash_profile .gitconfig .vimrc .vim .i3 .julia/config/startup.jl"
+files=".bashrc .bash_profile .gitconfig .vimrc .vim .i3 .julia/config/startup.jl .Xresources"
 
 
 # create dotfiles_old in homedir

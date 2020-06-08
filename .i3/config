@@ -19,23 +19,23 @@ floating_modifier $mod
 ################################################################################
 # Color definitions
 ################################################################################
-set $focus_bg #aaaaaa
-set $focus_bg #aaaaaa
-set $focus_tx #090909
+set_from_resource $focus_bg color1 #aaaaaa
+set_from_resource $focus_bd color1 #aaaaaa
+set_from_resource $focus_tx background #090909
 
-set $visible_bg #606060
-set $visible_bd #606060
-set $visible_tx #090909
+set_from_resource $visible_bg foreground #606060
+set_from_resource $visible_bd foreground #606060
+set_from_resource $visible_tx background #090909
 
-set $unfocus_bg #090909
-set $unfocus_bd #090909
-set $unfocus_tx #aaaaaa
+set_from_resource $unfocus_bg background #090909
+set_from_resource $unfocus_bd background #090909
+set_from_resource $unfocus_tx color1 #aaaaaa
 
-set $urgent_bg #6e2c2c
-set $urgent_bd #6e2c2c
-set $urgent_tx #e7e7e7
+set_from_resource $urgent_bg color2 #6e2c2c
+set_from_resource $urgent_bd color2 #6e2c2c
+set_from_resource $urgent_tx foreground #e7e7e7
 
-set $indicator #415f9a
+set_from_resource $indicator color6 #415f9a
 
 
 
