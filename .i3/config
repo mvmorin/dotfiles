@@ -16,6 +16,29 @@ floating_modifier $mod
 
 
 
+################################################################################
+# Color definitions
+################################################################################
+set $focus_bg #aaaaaa
+set $focus_bg #aaaaaa
+set $focus_tx #090909
+
+set $visible_bg #606060
+set $visible_bd #606060
+set $visible_tx #090909
+
+set $unfocus_bg #090909
+set $unfocus_bd #090909
+set $unfocus_tx #aaaaaa
+
+set $urgent_bg #6e2c2c
+set $urgent_bd #6e2c2c
+set $urgent_tx #e7e7e7
+
+set $indicator #415f9a
+
+
+
 ###############################################################################
 # Selection
 ###############################################################################
@@ -24,9 +47,8 @@ floating_modifier $mod
 #bindsym $mod+Return exec i3-sensible-terminal
 bindsym $mod+Return exec konsole
 
-# start dmenu, colors based on colors at the en of the file. Could not get those
-# variables to work in this commmand
-bindsym $mod+BackSpace exec dmenu_run -nb '#090909' -nf '#aaaaaa' -sb '#aaaaaa' -sf '#090909' -fn font
+# start dmenu
+bindsym $mod+BackSpace exec dmenu_run -nb "$unfocus_bg" -nf "$unfocus_tx" -sb "$focus_bg" -sf "$focus_tx" -fn font
 
 # split containers
 bindsym $mod+e split h; layout tabbed
@@ -140,30 +162,6 @@ bindsym $mod+Escape mode "resize"
 # Workspace Mode
 ##############################################################################
 
-# Switch to workspaces with number keys
-bindsym $mod+1 workspace number 1
-bindsym $mod+2 workspace number 2
-bindsym $mod+3 workspace number 3
-bindsym $mod+4 workspace number 4
-bindsym $mod+5 workspace number 5
-bindsym $mod+6 workspace number 6
-bindsym $mod+7 workspace number 7
-bindsym $mod+8 workspace number 8
-bindsym $mod+9 workspace number 9
-bindsym $mod+0 workspace number 0
-
-# move focused container to workspace with number keys
-bindsym $mod+Shift+1 move container to workspace number 1
-bindsym $mod+Shift+2 move container to workspace number 2
-bindsym $mod+Shift+3 move container to workspace number 3
-bindsym $mod+Shift+4 move container to workspace number 4
-bindsym $mod+Shift+5 move container to workspace number 5
-bindsym $mod+Shift+6 move container to workspace number 6
-bindsym $mod+Shift+7 move container to workspace number 7
-bindsym $mod+Shift+8 move container to workspace number 8
-bindsym $mod+Shift+9 move container to workspace number 9
-bindsym $mod+Shift+0 move container to workspace number 0
-
 mode "workspace mode" {
 	# Change to workspace
 	bindsym a workspace number 1
@@ -214,29 +212,11 @@ bindsym XF86AudioLowerVolume exec amixer -q -D pulse set Master 2.5%-
 
 
 ################################################################################
-# Color and appearance
+# Appearance
 ################################################################################
 set $border_width 3
 default_border pixel $border_width
 default_floating_border pixel $border_width
-
-set $focus_bg #aaaaaa
-set $focus_bg #aaaaaa
-set $focus_tx #090909
-
-set $visible_bg #606060
-set $visible_bd #606060
-set $visible_tx #090909
-
-set $unfocus_bg #090909
-set $unfocus_bd #090909
-set $unfocus_tx #aaaaaa
-
-set $urgent_bg #6e2c2c
-set $urgent_bd #6e2c2c
-set $urgent_tx #e7e7e7
-
-set $indicator #415f9a
 
 client.focused $focus_bg $focus_bg $focus_tx $indicator $focus_bd
 client.unfocused $unfocus_bg $unfocus_bg $unfocus_tx $indicator $unfocus_bd
