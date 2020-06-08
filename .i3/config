@@ -23,8 +23,8 @@ set_from_resource $focus_bg color1 #aaaaaa
 set_from_resource $focus_bd color1 #aaaaaa
 set_from_resource $focus_tx background #090909
 
-set_from_resource $visible_bg foreground #606060
-set_from_resource $visible_bd foreground #606060
+set_from_resource $visible_bg color9 #606060
+set_from_resource $visible_bd color9 #606060
 set_from_resource $visible_tx background #090909
 
 set_from_resource $unfocus_bg background #090909
@@ -35,7 +35,7 @@ set_from_resource $urgent_bg color2 #6e2c2c
 set_from_resource $urgent_bd color2 #6e2c2c
 set_from_resource $urgent_tx foreground #e7e7e7
 
-set_from_resource $indicator color6 #415f9a
+set_from_resource $indicator color3 #415f9a
 
 
 
