@@ -19,27 +19,27 @@ floating_modifier $mod
 ################################################################################
 # Color definitions
 ################################################################################
-set_from_resource $focus_bg color9 #aaaaaa
-set_from_resource $focus_bd color9 #aaaaaa
+set_from_resource $focus_bg color5 #aaaaaa
+set_from_resource $focus_bd color5 #aaaaaa
 set_from_resource $focus_tx background #090909
 
-set_from_resource $visible_bg color9 #606060
-set_from_resource $visible_bd color9 #606060
+set_from_resource $visible_bg color4 #606060
+set_from_resource $visible_bd color4 #606060
 set_from_resource $visible_tx background #090909
 
 set_from_resource $unfocus_bg background #090909
 set_from_resource $unfocus_bd background #090909
-set_from_resource $unfocus_tx color9 #aaaaaa
+set_from_resource $unfocus_tx color4 #aaaaaa
 
-set_from_resource $urgent_bg color14 #6e2c2c
-set_from_resource $urgent_bd color14 #6e2c2c
+set_from_resource $urgent_bg color1 #6e2c2c
+set_from_resource $urgent_bd color1 #6e2c2c
 set_from_resource $urgent_tx background #e7e7e7
 
-set_from_resource $indicator color2 #415f9a
+set_from_resource $indicator color3 #415f9a
 
-set_from_resource $status_bg color11 #090909
-set_from_resource $status_tx color15 #aaaaaa
-set_from_resource $status_sp color15 #aaaaaa
+set_from_resource $status_bg color0 #090909
+set_from_resource $status_tx color2 #aaaaaa
+set_from_resource $status_sp color5 #aaaaaa
 
 
 
