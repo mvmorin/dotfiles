@@ -38,12 +38,20 @@ if has('Win32')
 	set shellslash
 endif
 
-" Set colorscheme
+
+" Setup terminal colors
 set t_8f=[38;2;%lu;%lu;%lum " set foreground color for correct truecolor in terminals
 set t_8b=[48;2;%lu;%lu;%lum " set background color for correct truecolor in terminals
-set termguicolors
+if $TERM == "rxvt-unicode-256color"
+	set t_Co=256
+else
+	" Assume terminal support truecolor, make exceptions for those who don't
+	set termguicolors
+endif
+
+
+" Set colorscheme
 set bg=dark
-" colo desert "semi-decent default
 " let g:gruvbox_contrast_dark='hard' | colo gruvbox
 colo nord
 " colo onedark

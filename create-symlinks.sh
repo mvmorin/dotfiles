@@ -8,8 +8,17 @@
 ########## Variables
 dir=~/dotfiles
 olddir=~/dotfiles_old
-files=".bashrc .bash_profile .gitconfig .vimrc .vim .i3 .julia/config/startup.jl .Xresources"
-
+files="\
+	.bashrc \
+	.bash_profile \
+	.gitconfig \
+	.vimrc \
+	.vim \
+	.i3 \
+	.julia/config/startup.jl \
+	.Xresources \
+	.urxvt \
+	"
 
 # create dotfiles_old in homedir
 echo "Creating $olddir for backup of any existing dotfiles."
@@ -23,7 +32,7 @@ cd $dir
 echo -e "\nCreating symlink to dotfiles, backing up any already existing files."
 for file in $files; do
 	mv ~/$file ~/dotfiles_old/
-	echo -e "\tCreating symlink to $file in home directory."
+	echo -e "\tCreating symlink to: $file"
 	ln -s $dir/$file ~/$file
 done
 

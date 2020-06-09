@@ -1,4 +1,29 @@
+! Set colorscheme
 #include "Xcolorschemes/nord"
 /* #include "Xcolorschemes/solarized" */
 /* #include "Xcolorschemes/gruvbox" */
 /* #include "Xcolorschemes/onedark" */
+
+! urxvt
+URxvt*font: xft:monospace:size=10:antialias=true:hinting=true
+URxvt*boldFont: xft:monospace:bold:size=10:antialias=true:hingting=true
+URxvt*italicFont: xft:monospace:italic:size=10:antialias=true:hingting=true
+URxvt*boldItalicFont: xft:monospace:bold:italic:size=10:antialias=true:hingting=true
+URxvt*letterSpace: -1
+
+URxvt*scrollBar: false
+URxvt*scrollTtyKeypress: true
+URxvt*scrollTtyOutput: false
+URxvt*scrollWithBuffer: true
+URxvt*fading: 0
+
+URxvt.keysym.Shift-Insert: eval:paste_clipboard
+URxvt.keysym.Control-Insert: eval:selection_to_clipboard
+
+URxvt.perl-ext-common: default,resize-font
+
+URxvt.resize-font.step: 1
+URxvt.resize-font.smaller: C-minus
+URxvt.resize-font.bigger: C-plus
+URxvt.resize-font.reset: C-0
+URxvt.resize-font.show: C-question
