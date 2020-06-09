@@ -14,13 +14,9 @@ call plug#begin('~/.vim/plugged')
 	" Colorschemes to try out
 	Plug 'morhetz/gruvbox'
 	Plug 'arcticicestudio/nord-vim'
-"	Plug 'fatih/molokai' "Does not load properly on windows
-	Plug 'dracula/vim'
 	Plug 'joshdick/onedark.vim'
-	Plug 'KeitaNakamura/neodark.vim'
 	Plug 'mhartington/oceanic-next'
 	Plug 'altercation/vim-colors-solarized'
-	Plug 'tomasiser/vim-code-dark'
 
 	" Simple mode
 	Plug 'junegunn/goyo.vim'
@@ -50,12 +46,9 @@ set bg=dark
 " colo desert "semi-decent default
 " let g:gruvbox_contrast_dark='hard' | colo gruvbox
 colo nord
-" colo dracula
 " colo onedark
-" colo neodark
 " colo OceanicNext
 " colo solarized
-" colo codedark
 
 
 " ToLearn: Autoindenting/formatting, file search (ctrlp?), marks, folding
