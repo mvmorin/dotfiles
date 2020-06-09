@@ -52,11 +52,19 @@ endif
 
 " Set colorscheme
 set bg=dark
-" let g:gruvbox_contrast_dark='hard' | colo gruvbox
-colo nord
-" colo onedark
-" colo OceanicNext
-" colo solarized
+" Read from xresources if possible
+let xrdb_colorscheme = system(
+	\ "xrdb -query | sed -n -e 's/\\(^vim.colorscheme\\):\t\\(.*\\)/\\2/p'"
+	\ )
+if xrdb_colorscheme != ""
+	exec 'colo 'xrdb_colorscheme
+else
+	" colo gruvbox
+	colo nord
+	" colo onedark
+	" colo OceanicNext
+	" colo solarized
+endif
 
 
 " ToLearn: Autoindenting/formatting, file search (ctrlp?), marks, folding

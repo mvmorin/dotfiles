@@ -15,17 +15,18 @@ URxvt*scrollBar: false
 URxvt*scrollTtyKeypress: true
 URxvt*scrollTtyOutput: false
 URxvt*scrollWithBuffer: true
-URxvt.secondaryScreen: 1
-URxvt.secondaryScroll: 0
+URxvt*secondaryScreen: 1
+URxvt*secondaryScroll: 0
 URxvt*fading: 0
 
-URxvt.keysym.Shift-Insert: eval:paste_clipboard
-URxvt.keysym.Control-Insert: eval:selection_to_clipboard
+URxvt*keysym.Shift-Insert: eval:paste_clipboard
+URxvt*keysym.Control-Insert: eval:selection_to_clipboard
 
-URxvt.perl-ext-common: default,resize-font
+URxvt*perl-ext-common: default,resize-font
 
-URxvt.resize-font.step: 1
-URxvt.resize-font.smaller: C-minus
-URxvt.resize-font.bigger: C-plus
-URxvt.resize-font.reset: C-0
-URxvt.resize-font.show: C-question
+URxvt*resize-font.step: 1
+URxvt*resize-font.smaller: C-minus
+URxvt*resize-font.bigger: C-plus
+URxvt*resize-font.reset: C-0
+URxvt*resize-font.show: C-question
+

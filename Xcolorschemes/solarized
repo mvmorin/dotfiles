@@ -45,3 +45,11 @@
 *color13:                 S_violet
 *color14:                 S_base1
 *color15:                 S_base3
+
+
+! The following resource is non-standard but can be read in the .vimrc to
+! automatically set colorscheme, given that it is installed.
+! Example .vimrc snippet:
+! let xrdb_colorscheme = system("xrdb -query | sed -n -e 's/\\(^vim.colorscheme\\):\t\\(.*\\)/\\2/p'")
+! exec 'colo 'xrdb_colorscheme
+vim.colorscheme: solarized
