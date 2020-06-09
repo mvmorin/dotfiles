@@ -29,11 +29,11 @@ fi
 if test ! -z "$GIT_COMPLETION_PATH"; then
 	source "$GIT_COMPLETION_PATH/git-completion.bash"
 	source "$GIT_COMPLETION_PATH/git-prompt.sh"
-	PROMPT_COMMAND='PS1_GIT=$(__git_ps1 " \e[35m(\e[32m%s\e[35m)")'
+	PROMPT_COMMAND='PS1_GIT=$(__git_ps1 "%s")'
 fi
 
 # Finish prompt
-export PS1="$PS1_BASE"'$PS1_GIT'"\[\e[35m\]\$ \[\e[00m\]"
+export PS1="$PS1_BASE"'${PS1_GIT:+\[\e[35m\] (\[\e[32m\]$PS1_GIT\[\e[35m\])}'"\[\e[35m\]\$ \[\e[00m\]"
 
 # Aliases
 alias grep='grep --color=auto'
