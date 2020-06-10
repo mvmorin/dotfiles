@@ -178,14 +178,22 @@ augroup file_pre_post_processing
 augroup END
 
 " netrw setup
-nnoremap <leader>e :Explore<CR>
+function LaunchExplore()
+	if expand("#") == ""
+		Explore
+	else
+		let olddir=expand("%:h")
+		b#
+		exec 'Explore 'olddir
+	endif
+endfunction
+nnoremap <leader>e :call LaunchExplore()<cr>
 let g:netrw_banner=0
-let g:netrw_liststyle = 3
+let g:netrw_liststyle = 1 " Would prefer style 3 but it has problems
 augroup netrw_key_bindings
 	autocmd!
-	autocmd FileType netrw nnoremap <buffer> <leader>e :Rexplore<CR>
+	autocmd FileType netrw nnoremap <buffer> <leader>e :b#<cr>
 	autocmd FileType netrw setlocal cc=0
-	autocmd FileType netrw nmap <buffer> + gn
 	autocmd FileType netrw nnoremap <buffer> cd :exec 'cd' b:netrw_curdir<CR>
 augroup END
 
