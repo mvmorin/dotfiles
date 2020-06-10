@@ -1,0 +1,37 @@
+# root = <local dir>
+# root = ssh://<host>//<remote dir>
+# include <this file>
+
+# Command to run matching unison version on server
+servercmd = ~/bin/unison-2.48.4
+
+# Paths to syncronize
+path = work
+follow = Name work
+
+path = wdata
+follow = Name wdata
+
+path = zotero-attachments
+follow = Name zotero-attachments
+
+path = wrepos
+follow = Name wrepos
+
+# Needed to avoid double reading of enter key (should be default)
+dumbtty = true
+
+# Only ask when conflicts occur
+auto = true
+
+# Don't log
+log = false
+
+# Sync file modification times
+times = true
+
+# Ignore vim swap-files
+ignore = Name .*.*.swp
+
+# Ignore cache directory - Specifically the libSVM datasets cache
+ignore = Name cache

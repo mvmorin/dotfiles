@@ -6,11 +6,11 @@ name=${file%.tex} #remove file extension
 shift
 
 # Default build command
-buildcmd="pdflatex"
-buildopt="-shell-escape -synctex=1 -interaction=nonstopmode"
+cmd="pdflatex"
+cmdopt="-shell-escape -synctex=1 -interaction=nonstopmode"
 
 # View command
-test "$OSTYPE" == "msys" &&	viewcmd="~/AppData/Local/SumatraPDF/SumatraPDF.exe"
+test "$OSTYPE" == "msys" &&	viewcmd="SumatraPDF.exe"
 test "$OSTYPE" == "linux-gnu" && viewcmd="zathura"
 
 # Parse rest of arguments
@@ -26,12 +26,10 @@ while getopts ":bwnlx" opt; do
 			nobuild="set"
 		;;
 		l)
-			buildcmd="lualatex"
-			buildopt="-shell-escape -synctex=1 -interaction=nonstopmode"
+			cmd="lualatex"
 		;;
 		x)
-			buildcmd="xelatex"
-			buildopt="-shell-escape -synctex=1 -interaction=nonstopmode"
+			cmd="xelatex"
 		;;
 		\?)
 			echo "Invalid option. Remember: options must come last." 1>&2; exit
@@ -41,11 +39,11 @@ done
 
 # Build
 if ! [ -n "$nobuild" ]; then
-	${buildcmd} ${buildopt} ${name}.tex
+	${cmd} ${cmdopt} ${name}.tex
 	if [ -n "$bib" ]; then
 		bibtex ${name}.aux
-		${buildcmd} ${buildopt} ${name}.tex
-		${buildcmd} ${buildopt} ${name}.tex
+		${cmd} ${cmdopt} ${name}.tex
+		${cmd} ${cmdopt} ${name}.tex
 	fi
 fi
 
