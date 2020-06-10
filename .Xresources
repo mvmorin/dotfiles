@@ -15,6 +15,7 @@ URxvt*scrollBar: false
 URxvt*scrollTtyKeypress: true
 URxvt*scrollTtyOutput: false
 URxvt*scrollWithBuffer: true
+URxvt*saveLines: 10000
 URxvt*secondaryScreen: 1
 URxvt*secondaryScroll: 0
 URxvt*fading: 0
