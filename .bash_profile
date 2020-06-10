@@ -1,4 +1,4 @@
-export PATH=$PATH:~/scripts
+export PATH=$PATH:~/.scripts
 
 export TERMINAL=urxvt256c
 export EDITOR=vim
