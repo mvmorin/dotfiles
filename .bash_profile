@@ -1,6 +1,4 @@
-export PATH=$PATH:~/shortcuts
-
-export MATLAB_VERSION=R2016a
+export PATH=$PATH:~/scripts
 
 export TERMINAL=urxvt256c
 export EDITOR=vim

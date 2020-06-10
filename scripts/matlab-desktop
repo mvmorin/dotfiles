@@ -1,0 +1,3 @@
+#!/bin/bash
+MATLAB_VERSION=R2019b
+matlab -desktop

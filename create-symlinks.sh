@@ -18,6 +18,7 @@ files="\
 	.julia/config/startup.jl \
 	.Xresources \
 	.urxvt \
+	scripts \
 	"
 
 # create dotfiles_old in homedir
