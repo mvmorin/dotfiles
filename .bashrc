@@ -27,6 +27,8 @@ elif test -d "$GIT_BASE_PATH/share/doc/git/contrib/completion"; then
 fi
 
 if test ! -z "$GIT_COMPLETION_PATH"; then
+	[ "$OSTYPE" == "msys" ] || [ "$OSTYPE" == "cygwin" ] ||
+		export GIT_PS1_SHOWDIRTYSTATE="true"
 	source "$GIT_COMPLETION_PATH/git-completion.bash"
 	source "$GIT_COMPLETION_PATH/git-prompt.sh"
 	PROMPT_COMMAND='PS1_GIT=$(__git_ps1 "%s")'
