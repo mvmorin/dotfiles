@@ -6,9 +6,9 @@
 
 ! urxvt
 URxvt*font: xft:monospace:size=10:antialias=true:hinting=true
-URxvt*boldFont: xft:monospace:bold:size=10:antialias=true:hingting=true
-URxvt*italicFont: xft:monospace:italic:size=10:antialias=true:hingting=true
-URxvt*boldItalicFont: xft:monospace:bold:italic:size=10:antialias=true:hingting=true
+URxvt*boldFont: xft:monospace:bold:size=10:antialias=true:hinting=true
+URxvt*italicFont: xft:monospace:italic:size=10:antialias=true:hinting=true
+URxvt*boldItalicFont: xft:monospace:bold:italic:size=10:antialias=true:hinting=true
 URxvt*letterSpace: -1
 
 URxvt*scrollBar: false
@@ -16,8 +16,8 @@ URxvt*scrollTtyKeypress: true
 URxvt*scrollTtyOutput: false
 URxvt*scrollWithBuffer: true
 URxvt*saveLines: 10000
-URxvt*secondaryScreen: 1
-URxvt*secondaryScroll: 0
+URxvt.secondaryScreen: 1
+URxvt.secondaryScroll: 0
 URxvt*fading: 0
 
 URxvt*keysym.Shift-Insert: eval:paste_clipboard
