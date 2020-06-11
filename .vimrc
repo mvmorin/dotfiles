@@ -29,6 +29,7 @@ call plug#begin('~/.vim/plugged')
 	Plug 'mboughaba/i3config.vim' " May need some help identifying the filetype
 "	Plug 'sheerun/vim-polyglot' " Automatic downloading of language syntax pkgs
 	Plug 'JuliaEditorSupport/julia-vim'
+	Plug 'lervag/vimtex'
 call plug#end()
 
 if has('Win32')
@@ -123,8 +124,16 @@ set wildmode=longest,list,full
 
 " Basic insertmode word completion
 set completeopt=longest,menuone
-inoremap <expr> <S-Tab> pumvisible() ? "\<C-e>" : "\<C-n>"
+inoremap <Tab>i <C-x><C-i>
+inoremap <Tab>o <C-x><C-o>
+inoremap <Tab>f <C-x><C-f>
+inoremap <Tab>s <Esc>z=
+nnoremap <Tab>s z=1<Cr><Esc>
+inoremap <Tab><Tab> <C-e>
+inoremap <C-Tab> <Tab>
 imap <expr> <CR> pumvisible() ? "\<C-y>" : "\<CR>"
+imap <expr> j pumvisible() ? "\<C-n>" : "j"
+imap <expr> k pumvisible() ? "\<C-p>" : "k"
 
 " No bell
 set belloff=all
@@ -198,6 +207,22 @@ augroup netrw_key_bindings
 augroup END
 
 " Tex and markdown
+" nnoremap <leader>x :exec "silent !zathura --synctex-forward ".line(".").":".col(".").":%:p %:p:r.pdf&"<cr>
+let g:vimtex_compiler_enabled=0
+let g:vimtex_view_automatic=0
+" These mappings conflicts/slows down the oridnary t{char} map
+let g:vimtex_mappings_disable = {
+			\ 'n': ['tsf', 'tsc', 'tse', 'tsd', 'tsD'],
+			\ 'x': ['tsf', 'tsd', 'tsD'],
+			\}
+if has('Win32')
+	let g:vimtex_view_method='general'
+	let g:vimtex_view_general_viewer = 'SumatraPDF'
+	let g:vimtex_view_general_options
+		\ = '-reuse-instance -forward-search @tex @line @pdf'
+else
+	let g:vimtex_view_method='zathura'
+endif
 let g:tex_stylish=1
 augroup tex_and_markdown
 	autocmd!
