@@ -49,31 +49,21 @@ set_from_resource $status_sp color5 #aaaaaa
 
 # start a terminal
 bindsym $mod+Return exec i3-sensible-terminal
-#bindsym $mod+Return exec urxvt256c
 
 # start dmenu
 bindsym $mod+BackSpace exec dmenu_run -nb "$unfocus_bg" -nf "$unfocus_tx" -sb "$focus_bg" -sf "$focus_tx" -fn font
 
 # split containers
-bindsym $mod+e split h; layout tabbed
-bindsym $mod+w split h
-bindsym $mod+q split v
+bindsym $mod+d split toggle
 
-# change container layout (stacked, tabbed, toggle split)
-#bindsym $mod+s layout stacking
-bindsym $mod+d layout tabbed
-bindsym $mod+s layout splith
-bindsym $mod+a layout splitv
+# toggle container layout
+bindsym $mod+f layout toggle splith splitv tabbed
 
-# change focus with VIM/arrow keys
+# change focus with VIM keys
 bindsym $mod+h focus left
 bindsym $mod+j focus down
 bindsym $mod+k focus up
 bindsym $mod+l focus right
-bindsym $mod+Left focus left
-bindsym $mod+Down focus down
-bindsym $mod+Up focus up
-bindsym $mod+Right focus right
 
 # Cycle next/prev/new workspace on output
 bindsym $mod+u workspace next_on_output
@@ -82,8 +72,7 @@ bindsym $mod+o exec --no-startup-id ~/.i3/new-workspace.sh
 
 # focus the parent/child/float
 bindsym $mod+y focus parent
-bindsym $mod+n focus child
-bindsym $mod+b focus mode_toggle
+bindsym $mod+n focus mode_toggle
 
 # Change monitor
 bindsym $mod+space focus output left
@@ -94,15 +83,11 @@ bindsym $mod+space focus output left
 # Repositioning
 ###############################################################################
 
-# move window with VIM/arrow keys
+# move window with VIM keys
 bindsym $mod+Shift+h move left
 bindsym $mod+Shift+j move down
 bindsym $mod+Shift+k move up
 bindsym $mod+Shift+l move right
-bindsym $mod+Shift+Left move left
-bindsym $mod+Shift+Down move down
-bindsym $mod+Shift+Up move up
-bindsym $mod+Shift+Right move right
 
 # Move to next/prev/new workspace
 bindsym $mod+Shift+u move container to workspace next_on_output; workspace next_on_output
@@ -110,7 +95,7 @@ bindsym $mod+Shift+i move container to workspace prev_on_output; workspace prev_
 bindsym $mod+Shift+o exec --no-startup-id ~/.i3/move-to-new-workspace.sh
 
 # toggle tiling/floating
-bindsym $mod+Shift+b floating toggle
+bindsym $mod+Shift+n floating toggle
 
 # Move Container to next ouput
 bindsym $mod+Shift+BackSpace move container to output left; focus output left
@@ -124,41 +109,19 @@ bindsym $mod+Shift+space move workspace to output left
 # kill focused window
 bindsym $mod+Shift+q kill
 # reload the configuration file
-bindsym $mod+Shift+c reload
-# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
-bindsym $mod+Shift+r restart
+bindsym $mod+Shift+r reload
 # exit i3 (logs you out of your X session)
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'Do you really want to exit i3 and end your X session?' -b 'Yes, exit i3' 'i3-msg exit'"
 
 
 
 ##############################################################################
-# Resize Mode
+# Resize
 ##############################################################################
-# resize window (you can also use the mouse for that)
-mode "resize" {
-        # These bindings trigger as soon as you enter the resize mode
-
-        bindsym l resize grow width 20 px
-        bindsym j resize grow height 20 px
-        bindsym k resize shrink height 20 px
-        bindsym h resize shrink width 20 px
-
-        # same bindings, but for the arrow keys
-        bindsym Right resize grow width 20 px
-        bindsym Down resize grow height 20 px
-        bindsym Up resize shrink height 20 px
-        bindsym Left resize shrink width 20 px
-
-        # back to normal mode
-        bindsym Return mode "default"
-        bindsym Escape mode "default"
-		bindsym Tab mode "default"
-		bindsym $mod+Tab mode "default"
-}
-
-bindsym $mod+Tab mode "resize"
-bindsym $mod+Escape mode "resize"
+bindsym $mod+Ctrl+l resize grow width 20 px
+bindsym $mod+Ctrl+k resize grow height 20 px
+bindsym $mod+Ctrl+j resize shrink height 20 px
+bindsym $mod+Ctrl+h resize shrink width 20 px
 
 
 
