@@ -1,8 +1,7 @@
 # dotfiles
 config-, rc- and dotfiles
 
-nothing fancy yet, just manual backup and sync
-"create-symlinks.sh" does just that, given that the dotfiles are in the list
+nothing fancy yet, just manual backup and sync with "create-symlinks" that does just that, given that the dotfiles are in the list
 
 # ToDo
 This might be a good approach
