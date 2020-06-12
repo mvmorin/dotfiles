@@ -68,7 +68,7 @@ bindsym $mod+l focus right
 # Cycle next/prev/new workspace on output
 bindsym $mod+u workspace next_on_output
 bindsym $mod+i workspace prev_on_output
-bindsym $mod+o exec --no-startup-id ~/.i3/new-workspace.sh
+bindsym $mod+o exec --no-startup-id ~/.i3/new-workspace
 
 # focus the parent/child/float
 bindsym $mod+y focus parent
@@ -92,7 +92,7 @@ bindsym $mod+Shift+l move right
 # Move to next/prev/new workspace
 bindsym $mod+Shift+u move container to workspace next_on_output; workspace next_on_output
 bindsym $mod+Shift+i move container to workspace prev_on_output; workspace prev_on_output
-bindsym $mod+Shift+o exec --no-startup-id ~/.i3/move-to-new-workspace.sh
+bindsym $mod+Shift+o exec --no-startup-id ~/.i3/move-to-new-workspace
 
 # toggle tiling/floating
 bindsym $mod+Shift+n floating toggle
@@ -170,7 +170,7 @@ bindsym $mod+minus mode "workspace mode"
 ##############################################################################
 
 # Machine specific setup (monitor, mouse etc.)
-exec --no-startup-id ~/.i3/pcsettings.sh
+exec --no-startup-id ~/.i3/pcsettings
 
 #Volume control
 bindsym XF86AudioRaiseVolume exec amixer -q -D pulse set Master 2.5%+
