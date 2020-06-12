@@ -169,8 +169,8 @@ bindsym $mod+minus mode "workspace mode"
 # General System Stuff
 ##############################################################################
 
-# Machine specific setup (monitor, mouse etc.)
-exec --no-startup-id ~/.i3/pcsettings
+# Startup script, sets monitors, mouse etc.
+exec --no-startup-id ~/.i3/startup/default
 
 #Volume control
 bindsym XF86AudioRaiseVolume exec amixer -q -D pulse set Master 2.5%+

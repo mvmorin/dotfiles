@@ -1,0 +1,9 @@
+#!/bin/bash
+
+# Key repeat rate
+xset r rate 300 55
+
+# Machine specific settings should be symlinked to 'machine'. 'machine' is in
+# gitignore so this way is robust to push and pull from several machines with
+# different settings
+[ -f ~/.i3/startup/machine ] && source ~/.i3/startup/machine
