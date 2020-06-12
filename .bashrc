@@ -46,4 +46,6 @@ alias l='ls -l'
 alias ll='ls -Al'
 alias la='ls -A'
 
+alias glog='git log --graph --oneline'
+
 alias :q="exit"
