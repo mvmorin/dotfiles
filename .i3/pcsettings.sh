@@ -3,6 +3,9 @@
 # Setup monitor layout
 xrandr --output HDMI-1 --primary --output HDMI-2 --pos -1200x-40 --rotate left
 
+# Key repeat rate
+xset r rate 300 55
+
 # Set mouse speed
 xset m 1 0
 xinput --set-prop 'Logitech USB-PS/2 Optical Mouse' 'libinput Accel Profile Enabled' 0 1
