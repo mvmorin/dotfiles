@@ -119,7 +119,7 @@ set guioptions= " Remove all gui items
 if has('gui_running') && has('Win32')
 	set lines=45 columns=100 guifont=Consolas:h11
 endif
-set statusline=%m\ %n)\ %f\ %y\ [%{&ff}]\ [%{&encoding}]\ %L\ lines
+set statusline=%m\ %n)\ %f\ %y\ [%{&ff}]\ [%{&encoding}]
 set statusline+=%=
 set statusline+=Line:\ %l\/%L\ Col:\ %c\/%{strwidth(getline('.'))}\ "
 
