@@ -48,7 +48,7 @@ set_from_resource $status_sp color5 #aaaaaa
 ###############################################################################
 
 # start a terminal
-bindsym $mod+Return exec i3-sensible-terminal
+bindsym $mod+Return exec terminal-here
 
 # start dmenu
 bindsym $mod+BackSpace exec dmenu_run -nb "$unfocus_bg" -nf "$unfocus_tx" -sb "$focus_bg" -sf "$focus_tx" -fn font

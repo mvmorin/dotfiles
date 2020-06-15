@@ -1,0 +1,11 @@
+#!/bin/bash
+# Based on: https://faq.i3wm.org/question/150/how-to-launch-a-terminal-from-here/?answer=152#post-id-152
+
+ID=$(xdpyinfo | sed -n 's/focus.\+window\s\+\(0x[0-9a-e]\+\).*/\1/p')
+PID=$(xprop -id $ID | sed -n 's/.*PID.*\s\([0-9]\+\)$/\1/p')
+PID_LEAF=$(pstree -lpA $PID | sed 's/.*(\([0-9]\+\))/\1/')
+
+DIR="$HOME"
+[ -e /proc/$PID_LEAF$/cwd] || DIR=$(readlink /proc/$PID_LEAF/cwd)
+
+cd $DIR && $TERMINAL

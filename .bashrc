@@ -20,13 +20,13 @@ PS1_GIT=""
 GIT_EXEC_PATH="$(git --exec-path 2>/dev/null)"
 GIT_BASE_PATH="${GIT_EXEC_PATH%/libexec/git-core}"
 
-if test -d "$GIT_BASE_PATH/share/git/completion"; then
+if [ -d "$GIT_BASE_PATH/share/git/completion" ]; then
 	GIT_COMPLETION_PATH="$GIT_BASE_PATH/share/git/completion"
-elif test -d "$GIT_BASE_PATH/share/doc/git/contrib/completion"; then
+elif [ -d "$GIT_BASE_PATH/share/doc/git/contrib/completion" ]; then
 	GIT_COMPLETION_PATH="$GIT_BASE_PATH/share/doc/git/contrib/completion"
 fi
 
-if test ! -z "$GIT_COMPLETION_PATH"; then
+if [ ! -z "$GIT_COMPLETION_PATH" ]; then
 	[ "$OSTYPE" == "msys" ] || [ "$OSTYPE" == "cygwin" ] ||
 		export GIT_PS1_SHOWDIRTYSTATE="true"
 	source "$GIT_COMPLETION_PATH/git-completion.bash"
