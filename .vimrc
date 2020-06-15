@@ -39,8 +39,8 @@ call plug#begin('~/.vim/plugged')
 	Plug 'tpope/vim-fugitive' " :Git <command> to run git commands from vim
 
 	" Formatting and Syntax
-	Plug 'mboughaba/i3config.vim' " May need some help identifying the filetype
 "	Plug 'sheerun/vim-polyglot' " Automatic downloading of language syntax pkgs
+	Plug 'mboughaba/i3config.vim' " May need some help identifying the filetype
 	Plug 'JuliaEditorSupport/julia-vim'
 	Plug 'lervag/vimtex'
 call plug#end()
@@ -57,6 +57,7 @@ endif
 
 " Set colorscheme
 set bg=dark
+let g:gruvbox_guisp_fallback='bg'
 colo gruvbox
 " colo nord
 " colo onedark
@@ -120,8 +121,7 @@ if has('gui_running') && has('Win32')
 endif
 set statusline=%m\ %n)\ %f\ %y\ [%{&ff}]\ [%{&encoding}]\ %L\ lines
 set statusline+=%=
-set statusline+=Line:\ %l\/%L\ Col:\ %c\/%{&textwidth}\ "
-
+set statusline+=Line:\ %l\/%L\ Col:\ %c\/%{strwidth(getline('.'))}\ "
 
 " Command/file auto completion
 set path+=**
