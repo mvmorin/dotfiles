@@ -1,6 +1,6 @@
 export PATH=$PATH:~/.scripts
 
-export TERMINAL=urxvt256c
+export TERMINAL=st
 export EDITOR=vim
 export VISUAL=vim
 export BROWSER=google-chrome

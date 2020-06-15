@@ -52,6 +52,8 @@ set t_8b=[48;2;%lu;%lu;%lum " set background color for correct truecolor in ter
 set termguicolors " Assume terminal support truecolor, make exceptions for those who don't
 if $TERM == "rxvt-unicode-256color"
 	set t_Co=256 notermguicolors
+elseif $TERM == "rxvt-unicode"
+	set t_Co=16 notermguicolors
 endif
 
 
