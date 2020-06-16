@@ -11,6 +11,7 @@ HISTFILESIZE=2000
 shopt -s checkwinsize
 shopt -s autocd
 stty -ixon # Disable ctrl-s and ctrl-q.
+tput smkx # Make delete key work in bash in st
 
 # Base prompt
 PS1_BASE="\[\e[35m\][\[\e[34m\]\u@\h\[\e[36m\] \W\[\e[35m\]]"
