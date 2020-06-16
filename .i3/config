@@ -82,6 +82,8 @@ bindsym $mod+space focus output left
 ###############################################################################
 # Repositioning
 ###############################################################################
+# mouse shouldn't follow focus since it appears broken when switching output
+mouse_warping none
 
 # move window with VIM keys
 bindsym $mod+Shift+h move left
