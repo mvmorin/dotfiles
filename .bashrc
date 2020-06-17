@@ -13,30 +13,28 @@ shopt -s autocd
 stty -ixon # Disable ctrl-s and ctrl-q.
 tput smkx # Make delete key work in bash in st
 
-# Base prompt
-PS1_BASE="\[\e[35m\][\[\e[34m\]\u@\h\[\e[36m\] \W\[\e[35m\]]"
-
 # Git completion and prompt
-PS1_GIT=""
-GIT_EXEC_PATH="$(git --exec-path 2>/dev/null)"
-GIT_BASE_PATH="${GIT_EXEC_PATH%/libexec/git-core}"
+GIT_BASE_PATH="$(git --exec-path 2>/dev/null | sed 's/\/libexec\/git-core$//')"
+GC_PATHS=( \
+	$GIT_BASE_PATH/share/doc/git/contrib/completion \
+	$GIT_BASE_PATH/share/git/completion \
+	)
 
-if [ -d "$GIT_BASE_PATH/share/git/completion" ]; then
-	GIT_COMPLETION_PATH="$GIT_BASE_PATH/share/git/completion"
-elif [ -d "$GIT_BASE_PATH/share/doc/git/contrib/completion" ]; then
-	GIT_COMPLETION_PATH="$GIT_BASE_PATH/share/doc/git/contrib/completion"
-fi
+for GCP in ${GC_PATHS[@]}; do [ -d ${GCP} ] && GIT_COMPLETE=${GCP}; done
 
-if [ ! -z "$GIT_COMPLETION_PATH" ]; then
+if [ ! -z "$GIT_COMPLETE" ]; then
 	[ "$OSTYPE" == "msys" ] || [ "$OSTYPE" == "cygwin" ] ||
 		export GIT_PS1_SHOWDIRTYSTATE="true"
-	source "$GIT_COMPLETION_PATH/git-completion.bash"
-	source "$GIT_COMPLETION_PATH/git-prompt.sh"
+	source "$GIT_COMPLETE/git-completion.bash"
+	source "$GIT_COMPLETE/git-prompt.sh"
 	PROMPT_COMMAND='PS1_GIT=$(__git_ps1 "%s")'
 fi
 
-# Finish prompt
-export PS1="$PS1_BASE"'${PS1_GIT:+\[\e[35m\] (\[\e[32m\]$PS1_GIT\[\e[35m\])}'"\[\e[35m\]\$ \[\e[00m\]"
+# Prompt
+PS1_BASE="\[\e[35m\][\[\e[34m\]\u@\h\[\e[36m\] \W\[\e[35m\]]"
+PS1_GIT='${PS1_GIT:+\[\e[35m\] (\[\e[32m\]$PS1_GIT\[\e[35m\])}'
+PS1_END="\[\e[35m\]\$ \[\e[00m\]"
+export PS1=${PS1_BASE}${PS1_GIT}${PS1_END}
 
 # Aliases
 alias grep='grep --color=auto'
@@ -48,5 +46,7 @@ alias ll='ls -Al'
 alias la='ls -A'
 
 alias glog='git log --graph --oneline'
+
+[ -n "$(which vimx 2>/dev/null)" ] && alias vim='vimx'
 
 alias :q="exit"
