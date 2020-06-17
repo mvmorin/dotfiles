@@ -135,6 +135,7 @@ set completeopt=longest,menuone
 inoremap <Tab>i <C-x><C-i>
 inoremap <Tab>o <C-x><C-o>
 inoremap <Tab>f <C-x><C-f>
+inoremap <Tab>s <C-x>s
 inoremap <Tab><Tab> <C-e>
 inoremap <C-Tab> <Tab>
 imap <expr> <CR> pumvisible() ? "\<C-y>" : "\<CR>"
