@@ -84,6 +84,7 @@ syntax on
 set backspace=indent,eol,start
 set autoread
 set scrolloff=3
+set belloff=all
 
 
 " Setup tabs
@@ -125,6 +126,7 @@ set statusline=%m\ %n)\ %f\ %y\ [%{&ff}]\ [%{&encoding}]
 set statusline+=%=
 set statusline+=Line:\ %l\/%L\ Col:\ %c\/%{strwidth(getline('.'))}\ "
 
+
 " Command/file auto completion
 set path+=**
 set wildmode=longest,list,full
@@ -143,10 +145,6 @@ imap <expr> j pumvisible() ? "\<C-n>" : "j"
 imap <expr> k pumvisible() ? "\<C-p>" : "k"
 
 
-" No bell
-set belloff=all
-
-
 " Copy to system clipboard
 vnoremap <leader>y "*y :let @+=@*<CR>
 nnoremap <leader>p "*]p
@@ -159,6 +157,11 @@ command Cd cd %:p:h
 " Shift lines width auto indent
 vnoremap J :m '>+1<CR>gv=gv
 vnoremap K :m '<-2<CR>gv=gv
+
+
+" Better half page movments
+nnoremap <C-u> M<C-u>
+nnoremap <C-d> M<C-d>
 
 
 " Windows
