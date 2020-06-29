@@ -3,14 +3,13 @@ atreplinit() do repl
 
 	ENV["PLOTS*DEFAULT*BACKEND"] = "GR"
 	@eval using Plots
-	@eval gr(color_palette=:darktest)
-	#@eval using LinearAlgebra
-	#@eval using BenchmarkTools
+	# @eval using LinearAlgebra
+	# @eval using BenchmarkTools
 
 	# Might not be worth the load time for these
-	#@eval using Profile
-	#@eval using ProfileView
-	#@eval using Traceur
+	# @eval using Profile
+	# @eval using ProfileView
+	# @eval using Traceur
 
 	ENV["JULIA_REVISE_INCLUDE"] = "1"
 	@eval using Revise
