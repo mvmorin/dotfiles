@@ -49,6 +49,6 @@ alias glog='git log --graph --oneline'
 
 [ -n "$(which vimx 2>/dev/null)" ] && alias vim='vimx'
 
-alias jscreen='screen -S julia-screen-session julia'
+alias jscreen='echo "termcapinfo * ti@:te@" > tmp && screen -c tmp -S julia-screen-session rm tmp; julia'
 
 alias :q="exit"
