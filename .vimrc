@@ -133,6 +133,11 @@ set path+=**
 set wildmode=longest,list,full
 
 
+" Spelling
+set spelllang=en_us,sv
+nnoremap <leader>s :set spell!<CR>
+
+
 " Basic insertmode word completion
 set completeopt=longest,menuone
 inoremap <Tab>i <C-x><C-i>
@@ -193,9 +198,12 @@ nnoremap <leader>i :bp<CR>
 command Bd b#<bar>bd#
 
 
-" Spelling
-set spelllang=en_us,sv
-nnoremap <leader>s :set spell!<CR>
+" Vim-Slime
+let g:slime_no_mappings=1
+nmap <C-c>v <Plug>SlimeConfig
+nmap <C-c><C-p> <Plug>SlimeParagraphSend
+nnoremap <C-c><C-c> :SlimeSend<CR>
+xmap <C-c><C-c> <Plug>SlimeRegionSend
 
 
 " Pre/post processing
