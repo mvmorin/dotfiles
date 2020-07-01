@@ -37,6 +37,7 @@ call plug#begin('~/.vim/plugged')
 	" Extensions
 	Plug 'tpope/vim-commentary' " gc+motion to comment/uncomment
 	Plug 'tpope/vim-fugitive' " :Git <command> to run git commands from vim
+	Plug 'jpalardy/vim-slime' " For sending text to terminal manager (screen,tmux...)
 
 	" Formatting and Syntax
 "	Plug 'sheerun/vim-polyglot' " Automatic downloading of language syntax pkgs
@@ -266,6 +267,7 @@ augroup END
 augroup julia_code
 	autocmd!
 	autocmd FileType julia setlocal commentstring=#\ %s
+	autocmd FileType julia let b:slime_config = {"sessionname": "julia-screen-session", "windowname": "0"}
 augroup END
 
 
