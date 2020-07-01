@@ -160,18 +160,12 @@ nnoremap <leader>p "*]p
 command Cd cd %:p:h
 
 
-" Shift lines width auto indent
-vnoremap J :m '>+1<CR>gv=gv
-vnoremap K :m '<-2<CR>gv=gv
-
-
 " Better half page movments
 nnoremap <C-u> M<C-u>
 nnoremap <C-d> M<C-d>
 
 
-" Windows
-"set splitbelow splitright
+" Window movement
 nnoremap <leader>h <C-w>h
 nnoremap <leader>j <C-w>j
 nnoremap <leader>k <C-w>k
@@ -183,11 +177,7 @@ nnoremap <leader>K <C-w>K
 nnoremap <leader>L <C-w>L
 
 nnoremap <leader>= <C-w>=
-nnoremap <leader><CR> <C-w><bar>
-nnoremap <C-h> <C-w>5<
-nnoremap <C-l> <C-w>5>
-nnoremap <C-j> <C-w>5-
-nnoremap <C-k> <C-w>5+
+nnoremap <leader><CR> <C-w><bar><C-w>_
 
 
 " Buffers
