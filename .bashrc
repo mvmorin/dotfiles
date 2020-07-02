@@ -49,6 +49,6 @@ alias glog='git log --graph --oneline'
 
 [ -n "$(which vimx 2>/dev/null)" ] && alias vim='vimx'
 
-alias jscreen='screen -S julia-screen-session julia'
+alias jmux='tmux -L julia-only new -s julia julia'
 
 alias :q="exit"

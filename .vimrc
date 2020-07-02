@@ -190,6 +190,7 @@ command Bd b#<bar>bd#
 
 " Vim-Slime
 let g:slime_no_mappings=1
+let g:slime_target="tmux"
 nmap <C-c>v <Plug>SlimeConfig
 nmap <C-c><C-p> <Plug>SlimeParagraphSend
 nnoremap <C-c><C-c> :SlimeSend<CR>
@@ -265,7 +266,7 @@ augroup END
 augroup julia_code
 	autocmd!
 	autocmd FileType julia setlocal commentstring=#\ %s
-	autocmd FileType julia let b:slime_config = {"sessionname": "julia-screen-session", "windowname": "0"}
+	autocmd FileType julia let b:slime_config = {"socket_name": "julia-only", "target_pane": "julia:0"}
 augroup END
 
 

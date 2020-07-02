@@ -19,6 +19,7 @@ files="\
 	.Xresources \
 	.urxvt \
 	.scripts \
+	.tmux.conf \
 	"
 
 # create dotfiles_old in homedir
