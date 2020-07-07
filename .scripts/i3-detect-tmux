@@ -5,9 +5,14 @@ process_window_events () {
 		WINID=$(echo ${line} 2>/dev/null | sed -n 's/.*"window":\([0-9]\+\).*/\1/p')
 		PARENT_PID=$(xprop -id $WINID 2>/dev/null | sed -n 's/.*PID.*\s\([0-9]\+\)$/\1/p')
 		TMUX_CLIENT_PIDS=$(pstree -lpA $PARENT_PID 2>/dev/null | sed -n 's/.*tmux:\ client(\([0-9]\+\)).*/\1/p')
+		ACTIVE_TMUX=""
 		for PID in $TMUX_CLIENT_PIDS; do
-			[ "$(ps -o s= -p $PID)" == "T" ] || echo "Active tmux client in window"
+			[ "$(ps -o s= -p $PID)" == "T" ] || ACTIVE_TMUX="true"
 		done
+		if [ ! -z "$ACTIVE_TMUX" ] ; then
+			echo "Active tmux client in window"
+			i3-msg -t command mode "tmux mode" >/dev/null
+		fi
 	done
 }
 
