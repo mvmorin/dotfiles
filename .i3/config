@@ -1,4 +1,5 @@
 # Please see http://i3wm.org/docs/userguide.html for a complete reference!
+# i3 config file (v4)
 
 set $mod Mod4
 floating_modifier $mod
@@ -46,7 +47,7 @@ bindsym $mod+BackSpace exec dmenu_run -nb "$unfocus_bg" -nf "$unfocus_tx" -sb "$
 bindsym $mod+Shift+q kill
 
 # reload the configuration file
-bindsym $mod+Shift+r reload
+bindsym $mod+Shift+r restart
 
 # exit i3 (logs you out of your X session)
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'Do you really want to exit i3 and end your X session?' -b 'Yes, exit i3' 'i3-msg exit'"
@@ -167,7 +168,7 @@ mode "tmux mode" {
 # General System Stuff
 ##############################################################################
 # startup script, sets monitors, mouse etc.
-exec --no-startup-id ~/.i3/startup/default
+exec_always --no-startup-id ~/.i3/startup/default
 
 # volume control
 bindsym XF86AudioRaiseVolume exec amixer -q -D pulse set Master 2.5%+
