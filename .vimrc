@@ -266,7 +266,7 @@ augroup END
 augroup julia_code
 	autocmd!
 	autocmd FileType julia setlocal commentstring=#\ %s
-	autocmd FileType julia let b:slime_config = {"socket_name": "julia-only", "target_pane": "julia:0"}
+	autocmd FileType julia let b:slime_config = {"socket_name": "default", "target_pane": "Jmux:0"}
 augroup END
 
 
