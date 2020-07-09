@@ -46,6 +46,8 @@ alias ll='ls -Al'
 alias la='ls -A'
 
 alias glog='git log --graph --oneline -n30'
+alias gd='git diff'
+alias gs='git status'
 
 [ -n "$(which vimx 2>/dev/null)" ] && alias vim='vimx'
 
