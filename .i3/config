@@ -124,29 +124,17 @@ bindsym $mod+Ctrl+h resize shrink width 20 px
 # Workspace Mode
 ##############################################################################
 mode "workspace mode" {
-	# Change to workspace
-	bindsym a workspace number 1
-	bindsym s workspace number 2
-	bindsym d workspace number 3
-	bindsym f workspace number 4
-	bindsym g workspace number 5
-	bindsym h workspace number 6
-	bindsym j workspace number 7
-	bindsym k workspace number 8
-	bindsym l workspace number 9
-	bindsym odiaeresis workspace number 0
-
-	# Move container to workspace
-	bindsym q move container to workspace number 1
-	bindsym w move container to workspace number 2
-	bindsym e move container to workspace number 3
-	bindsym r move container to workspace number 4
-	bindsym t move container to workspace number 5
-	bindsym y move container to workspace number 6
-	bindsym u move container to workspace number 7
-	bindsym i move container to workspace number 8
-	bindsym o move container to workspace number 9
-	bindsym p move container to workspace number 0
+	# Move container to workspace and follow focus
+	bindsym a move container to workspace number 1; workspace number 1
+	bindsym s move container to workspace number 2; workspace number 2
+	bindsym d move container to workspace number 3; workspace number 3
+	bindsym f move container to workspace number 4; workspace number 4
+	bindsym g move container to workspace number 5; workspace number 5
+	bindsym h move container to workspace number 6; workspace number 6
+	bindsym j move container to workspace number 7; workspace number 7
+	bindsym k move container to workspace number 8; workspace number 8
+	bindsym l move container to workspace number 9; workspace number 9
+	bindsym odiaeresis move container to workspace number 0; workspace number 0
 
 	# Exit
 	bindsym Escape mode "default"
