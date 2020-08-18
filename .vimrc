@@ -235,7 +235,7 @@ let g:vimtex_mappings_disable = {
 			\ 'n': ['tsf', 'tsc', 'tse', 'tsd', 'tsD'],
 			\ 'x': ['tsf', 'tsd', 'tsD'],
 			\}
-if has('Win32')
+if has('Win32') || has('Win32Unix')
 	let g:vimtex_view_method='general'
 	let g:vimtex_view_general_viewer = 'SumatraPDF'
 	let g:vimtex_view_general_options
