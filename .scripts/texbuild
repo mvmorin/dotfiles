@@ -14,26 +14,14 @@ test "$OSTYPE" == "msys" &&	viewcmd="SumatraPDF.exe"
 test "$OSTYPE" == "linux-gnu" && viewcmd="zathura"
 
 # Parse rest of arguments
-while getopts ":bwnlx" opt; do
+while getopts ":bvnlx" opt; do
 	case ${opt} in
-		b)
-			bib="set"
-		;;
-		w)
-			view="set"
-		;;
-		n)
-			nobuild="set"
-		;;
-		l)
-			cmd="lualatex"
-		;;
-		x)
-			cmd="xelatex"
-		;;
-		\?)
-			echo "Invalid option. Remember: options must come last." 1>&2; exit
-		;;
+		b) bib="set" ;;
+		v) view="set" ;;
+		n) nobuild="set" ;;
+		l) cmd="lualatex" ;;
+		x) cmd="xelatex" ;;
+		\?) echo "Invalid option. Remember: options must come last." 1>&2 ; exit ;;
 	esac
 done
 
