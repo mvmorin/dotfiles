@@ -1,0 +1,49 @@
+! Tender color scheme, made by jacoborus
+! adapted by Jose Esparza
+! Source: https://github.com/pebeto/tender-xresources
+! License: MIT
+
+! special
+*foreground:   #eeeeee
+*background:   #282828
+!*cursorColor:  #eeeeee
+
+! black
+*color0:       #282828
+*color8:       #4c4c4c
+
+! red
+*color1:       #f43753
+*color9:       #f43753
+
+! green
+*color2:       #c9d05c
+*color10:      #c9d05c
+
+! yellow
+*color3:       #ffc24b
+*color11:      #ffc24b
+
+! blue
+*color4:       #b3deef
+*color12:      #b3deef
+
+! magenta
+*color5:       #d3b987
+*color13:      #d3b987
+
+! cyan
+*color6:       #73cef4
+*color14:      #73cef4
+
+! white
+*color7:       #eeeeee
+*color15:      #feffff
+
+
+! The following resource is non-standard but can be read in the .vimrc to
+! automatically set colorscheme, given that it is installed.
+! Example .vimrc snippet:
+! let xrdb_colorscheme = system("xrdb -query | sed -n -e 's/\\(^vim.colorscheme\\):\t\\(.*\\)/\\2/p'")
+! exec 'colo 'xrdb_colorscheme
+vim.colorscheme: tender

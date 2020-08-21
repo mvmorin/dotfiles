@@ -31,6 +31,7 @@ call plug#begin('~/.vim/plugged')
 	Plug 'mhartington/oceanic-next'
 	Plug 'altercation/vim-colors-solarized'
 	Plug 'drewtempelmeyer/palenight.vim'
+	Plug 'jacoborus/tender.vim'
 
 	" Simple mode
 	Plug 'junegunn/goyo.vim'
