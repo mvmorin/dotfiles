@@ -195,4 +195,6 @@ bar {
 		active_workspace $visible_bd $visible_bg $visible_tx
 		urgent_workspace $urgent_bd $urgent_bg $urgent_tx
 	}
+
+	tray_output primary
 }
