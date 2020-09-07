@@ -7,7 +7,8 @@ shift
 
 # Default build command
 cmd="pdflatex"
-cmdopt="-shell-escape -synctex=1 -interaction=nonstopmode"
+# cmdopt="-shell-escape -synctex=1 -interaction=nonstopmode"
+cmdopt="-shell-escape -synctex=1"
 
 # View command
 test "$OSTYPE" == "msys" &&	viewcmd="SumatraPDF.exe"
