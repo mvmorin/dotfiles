@@ -11,7 +11,6 @@ HISTFILESIZE=2000
 shopt -s checkwinsize
 shopt -s autocd
 stty -ixon # Disable ctrl-s and ctrl-q.
-tput smkx # Make delete key work in bash in st
 
 # Git completion and prompt
 GIT_BASE_PATH="$(git --exec-path 2>/dev/null | sed 's/\/libexec\/git-core$//')"
