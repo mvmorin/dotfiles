@@ -10,6 +10,7 @@ HISTFILESIZE=2000
 # Behavior
 shopt -s checkwinsize
 shopt -s autocd
+shopt -s globstar
 stty -ixon # Disable ctrl-s and ctrl-q.
 
 # Git completion and prompt
