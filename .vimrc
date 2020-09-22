@@ -114,6 +114,27 @@ set nohlsearch
 set ignorecase
 set smartcase
 
+command Focus call ToggleSingleLineFocus()
+function ToggleSingleLineFocus()
+	if !exists("w:single_line_focus_on")
+		let w:single_line_focus_on = 0
+	endif
+
+	if w:single_line_focus_on
+		let w:single_line_focus_on = 0
+		let &conceallevel = w:old_conceallevel
+		2match
+		Goyo!
+	else
+		Goyo 80
+		let w:single_line_focus_on = 1
+		let w:old_conceallevel = &conceallevel
+		let &conceallevel = 3
+		2match Conceal /^.*$/
+		norm zt
+	endif
+endfunction
+
 
 " Set status, gui-options and decorations
 set cursorline
