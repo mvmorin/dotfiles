@@ -126,12 +126,13 @@ function ToggleSingleLineFocus()
 		2match
 		Goyo!
 	else
-		Goyo 80
+		Goyo 80%x3
 		let w:single_line_focus_on = 1
 		let w:old_conceallevel = &conceallevel
 		let &conceallevel = 3
 		2match Conceal /^.*$/
-		norm zt
+		norm z.
+		echo ""
 	endif
 endfunction
 
