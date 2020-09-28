@@ -1,0 +1,5 @@
+set sandbox none
+set selection-clipboard clipboard
+set incremental-search true
+set page-padding 10
+set guioptions ""

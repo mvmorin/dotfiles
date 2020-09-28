@@ -21,6 +21,7 @@ files="\
 	.scripts \
 	.tmux.conf \
 	.inputrc \
+	.config/zathura/zathurarc \
 	"
 
 # create dotfiles_old in homedir
