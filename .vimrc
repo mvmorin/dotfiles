@@ -268,6 +268,7 @@ else
 	let g:vimtex_view_method='zathura'
 endif
 let g:tex_stylish=1
+let g:vimtex_indent_on_ampersands=0
 augroup tex_and_markdown
 	autocmd!
 	autocmd BufRead,BufNewFile *.tex, setlocal filetype=tex
