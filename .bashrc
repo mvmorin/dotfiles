@@ -52,5 +52,6 @@ alias gs='git status'
 [ -n "$(which vimx 2>/dev/null)" ] && alias vim='vimx'
 
 alias jmux='tmux new -A -s Jmux julia'
+alias jbare='julia --startup-file=no'
 
 alias :q="exit"
