@@ -4,8 +4,8 @@
 # History
 HISTCONTROL=ignoreboth
 shopt -s histappend
-HISTSIZE=1000
-HISTFILESIZE=2000
+HISTSIZE=5000
+HISTFILESIZE=10000
 
 # Behavior
 shopt -s checkwinsize
@@ -49,9 +49,10 @@ alias glog='git log --graph --oneline -n30'
 alias gd='git diff'
 alias gs='git status'
 
-[ -n "$(which vimx 2>/dev/null)" ] && alias vim='vimx'
+alias :q="exit"
 
+## default launchers
+[ -n "$(which vimx 2>/dev/null)" ] && alias vim='vimx --servername VIMX'
 alias jmux='tmux new -A -s Jmux julia'
 alias jbare='julia --startup-file=no'
-
-alias :q="exit"
+alias zathura='zathura --fork'
