@@ -6,3 +6,5 @@ nothing fancy yet, just manual backup and sync with "create-symlinks" that does 
 # ToDo
 This might be a good approach
 https://developer.atlassian.com/blog/2016/02/best-way-to-store-dotfiles-git-bare-repo/
+
+GNU stow?

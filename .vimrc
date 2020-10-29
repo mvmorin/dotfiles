@@ -273,13 +273,13 @@ let g:vimtex_compiler_latexmk = {
 	\   '-shell-escape',
 	\ ],
 	\}
-let g:vimtex_compiler_latexmk_engines = {'_' : '-xelatex'}
 command LatexmkPdf
 	\ let g:vimtex_compiler_latexmk_engines = {'_' : '-pdf'} <bar> norm \lx<cr>\ll
 command LatexmkXe
 	\ let g:vimtex_compiler_latexmk_engines = {'_' : '-xelatex'} <bar> norm \lx<cr>\ll
 command LatexmkLua
 	\ let g:vimtex_compiler_latexmk_engines = {'_' : '-lualatex'} <bar> norm \lx<cr>\ll
+LatexmkLua " Set default. Obs! Latexmk and xelatex does not work well with SumatraPDF
 
 " These mappings conflicts/slows down the oridnary t{char} map
 let g:vimtex_mappings_disable = {
@@ -291,6 +291,8 @@ if has('Win32') || has('Win32Unix')
 	let g:vimtex_view_method='general'
 	let g:vimtex_view_general_viewer = 'SumatraPDF'
 	let g:vimtex_view_general_options
+		\ = '-reuse-instance -forward-search @tex @line @pdf'
+	let g:vimtex_view_general_options_latexmk
 		\ = '-reuse-instance -forward-search @tex @line @pdf'
 else
 	let g:vimtex_view_method='zathura'
