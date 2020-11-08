@@ -1,0 +1,27 @@
+# root = <dotfile dir>
+# root = <windows home dir>
+# include <this file>
+
+# Command to run matching unison version on server
+# servercmd = ~/bin/unison-2.48.4
+
+# Paths to syncronize
+path = .bashrc
+path = .bash_profile
+path = .vimrc
+path = .vim/autoload
+path = .gitconfig
+path = .julia/config/startup.jl
+path = .scripts
+
+# Options
+# Needed to avoid double reading of enter key (should be default)
+dumbtty = true
+# Only ask when conflicts occur
+auto = true
+# Don't log
+log = false
+# Sync file modification times
+times = true
+# Windows use a fat file system
+fat = true

@@ -18,20 +18,20 @@ follow = Name zotero-attachments
 path = wrepos
 follow = Name wrepos
 
+# Ignore paths
+# vim swap-files
+ignore = Name .*.*.swp
+# cache directories - Specifically the libSVM datasets cache
+ignore = Name cache
+
+# Options
 # Needed to avoid double reading of enter key (should be default)
 dumbtty = true
-
 # Only ask when conflicts occur
 auto = true
-
 # Don't log
 log = false
-
 # Sync file modification times
 times = true
-
-# Ignore vim swap-files
-ignore = Name .*.*.swp
-
-# Ignore cache directory - Specifically the libSVM datasets cache
-ignore = Name cache
+# Want to be able to sync to windows file systems
+fat = true

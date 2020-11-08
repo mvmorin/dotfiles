@@ -14,10 +14,10 @@ shopt -s globstar
 stty -ixon # Disable ctrl-s and ctrl-q.
 
 # Git completion and prompt
-GIT_BASE_PATH="$(git --exec-path 2>/dev/null | sed 's/\/libexec\/git-core$//')"
 GC_PATHS=( \
-	"${GIT_BASE_PATH}"'/share/doc/git/contrib/completion' \
-	"${GIT_BASE_PATH}"'/share/git/completion' \
+	'/usr/share/doc/git/contrib/completion' \
+	'/usr/share/git-core/contrib/completion' \
+	'C:/Program Files/Git/mingw64/share/git/completion' \
 	)
 
 for GCP in "${GC_PATHS[@]}"; do [ -d "${GCP}" ] && GIT_COMPLETE="${GCP}"; done

@@ -1,13 +1,6 @@
-#!/bin/bash
-
-############################
-# This script creates symlinks from the home directory to any desired dotfiles
-# in ~/dotfiles
-############################
+#!/bin/sh
 
 ########## Variables
-dir=~/dotfiles
-olddir=~/dotfiles_old
 files="\
 	.bashrc \
 	.bash_profile \
@@ -24,20 +17,58 @@ files="\
 	.config/zathura/zathurarc \
 	"
 
-# create dotfiles_old in homedir
-echo "Creating $olddir for backup of any existing dotfiles."
-mkdir -p $olddir
+df_dir=~/dotfiles
+bak_dir=~/dotfiles_bak
+home_dir=~
 
-# change to the dotfiles directory
-cd $dir
+########## Functions
+rmdir_rel()
+{
+	workdir="$(pwd -P)"
+	cd "$2" || return 1
+	reltarget=$(realpath --relative-to="$2" "$1")
+	[ "$reltarget" != "." ]	&& rmdir -p "$reltarget"
+	cd "$workdir" || return 1
+}
 
-# move any existing dotfiles in homedir to dotfiles_old directory, then create
-# symlinks
-echo -e "\nCreating symlink to dotfiles, backing up any already existing files."
-for file in $files; do
-	mv ~/$file ~/dotfiles_old/
-	echo -e "\tCreating symlink to: $file"
-	ln -s $dir/$file ~/$file
-done
+backup_old_dotfile()
+{
+	dotfile=$home_dir/$1
+	bakpath=$bak_dir/$1
+	if [ -e "$dotfile" ] || [ -L "$dotfile" ]; then
+		mkdir -p "${bakpath%/*}"
+		mv "$dotfile" "$bakpath"
+		rmdir_rel "${dotfile%/*}" "$home_dir"
+		return 0
+	fi
+	return 1
+}
 
-echo -e "\nDone, delete $olddir if everything is ok."
+symlink_dotfile()
+{
+	linkname=$home_dir/$1
+	target=$df_dir/$1
+	mkdir -p "${linkname%/*}"
+	ln -s "$target" "$linkname"
+	return 0
+}
+
+backup_all()
+{
+	echo "Backing up existing dotfiles:"
+	for file in $files; do
+		backup_old_dotfile "$file" && echo "  $file"
+	done
+}
+
+symlink_all()
+{
+	echo "Creating symlinks to:"
+	for file in $files; do
+		symlink_dotfile "$file" && echo "  $file"
+	done
+}
+
+########## Run installer
+backup_all
+symlink_all
