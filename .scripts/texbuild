@@ -11,8 +11,8 @@ cmd="pdflatex"
 cmdopt="-shell-escape -synctex=1"
 
 # View command
-test "$OSTYPE" == "msys" &&	viewcmd="SumatraPDF.exe"
-test "$OSTYPE" == "linux-gnu" && viewcmd="zathura"
+[ "$OSTYPE" == "msys" ] &&	viewcmd="SumatraPDF.exe"
+[ "$OSTYPE" == "linux-gnu" ] && viewcmd="zathura"
 
 # Parse rest of arguments
 while getopts ":bvnlx" opt; do
@@ -28,13 +28,13 @@ done
 
 # Build
 if ! [ -n "$nobuild" ]; then
-	${cmd} ${cmdopt} ${name}.tex
+	${cmd} "${cmdopt}" "${name}.tex"
 	if [ -n "$bib" ]; then
-		bibtex ${name}.aux
-		${cmd} ${cmdopt} ${name}.tex
-		${cmd} ${cmdopt} ${name}.tex
+		bibtex "${name}.aux"
+		${cmd} "${cmdopt}" "${name}.tex"
+		${cmd} "${cmdopt}" "${name}.tex"
 	fi
 fi
 
 # View pdf
-test -n "$view" && ${viewcmd} ${name}.pdf &
+[ -n "$view" ] && ${viewcmd} "${name}.pdf" &

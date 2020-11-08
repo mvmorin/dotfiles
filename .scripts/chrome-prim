@@ -1,2 +1,2 @@
-#!/bin/bash
+#!/bin/sh
 google-chrome --new-window --profile-directory="Default"

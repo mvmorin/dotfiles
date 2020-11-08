@@ -1,2 +1,2 @@
-#!/bin/bash
+#!/bin/sh
 VERSION=R2019b matlab -desktop
