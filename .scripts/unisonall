@@ -3,5 +3,7 @@
 for file in ~/.unison/*.prf; do
 	prf_file=${file##*/}
 	profile=${prf_file%.prf}
+	echo "Running: unison $profile"
 	unison "$profile"
+	echo ""
 done
