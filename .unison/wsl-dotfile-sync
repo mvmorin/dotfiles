@@ -14,6 +14,9 @@ path = .gitconfig
 path = .julia/config/startup.jl
 path = .scripts
 
+# Ignore vim swap-files
+ignore = Name .*.swp
+
 # Options
 # Needed to avoid double reading of enter key (should be default)
 dumbtty = true

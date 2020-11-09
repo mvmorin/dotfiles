@@ -1,0 +1,7 @@
+#!/bin/sh
+
+for file in ~/.unison/*.prf; do
+	prf_file=${file##*/}
+	profile=${prf_file%.prf}
+	unison "$profile"
+done
