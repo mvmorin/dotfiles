@@ -260,26 +260,26 @@ augroup END
 let g:vimtex_view_automatic=0
 let g:vimtex_quickfix_open_on_warning=0
 let g:vimtex_quickfix_autoclose_after_keystrokes=10
-let g:vimtex_quickfix_latexlog = {
-	\ 'overfull' : 0, 'underfull' : 0, 'font' : 0,
-	\ 'packages' : { 'default' : 0, },
-	\}
+" Disable custom warnings based on regexp
+" let g:vimtex_quickfix_ignore_filters = [
+" 			\ 'Marginpar on page',
+" 			\]
 let g:vimtex_compiler_latexmk = {
-	\ 'options' : [
-	\   '-verbose',
-	\   '-file-line-error',
-	\   '-synctex=1',
-	\   '-interaction=nonstopmode',
-	\   '-shell-escape',
-	\ ],
-	\}
+			\ 'options' : [
+			\   '-verbose',
+			\   '-file-line-error',
+			\   '-synctex=1',
+			\   '-interaction=nonstopmode',
+			\   '-shell-escape',
+			\ ],
+			\}
+let g:vimtex_compiler_latexmk_engines = {'_' : '-lualatex'} " Set default. Obs! Latexmk and xelatex does not work well with SumatraPDF
 command LatexmkPdf
-	\ let g:vimtex_compiler_latexmk_engines = {'_' : '-pdf'} <bar> norm \lx<cr>\ll
+			\ let g:vimtex_compiler_latexmk_engines = {'_' : '-pdf'} <bar> norm \lx<cr>\ll
 command LatexmkXe
-	\ let g:vimtex_compiler_latexmk_engines = {'_' : '-xelatex'} <bar> norm \lx<cr>\ll
+			\ let g:vimtex_compiler_latexmk_engines = {'_' : '-xelatex'} <bar> norm \lx<cr>\ll
 command LatexmkLua
-	\ let g:vimtex_compiler_latexmk_engines = {'_' : '-lualatex'} <bar> norm \lx<cr>\ll
-LatexmkLua " Set default. Obs! Latexmk and xelatex does not work well with SumatraPDF
+			\ let g:vimtex_compiler_latexmk_engines = {'_' : '-lualatex'} <bar> norm \lx<cr>\ll
 
 " These mappings conflicts/slows down the oridnary t{char} map
 let g:vimtex_mappings_disable = {
@@ -291,9 +291,9 @@ if has('Win32') || has('Win32Unix')
 	let g:vimtex_view_method='general'
 	let g:vimtex_view_general_viewer = 'SumatraPDF'
 	let g:vimtex_view_general_options
-		\ = '-reuse-instance -forward-search @tex @line @pdf'
+				\ = '-reuse-instance -forward-search @tex @line @pdf'
 	let g:vimtex_view_general_options_latexmk
-		\ = '-reuse-instance -forward-search @tex @line @pdf'
+				\ = '-reuse-instance -forward-search @tex @line @pdf'
 else
 	let g:vimtex_view_method='zathura'
 endif
