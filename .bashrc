@@ -53,6 +53,13 @@ alias :q="exit"
 
 ## default launchers
 [ -n "$(which vimx 2>/dev/null)" ] && alias vim='vimx --servername VIMX'
-alias jmux='tmux new -A -s Jmux julia'
+# alias jmux='tmux new -A -s Jmux julia' # this probably don't work that well with my new expanded tmux use.
 alias jbare='julia --startup-file=no'
 alias zathura='zathura --fork'
+alias tmuxa='tmux attach'
+
+# Launch tmux if not already in tmux
+if [ -z "$TMUX" ]; then
+	# should do something more fance here to get easier session management
+	tmux
+fi
