@@ -58,8 +58,8 @@ alias jbare='julia --startup-file=no'
 alias zathura='zathura --fork'
 alias tmuxa='tmux attach'
 
-# Launch tmux if not already in tmux
-if [ -z "$TMUX" ]; then
+# Launch tmux if it exists and not already in tmux
+if [ -n "$(which tmux 2>/dev/null)" ] && [ -z "$TMUX" ]; then
 	# should do something more fance here to get easier session management
 	tmux
 fi
