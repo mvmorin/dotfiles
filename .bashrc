@@ -61,5 +61,5 @@ alias tmuxa='tmux attach'
 # Launch tmux if it exists and not already in tmux
 if [ -n "$(which tmux 2>/dev/null)" ] && [ -z "$TMUX" ]; then
 	# should do something more fance here to get easier session management
-	tmux
+	tmux new -A -s main
 fi
