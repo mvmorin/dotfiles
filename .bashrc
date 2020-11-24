@@ -21,14 +21,15 @@ GC_PATHS=( \
 	)
 
 for GCP in "${GC_PATHS[@]}"; do
-	gcomp="${CPT}/git-completion.bash"
-	gprompt="${CPT}/git-prompt.sh"
+	gcomp="${GCP}/git-completion.bash"
+	gprompt="${GCP}/git-prompt.sh"
 	if [ -f "${gcomp}" ] && [ -f "${gprompt}" ]; then
 		[ "$OSTYPE" == "msys" ] || [ "$OSTYPE" == "cygwin" ] ||
 			export GIT_PS1_SHOWDIRTYSTATE="true"
-		source "$GIT_COMPLETE/git-completion.bash"
-		source "$GIT_COMPLETE/git-prompt.sh"
+		source "$gcomp"
+		source "$gprompt"
 		PROMPT_COMMAND='PS1_GIT_TAG=$(__git_ps1 "%s")'
+		break
 	fi
 done
 
