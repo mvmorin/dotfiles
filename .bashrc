@@ -20,15 +20,17 @@ GC_PATHS=( \
 	'C:/Program Files/Git/mingw64/share/git/completion' \
 	)
 
-for GCP in "${GC_PATHS[@]}"; do [ -d "${GCP}" ] && GIT_COMPLETE="${GCP}"; done
-
-if [ ! -z "$GIT_COMPLETE" ]; then
-	[ "$OSTYPE" == "msys" ] || [ "$OSTYPE" == "cygwin" ] ||
-		export GIT_PS1_SHOWDIRTYSTATE="true"
-	source "$GIT_COMPLETE/git-completion.bash"
-	source "$GIT_COMPLETE/git-prompt.sh"
-	PROMPT_COMMAND='PS1_GIT_TAG=$(__git_ps1 "%s")'
-fi
+for GCP in "${GC_PATHS[@]}"; do
+	gcomp="${CPT}/git-completion.bash"
+	gprompt="${CPT}/git-prompt.sh"
+	if [ -f "${gcomp}" ] && [ -f "${gprompt}" ]; then
+		[ "$OSTYPE" == "msys" ] || [ "$OSTYPE" == "cygwin" ] ||
+			export GIT_PS1_SHOWDIRTYSTATE="true"
+		source "$GIT_COMPLETE/git-completion.bash"
+		source "$GIT_COMPLETE/git-prompt.sh"
+		PROMPT_COMMAND='PS1_GIT_TAG=$(__git_ps1 "%s")'
+	fi
+done
 
 # Prompt
 PS1_BASE="\[\e[35m\][\[\e[34m\]\u@\h\[\e[36m\] \W\[\e[35m\]]"
