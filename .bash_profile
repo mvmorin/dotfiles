@@ -6,8 +6,10 @@ export VISUAL=vim
 export BROWSER=google-chrome
 export READER=zathura
 
-# No display set on WSL. This should be a hopefully sane way to set a resonable
-# default.
-[ -z "$DISPLAY" ] && export DISPLAY=localhost:0
+# No display set on WSL. This should be a hopefully sane way to set the display
+[ -n "$WSL_DISTRO_NAME" ] && [ -n "$WSL_INTEROP" ] &&
+	export DISPLAY=$(awk '/nameserver / {print $2}' /etc/resolv.conf):0 # WSL 2
+[ -n "$WSL_DISTRO_NAME" ] && [ -z "$WSL_INTEROP" ] &&
+	export DISPLAY=localhost:0 # WSL 1
 
 source ~/.bashrc
