@@ -1,9 +1,7 @@
 # root = <local dir>
 # root = ssh://<host>//<remote dir>
+# servercmd = <path to matching unison version on server>
 # include <this file>
-
-# Command to run matching unison version on server
-servercmd = ~/bin/unison-2.48.4
 
 # Paths to syncronize
 path = work
