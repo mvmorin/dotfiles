@@ -38,7 +38,7 @@
 				"guid": "{b721a7b9-312a-4417-b4e3-a129a1fd920f}",
 				"hidden": false,
 				"name": "Debian with tmux and Xming",
-				"commandline": "powershell.exe -NoProfile -Command xming -ac -multiwindow -clipboard -xkbmodel pc105 -xkblayout fi; wsl -d Debian",
+				"commandline": "powershell.exe -NoProfile -Command vcxsrv -ac -multiwindow -clipboard -xkbmodel pc105 -xkblayout se; wsl -d Debian",
 				"startingDirectory": "\\\\wsl$\\Debian\\home\\morin"
 			},
 			{
@@ -114,4 +114,3 @@
 
 	]
 }
-
