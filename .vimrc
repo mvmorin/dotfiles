@@ -39,7 +39,7 @@ call plug#begin('~/.vim/plugged')
 	" Extensions
 	Plug 'tpope/vim-commentary' " gc+motion to comment/uncomment
 	Plug 'tpope/vim-fugitive' " :Git <command> to run git commands from vim
-	Plug 'jpalardy/vim-slime' " For sending text to terminal manager (screen,tmux...)
+	" Plug 'jpalardy/vim-slime' " For sending text to terminal manager (screen,tmux...) Could not install with plug last time I tried.
 
 	" Formatting and Syntax
 "	Plug 'sheerun/vim-polyglot' " Automatic downloading of language syntax pkgs
@@ -261,9 +261,9 @@ let g:vimtex_view_automatic=0
 let g:vimtex_quickfix_open_on_warning=0
 let g:vimtex_quickfix_autoclose_after_keystrokes=10
 " Disable custom warnings based on regexp
-" let g:vimtex_quickfix_ignore_filters = [
-" 			\ 'Marginpar on page',
-" 			\]
+let g:vimtex_quickfix_ignore_filters = [
+			\ 'I found no \(\\bibdata\|\\citation\) commands\?---while reading file \([^\S]*\).aux',
+			\]
 let g:vimtex_compiler_latexmk = {
 			\ 'options' : [
 			\   '-verbose',

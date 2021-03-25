@@ -27,7 +27,7 @@
 			{
 				"guid": "{b721a7b9-312a-4417-b4e3-a129a1fd920f}",
 				"hidden": false,
-				"name": "Debian with tmux and Xming",
+				"name": "Debian with VcXsrv",
 				"commandline": "wsl -d Debian",
 				"startingDirectory": "\\\\wsl$\\Debian\\home\\morin"
 			},
