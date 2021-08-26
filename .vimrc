@@ -39,7 +39,7 @@ call plug#begin('~/.vim/plugged')
 	" Extensions
 	Plug 'tpope/vim-commentary' " gc+motion to comment/uncomment
 	Plug 'tpope/vim-fugitive' " :Git <command> to run git commands from vim
-	" Plug 'jpalardy/vim-slime' " For sending text to terminal manager (screen,tmux...) Could not install with plug last time I tried.
+	Plug 'jpalardy/vim-slime' " For sending text to terminal manager (screen,tmux...) Could not install with plug last time I tried.
 
 	" Formatting and Syntax
 "	Plug 'sheerun/vim-polyglot' " Automatic downloading of language syntax pkgs

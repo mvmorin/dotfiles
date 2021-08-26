@@ -2,7 +2,7 @@ atreplinit() do repl
 	ENV["JULIA_PKG_DEVDIR"] = joinpath(homedir(), "wrepos")
 
 	ENV["PLOTS*DEFAULT*BACKEND"] = "GR"
-	@eval using Plots
+	# @eval using Plots
 	# @eval using LinearAlgebra
 	# @eval using BenchmarkTools
 
