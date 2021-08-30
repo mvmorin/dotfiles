@@ -25,13 +25,12 @@ endif
 call plug#begin('~/.vim/plugged')
 
 	" Colorschemes to try out
-	Plug 'morhetz/gruvbox'
-	Plug 'arcticicestudio/nord-vim'
-	Plug 'joshdick/onedark.vim'
-	Plug 'mhartington/oceanic-next'
-	Plug 'altercation/vim-colors-solarized'
-	Plug 'drewtempelmeyer/palenight.vim'
-	Plug 'jacoborus/tender.vim'
+	Plug 'gruvbox-community/gruvbox'
+	Plug 'sainnhe/gruvbox-material'
+	Plug 'sainnhe/everforest'
+	Plug 'sainnhe/edge'
+	Plug 'sainnhe/sonokai'
+	Plug 'cocopon/iceberg.vim'
 
 	" Simple mode
 	Plug 'junegunn/goyo.vim'
@@ -39,7 +38,7 @@ call plug#begin('~/.vim/plugged')
 	" Extensions
 	Plug 'tpope/vim-commentary' " gc+motion to comment/uncomment
 	Plug 'tpope/vim-fugitive' " :Git <command> to run git commands from vim
-	Plug 'jpalardy/vim-slime' " For sending text to terminal manager (screen,tmux...) Could not install with plug last time I tried.
+	Plug 'jpalardy/vim-slime' " For sending text to terminal manager (screen,tmux...)
 
 	" Formatting and Syntax
 "	Plug 'sheerun/vim-polyglot' " Automatic downloading of language syntax pkgs
@@ -60,15 +59,33 @@ elseif $TERM == "rxvt-unicode"
 endif
 
 
-" Set colorscheme
+" Set colorscheme options
 set bg=dark
-let g:gruvbox_guisp_fallback='bg'
+
+let g:gruvbox_guisp_fallback='bg' " necessary to get spellcheck highlighting
+
+let g:gruvbox_material_palette = 'original'
+let g:gruvbox_material_enable_italic = 1
+
+let g:edge_style = 'aura'
+let g:edge_enable_italic = 1
+
+let g:everforest_background = 'hard'
+let g:everforest_enable_italic = 1
+
+" let g:sonokai_style = 'shusia'
+let g:sonokai_style = 'espresso'
+let g:sonokai_enable_italic = 1
+
+" Set colorscheme
 colo gruvbox
-" colo nord
-" colo onedark
-" colo OceanicNext
-" colo solarized
-" Read from xresources if possible
+" colo gruvbox-material
+" colo everforest
+" colo edge
+" colo sonokai
+" colo iceberg
+
+" Read colorscheme from xresources if possible
 let xrdb_colorscheme = system(
 			\ "xrdb -query | sed -n -e 's/\\(^vim.colorscheme\\):\t\\(.*\\)/\\2/p'" )
 if xrdb_colorscheme != ""
