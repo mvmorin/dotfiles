@@ -4,27 +4,15 @@
 case $1 in
 	'') ;;
 	ignore) opt="-ignorearchives" ;;
-	restore) restore="set" ;;
 	check) check="set" ;;
 	*) echo "Invalid option." 1>&2 ; exit ;;
 esac
 
-# Restore archives from backup
-if [ -n "$restore" ]; then
-	echo "Restore archives from backups."
-	cp ~/.unison/backup-archive/* ~/.unison/
-	exit
-fi
-
 # Show size of archives to check for corruption
 if [ -n "$check" ]; then
 	wc -c ~/.unison/ar*
-	wc -c ~/.unison/backup-archive/ar*
    exit
 fi
-
-# Debug output
-wc -c ~/.unison/ar*
 
 # run unison on all profiles
 for file in ~/.unison/*.prf; do
@@ -34,11 +22,3 @@ for file in ~/.unison/*.prf; do
 	unison $profile $opt
 	echo ""
 done
-
-# Debug output
-wc -c ~/.unison/ar*
-
-# Backup archives
-mkdir -p ~/.unison/backup-archive
-rm -f ~/.unison/backup-archive/*
-cp -t ~/.unison/backup-archive ~/.unison/ar*
