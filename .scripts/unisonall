@@ -1,5 +1,8 @@
 #!/bin/sh
 
+wc -c ~/.unison/fp*
+wc -c ~/.unison/ar*
+
 for file in ~/.unison/*.prf; do
 	prf_file=${file##*/}
 	profile=${prf_file%.prf}
