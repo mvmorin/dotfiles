@@ -9,6 +9,7 @@ follow = Name work
 
 path = wdata
 follow = Name wdata
+immutable = Name wdata
 
 path = zotero-attachments
 follow = Name zotero-attachments
