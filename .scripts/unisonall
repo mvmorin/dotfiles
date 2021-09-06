@@ -10,3 +10,6 @@ for file in ~/.unison/*.prf; do
 	unison "$profile"
 	echo ""
 done
+
+wc -c ~/.unison/fp*
+wc -c ~/.unison/ar*
