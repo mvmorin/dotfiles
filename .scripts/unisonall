@@ -4,15 +4,8 @@
 case $1 in
 	'') ;;
 	ignore) opt="-ignorearchives" ;;
-	check) check="set" ;;
 	*) echo "Invalid option." 1>&2 ; exit ;;
 esac
-
-# Show size of archives to check for corruption
-if [ -n "$check" ]; then
-	wc -c ~/.unison/ar*
-   exit
-fi
 
 # run unison on all profiles
 for file in ~/.unison/*.prf; do
