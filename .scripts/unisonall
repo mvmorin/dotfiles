@@ -22,3 +22,7 @@ for file in ~/.unison/*.prf; do
 	unison $profile $opt
 	echo ""
 done
+
+# force a flush of files (mainly unison archives) to drive, wsl2 might otherwise
+# forget to do so if rebooted directly after
+sync
