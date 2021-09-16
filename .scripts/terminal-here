@@ -6,7 +6,6 @@ PID=$(xprop -id "${ID}" 2>/dev/null | sed -n 's/.*PID.*\s\([0-9]\+\)$/\1/p')
 PID_LEAF=$(pstree -lpA "${PID}" 2>/dev/null | sed -n '1s/.*(\([0-9]\+\))$/\1/p')
 
 DIR="$HOME"
-[ -e "/proc/${PID_LEAF}/cwd" ] || DIR=$(readlink "/proc/${PID_LEAF}/cwd")
-
+[ -e "/proc/${PID_LEAF}/cwd" ] && DIR=$(readlink "/proc/${PID_LEAF}/cwd")
 
 cd "${DIR}" && $TERMINAL
