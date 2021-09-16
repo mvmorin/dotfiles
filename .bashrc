@@ -61,8 +61,9 @@ alias jbare='julia --startup-file=no'
 alias zathura='zathura --fork'
 alias tmuxa='tmux attach'
 
-# Launch tmux if it exists, not already in tmux and not logged in over ssh
-if [ -n "$(which tmux 2>/dev/null)" ] && [ -z "$TMUX" ] && [ -z "$SSH_CLIENT" ]; then
+# Launch tmux if it exists, not already in tmux, not logged in over ssh, and not
+# using i3
+if [ -n "$(which tmux 2>/dev/null)" ] && [ -z "$TMUX" ] && [ -z "$SSH_CLIENT" ] && [ "$XDG_SESSION_DESKTOP" != "i3" ]; then
 	# should do something more fance here to get easier session management
 	tmux new -A -s main
 fi

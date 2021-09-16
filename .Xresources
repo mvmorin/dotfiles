@@ -1,9 +1,9 @@
 ! Set colorscheme
 /* #include "Xcolorschemes/nord" */
 /* #include "Xcolorschemes/solarized" */
-/* #include "Xcolorschemes/gruvbox" */
+#include "Xcolorschemes/gruvbox"
 /* #include "Xcolorschemes/onedark" */
-#include "Xcolorschemes/palenight"
+/* #include "Xcolorschemes/palenight" */
 /* #include "Xcolorschemes/tender" */
 
 ! urxvt
