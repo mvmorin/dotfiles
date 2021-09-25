@@ -40,6 +40,9 @@ call plug#begin('~/.vim/plugged')
 	Plug 'tpope/vim-fugitive' " :Git <command> to run git commands from vim
 	Plug 'jpalardy/vim-slime' " For sending text to terminal manager (screen,tmux...)
 
+	Plug 'junegunn/fzf', { 'do': { -> fzf#install() } } " If fzf is not installed or is too out of date the first will download it locally to the plugged/fzf folder
+	Plug 'junegunn/fzf.vim' " I might remove this, need better command names anyway so might as well write the whole thing myself
+
 	" Formatting and Syntax
 "	Plug 'sheerun/vim-polyglot' " Automatic downloading of language syntax pkgs
 	Plug 'mboughaba/i3config.vim' " May need some help identifying the filetype
@@ -93,9 +96,6 @@ if xrdb_colorscheme != ""
 endif
 
 
-" ToLearn: Autoindenting/formatting, file search (ctrlp?), marks, folding
-
-
 " Basics
 set fileformats=unix,dos "Set default fileformat order
 set encoding=utf-8
@@ -105,6 +105,7 @@ set backspace=indent,eol,start
 set autoread
 set scrolloff=3
 set belloff=all
+set nostartofline
 
 
 " Setup tabs
@@ -130,6 +131,7 @@ set incsearch
 set nohlsearch
 set ignorecase
 set smartcase
+set nowrapscan
 
 command Focus call ToggleSingleLineFocus()
 function ToggleSingleLineFocus()
@@ -152,6 +154,9 @@ function ToggleSingleLineFocus()
 		echo ""
 	endif
 endfunction
+
+" Use expanded % matching
+runtime! macros/matchit.vim
 
 
 " Set status, gui-options and decorations
@@ -201,12 +206,6 @@ nnoremap <leader>p "*]p
 " Simple cd to file dir
 command Cd cd %:p:h
 
-
-" Better half page movments
-nnoremap <C-u> M<C-u>
-nnoremap <C-d> M<C-d>
-
-
 " Window movement
 nnoremap <leader>h <C-w>h
 nnoremap <leader>j <C-w>j
@@ -223,7 +222,7 @@ nnoremap <leader><CR> <C-w><bar><C-w>_
 
 
 " Buffers
-set hidden
+" set hidden
 nnoremap <leader>y :b#<CR>
 nnoremap <leader>u :bn<CR>
 nnoremap <leader>i :bp<CR>

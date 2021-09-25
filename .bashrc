@@ -61,6 +61,9 @@ alias jbare='julia --startup-file=no'
 alias zathura='zathura --fork'
 alias tmuxa='tmux attach'
 
+## fuzzy commands
+zd() { file=$(find ${1:-~} -type d -not -path *.git* | fzf --preview='ls -la {}'); [ -n "${file}" ] && cd "${file}"; }
+
 # Launch tmux if it exists, not already in tmux, not logged in over ssh, and not
 # using i3
 if [ -n "$(which tmux 2>/dev/null)" ] && [ -z "$TMUX" ] && [ -z "$SSH_CLIENT" ] && [ "$XDG_SESSION_DESKTOP" != "i3" ]; then
