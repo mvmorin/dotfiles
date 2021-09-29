@@ -1,6 +1,7 @@
 # Please see http://i3wm.org/docs/userguide.html for a complete reference!
 # i3 config file (v4)
 
+# Mod4 = Super, Mod1 = Alt_L
 set $mod Mod4
 floating_modifier $mod
 
@@ -38,10 +39,10 @@ set_from_resource $status_sp color5 #aaaaaa
 # Program management
 ###############################################################################
 # start a terminal
-bindsym $mod+Return exec terminal-here
+bindsym $mod+n exec terminal-here
 
 # start dmenu
-bindsym $mod+BackSpace exec dmenu_run -nb "$unfocus_bg" -nf "$unfocus_tx" -sb "$focus_bg" -sf "$focus_tx" -fn font
+bindsym $mod+d exec dmenu_run -nb "$unfocus_bg" -nf "$unfocus_tx" -sb "$focus_bg" -sf "$focus_tx" -fn font
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -56,11 +57,11 @@ bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'Do you really want to exit i
 ###############################################################################
 # Selection
 ###############################################################################
-# split containers
-bindsym $mod+d split toggle
-
 # toggle container layout
-bindsym $mod+f layout toggle splith splitv tabbed
+bindsym $mod+s layout toggle splith splitv tabbed
+
+# focus tiling/floating
+bindsym $mod+f focus mode_toggle
 
 # change focus with VIM keys
 bindsym $mod+h focus left
@@ -68,17 +69,19 @@ bindsym $mod+j focus down
 bindsym $mod+k focus up
 bindsym $mod+l focus right
 
-# cycle next/prev/new workspace on output
-bindsym $mod+u workspace next_on_output
-bindsym $mod+i workspace prev_on_output
+# focus workspaces
+bindsym $mod+space focus output left
+bindsym $mod+u workspace prev_on_output
+bindsym $mod+i workspace next_on_output
 bindsym $mod+o exec --no-startup-id ~/.i3/new-workspace
 
-# focus the parent/child/float
-bindsym $mod+y focus parent
-bindsym $mod+n focus mode_toggle
+# focus the parent/child
+bindsym $mod+p focus parent
+bindsym $mod+c focus child
 
-# change monitor
-bindsym $mod+space focus output left
+# back and forth between marks
+bindsym $mod+Tab [con_mark="previous"] focus; mark new_curr; [con_mark="current"] mark previous; [con_mark="new_curr"] mark current
+bindsym $mod+Shift+Tab mark new_curr; [con_mark="current"]  mark previous; [con_mark="new_curr"] mark current
 
 
 ###############################################################################
@@ -87,68 +90,76 @@ bindsym $mod+space focus output left
 # mouse shouldn't follow focus since it appears broken when switching output
 mouse_warping none
 
-# move window with VIM keys
-bindsym $mod+Shift+h move left
-bindsym $mod+Shift+j move down
-bindsym $mod+Shift+k move up
-bindsym $mod+Shift+l move right
-
-# Move to next/prev/new workspace
-bindsym $mod+Shift+u move container to workspace next_on_output; workspace next_on_output
-bindsym $mod+Shift+i move container to workspace prev_on_output; workspace prev_on_output
-bindsym $mod+Shift+o exec --no-startup-id ~/.i3/move-to-new-workspace
+# split containers
+bindsym $mod+Shift+s split toggle
 
 # toggle tiling/floating
-bindsym $mod+Shift+n floating toggle
+bindsym $mod+Shift+f floating toggle; resize set 50 ppt 50 ppt; move position center
 
-# move container to next ouput
-bindsym $mod+Shift+BackSpace move container to output left; focus output left
+# move window with VIM keys
+bindsym $mod+Shift+h move left 4 ppt
+bindsym $mod+Shift+j move down 4 ppt
+bindsym $mod+Shift+k move up 4 ppt
+bindsym $mod+Shift+l move right 4 ppt
+
+# Move to workspaces
+bindsym $mod+Shift+space move container to output left; focus output left
+bindsym $mod+Shift+u move container to workspace prev_on_output; workspace prev_on_output
+bindsym $mod+Shift+i move container to workspace next_on_output; workspace next_on_output
+bindsym $mod+Shift+o exec --no-startup-id ~/.i3/move-to-new-workspace
 
 # enter fullscreen mode for the focused container
-bindsym $mod+Shift+Return fullscreen toggle
+bindsym $mod+Shift+m fullscreen toggle
 
 # move focused workspace to other screen
-bindsym $mod+Shift+space move workspace to output left
+bindsym $mod+Control+space move workspace to output left
 
 
 ##############################################################################
 # Resize
 ##############################################################################
-bindsym $mod+Ctrl+l resize grow width 20 px
-bindsym $mod+Ctrl+k resize grow height 20 px
-bindsym $mod+Ctrl+j resize shrink height 20 px
-bindsym $mod+Ctrl+h resize shrink width 20 px
+bindsym $mod+Control+l resize grow width 40 px or 10 ppt
+bindsym $mod+Control+k resize grow height 40 px or 10 ppt
+bindsym $mod+Control+j resize shrink height 40 px or 10 ppt
+bindsym $mod+Control+h resize shrink width 40 px or 10 ppt
+
+bindsym $mod+Control+m resize set 50 ppt 50 ppt
 
 
 ##############################################################################
-# Workspace Mode
+# Workspaces
 ##############################################################################
-mode "workspace mode" {
-	# Move container to workspace and follow focus
-	bindsym a move container to workspace number 1; workspace number 1
-	bindsym s move container to workspace number 2; workspace number 2
-	bindsym d move container to workspace number 3; workspace number 3
-	bindsym f move container to workspace number 4; workspace number 4
-	bindsym g move container to workspace number 5; workspace number 5
-	bindsym h move container to workspace number 6; workspace number 6
-	bindsym j move container to workspace number 7; workspace number 7
-	bindsym k move container to workspace number 8; workspace number 8
-	bindsym l move container to workspace number 9; workspace number 9
-	bindsym odiaeresis move container to workspace number 0; workspace number 0
+bindsym $mod+1 workspace number 1
+bindsym $mod+2 workspace number 2
+bindsym $mod+3 workspace number 3
+bindsym $mod+4 workspace number 4
+bindsym $mod+5 workspace number 5
+bindsym $mod+6 workspace number 6
+bindsym $mod+7 workspace number 7
+bindsym $mod+8 workspace number 8
+bindsym $mod+9 workspace number 9
+bindsym $mod+0 workspace number 0
 
-	# Exit
-	bindsym Escape mode "default"
-	bindsym Return mode "default"
-	bindsym Tab mode "default"
-	bindsym $mod+Tab mode "default"
-}
+bindsym $mod+Shift+1 move container to workspace number 1; workspace number 1
+bindsym $mod+Shift+2 move container to workspace number 2; workspace number 2
+bindsym $mod+Shift+3 move container to workspace number 3; workspace number 3
+bindsym $mod+Shift+4 move container to workspace number 4; workspace number 4
+bindsym $mod+Shift+5 move container to workspace number 5; workspace number 5
+bindsym $mod+Shift+6 move container to workspace number 6; workspace number 6
+bindsym $mod+Shift+7 move container to workspace number 7; workspace number 7
+bindsym $mod+Shift+8 move container to workspace number 8; workspace number 8
+bindsym $mod+Shift+9 move container to workspace number 9; workspace number 9
+bindsym $mod+Shift+0 move container to workspace number 0; workspace number 0
 
-bindsym $mod+minus mode "workspace mode"
+
+##############################################################################
+# tmux mode
+##############################################################################
+bindsym $mod+Control+Shift+minus mode "tmux mode"
 
 mode "tmux mode" {
-	# Exit
-	bindsym Escape mode "default"
-	bindsym $mod+Tab mode "default"
+	# simply disable all bindings
+	bindsym $mod+Control+Shift+minus mode "default"
 }
 
 
