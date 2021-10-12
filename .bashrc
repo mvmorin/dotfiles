@@ -64,15 +64,19 @@ alias tmuxa='tmux attach'
 ## fuzzy commands
 zd() {
 	DEFAULT=( \
-		'work' \
-		'wrepos' \
-		'dotfiles' \
-		'wdata' \
-		'Downloads' \
-		'windownload' \
+		"${HOME}/work" \
+		"${HOME}/wrepos" \
+		"${HOME}/dotfiles" \
+		"${HOME}/wdata" \
+		"${HOME}/Downloads" \
+		"${HOME}/windownload" \
 		)
-	file=$(find -L ${1:-${DEFAULT[@]}} -type d -not -path *.git* | fzf --preview='ls -ogA --color {}')
-	[ -n "${file}" ] && cd "${file}"
+	dir=$(
+		find -L ${1:-${DEFAULT[@]}} -type d -not -path *.git* |
+		sed -n "s/${HOME//\//\\\/}/~/p" |
+		fzf --preview='dir={}; ls -ogA --color "${dir/\~/${HOME}}"'
+	)
+	[ -n "${dir}" ] && cd "${dir}"
 	}
 
 # Launch tmux if it exists, not already in tmux, not logged in over ssh, and not
