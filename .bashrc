@@ -62,7 +62,18 @@ alias zathura='zathura --fork'
 alias tmuxa='tmux attach'
 
 ## fuzzy commands
-zd() { file=$(find ${1:-.} -type d -not -path *.git* | fzf --preview='ls -ogA --color {}'); [ -n "${file}" ] && cd "${file}"; }
+zd() {
+	DEFAULT=( \
+		'work' \
+		'wrepos' \
+		'dotfiles' \
+		'wdata' \
+		'Downloads' \
+		'windownload' \
+		)
+	file=$(find -L ${1:-${DEFAULT[@]}} -type d -not -path *.git* | fzf --preview='ls -ogA --color {}')
+	[ -n "${file}" ] && cd "${file}"
+	}
 
 # Launch tmux if it exists, not already in tmux, not logged in over ssh, and not
 # using i3
