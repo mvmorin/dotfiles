@@ -73,10 +73,10 @@ zd() {
 		)
 	dir=$(
 		find -L ${1:-${DEFAULT[@]}} -type d -not -path *.git* |
-		sed -n "s/${HOME//\//\\\/}/~/p" |
-		fzf --preview='dir={}; ls -ogA --color "${dir/\~/${HOME}}"'
+		sed "s/${HOME//\//\\\/}/~/g" |
+		fzf --preview='eval ls -ogA --color {}'
 	)
-	[ -n "${dir}" ] && cd "${dir}"
+	[ -n "${dir}" ] && eval cd "${dir}"
 	}
 
 # Launch tmux if it exists, not already in tmux, not logged in over ssh, and not
