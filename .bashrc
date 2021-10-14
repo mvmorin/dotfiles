@@ -72,7 +72,7 @@ zd() {
 		"${HOME}/windownload" \
 		)
 	dir=$(
-		find -L ${1:-${DEFAULT[@]}} -type d -not -path *.git* |
+		find -L ${1:-${DEFAULT[@]}} -type d -not -path *.git* 2> /dev/null |
 		sed "s/${HOME//\//\\\/}/~/g" |
 		fzf --preview='eval ls -ogA --color {}'
 	)
