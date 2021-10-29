@@ -5,7 +5,7 @@ set nocompatible
 " Leaders and command timeouts
 let mapleader=" "
 set timeoutlen=500
-set ttimeoutlen=1000
+set ttimeoutlen=100
 
 
 " Set paths for compability with both unix and windows, before loading plugins
@@ -131,7 +131,6 @@ set incsearch
 set nohlsearch
 set ignorecase
 set smartcase
-set nowrapscan
 
 command Focus call ToggleSingleLineFocus()
 function ToggleSingleLineFocus()
@@ -159,6 +158,8 @@ endfunction
 runtime! macros/matchit.vim
 
 
+
+
 " Set status, gui-options and decorations
 set cursorline
 let &colorcolumn=&textwidth
@@ -169,10 +170,22 @@ set guioptions= " Remove all gui items
 if has('gui_running') && has('Win32')
 	set lines=45 columns=100 guifont=Consolas:h11
 endif
-set statusline=%m\ %n)\ %f\ %y\ [%{&ff}]\ [%{&encoding}]
+
+set statusline=
+" hi InsertColor guifg=Black guibg=Cyan ctermbg=51 ctermfg=0
+" hi ReplaceColor guifg=Black guibg=maroon1 ctermbg=165 ctermfg=0
+" hi VisualColor guifg=Black guibg=Orange ctermbg=202 ctermfg=0
+" set statusline+=%{%(mode()=='i')?'%#InsertColor#':''%}
+" set statusline+=%{%(mode()=='R')?'%#ReplaceColor#':''%}
+" set statusline+=%{%(mode()=='v')?'%#VisualColor#':''%}
+set statusline+=%m\ %n)\ %f\ %y\ [%{&ff}]\ [%{&encoding}]
 set statusline+=\ %{&spell?'[':''}%{&spell?&spelllang:''}%{&spell?']':''}
 set statusline+=%=
 set statusline+=Line:\ %l\/%L\ Col:\ %c\/%{strwidth(getline('.'))}\ "
+" set statusline+=---\ L:\ %l\/%L\ C:\ %c\/%{strwidth(getline('.'))}\ "
+" set statusline+=%=
+" set statusline+=%{string(argv())}
+
 
 
 " Command/file auto completion
@@ -221,13 +234,22 @@ nnoremap <leader>= <C-w>=
 nnoremap <leader><CR> <C-w><bar><C-w>_
 
 
-" Buffers
+" Buffers, file, and quickfix movement
 " set hidden
-nnoremap <leader>y :b#<CR>
-nnoremap <leader>u :bn<CR>
-nnoremap <leader>i :bp<CR>
-command Bd b#<bar>bd#
+" nnoremap <leader>y :b#<CR>
+" nnoremap <leader>u :bn<CR>
+" nnoremap <leader>i :bp<CR>
+" command Bd b#<bar>bd#
+nnoremap <leader>f :Files<CR>
+nnoremap <leader>y :silent! argument<CR>:args<CR>
+nnoremap <leader>u :silent! prev<CR>:args<CR>
+nnoremap <leader>i :silent! next<CR>:args<CR>
+nnoremap <leader>a :$argedit %<CR>:args<CR>
+nnoremap <leader>d :argdelete %<CR>:args<CR>
 
+nnoremap [q :cprev<CR>
+nnoremap ]q :cnext<CR>
+nnoremap <expr> <leader>q empty(filter(getwininfo(), 'v:val.quickfix')) ? ':copen<CR>' : ':cclose<CR>'
 
 " Vim-Slime
 let g:slime_no_mappings=1
