@@ -79,9 +79,9 @@ bindsym $mod+o exec --no-startup-id ~/.i3/new-workspace
 bindsym $mod+p focus parent
 bindsym $mod+c focus child
 
-# back and forth between marks
-bindsym $mod+Tab [con_mark="previous"] focus; mark new_curr; [con_mark="current"] mark previous; [con_mark="new_curr"] mark current
-bindsym $mod+Shift+Tab mark new_curr; [con_mark="current"]  mark previous; [con_mark="new_curr"] mark current
+# # back and forth between marks
+# bindsym $mod+Tab [con_mark="previous"] focus; mark new_curr; [con_mark="current"] mark previous; [con_mark="new_curr"] mark current
+# bindsym $mod+Shift+Tab mark new_curr; [con_mark="current"]  mark previous; [con_mark="new_curr"] mark current
 
 
 ###############################################################################
