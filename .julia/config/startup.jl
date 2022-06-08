@@ -3,7 +3,7 @@ atreplinit() do repl
 
 	ENV["PLOTS*DEFAULT*BACKEND"] = "GR"
 	# @eval using Plots
-	# @eval using LinearAlgebra
+	@eval using LinearAlgebra
 	# @eval using BenchmarkTools
 
 	# Might not be worth the load time for these
