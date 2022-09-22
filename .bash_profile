@@ -1,4 +1,5 @@
-export PATH=$PATH:~/.scripts
+export PATH=~/.scripts:$PATH
+export PATH=~/.cargo/bin:$PATH # rustup places rust here, remove when not using rust
 
 export TERMINAL=st
 export EDITOR=vim

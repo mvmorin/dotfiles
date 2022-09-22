@@ -251,6 +251,10 @@ nnoremap [q :cprev<CR>
 nnoremap ]q :cnext<CR>
 nnoremap <expr> <leader>q empty(filter(getwininfo(), 'v:val.quickfix')) ? ':copen<CR>' : ':cclose<CR>'
 
+" Vimgrep for word under coursor. Does not complete the search to allow for
+" adding particular filetype
+nnoremap <C-g><C-G> :vimgrep /<C-r><C-w>/gj **/*
+
 " Vim-Slime
 let g:slime_no_mappings=1
 let g:slime_target="tmux"
@@ -311,7 +315,7 @@ let g:vimtex_compiler_latexmk = {
 			\   '-shell-escape',
 			\ ],
 			\}
-let g:vimtex_compiler_latexmk_engines = {'_' : '-lualatex'} " Set default. Obs! Latexmk and xelatex does not work well with SumatraPDF
+let g:vimtex_compiler_latexmk_engines = {'_' : '-pdf'} " Set default. Obs! Latexmk and xelatex does not work well with SumatraPDF
 command LatexmkPdf
 			\ let g:vimtex_compiler_latexmk_engines = {'_' : '-pdf'} <bar> norm \lx<cr>\ll
 command LatexmkXe
