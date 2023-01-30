@@ -1,7 +1,7 @@
 [core]
 	autocrlf = input
 [user]
-	email = martin.morin@control.lth.se
+	email = morin@iternio.com
 	name = Martin Morin
 [diff]
 	tool = vimdiff
