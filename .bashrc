@@ -66,6 +66,7 @@ zd() {
 	DEFAULT=( \
 		"${HOME}/work" \
 		"${HOME}/wrepos" \
+		"${HOME}/repos" \
 		"${HOME}/dotfiles" \
 		"${HOME}/wdata" \
 		"${HOME}/Downloads" \

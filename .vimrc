@@ -23,7 +23,6 @@ endif
 " Load plugins, using vim-plug, see github.com/junegunn/vim-plug. Script located
 " in .vim/autoload. Commands :PlugInstall, :PlugUpdate, :PlugClean
 call plug#begin('~/.vim/plugged')
-
 	" Colorschemes to try out
 	Plug 'gruvbox-community/gruvbox'
 	Plug 'sainnhe/gruvbox-material'
@@ -32,22 +31,18 @@ call plug#begin('~/.vim/plugged')
 	Plug 'sainnhe/sonokai'
 	Plug 'cocopon/iceberg.vim'
 
-	" Simple mode
-	Plug 'junegunn/goyo.vim'
-
 	" Extensions
 	Plug 'tpope/vim-commentary' " gc+motion to comment/uncomment
 	Plug 'tpope/vim-fugitive' " :Git <command> to run git commands from vim
-	Plug 'jpalardy/vim-slime' " For sending text to terminal manager (screen,tmux...)
 
 	Plug 'junegunn/fzf', { 'do': { -> fzf#install() } } " If fzf is not installed or is too out of date the first will download it locally to the plugged/fzf folder
 	Plug 'junegunn/fzf.vim' " I might remove this, need better command names anyway so might as well write the whole thing myself
 
 	" Formatting and Syntax
-"	Plug 'sheerun/vim-polyglot' " Automatic downloading of language syntax pkgs
 	Plug 'mboughaba/i3config.vim' " May need some help identifying the filetype
 	Plug 'JuliaEditorSupport/julia-vim'
 	Plug 'lervag/vimtex'
+	Plug 'vim-python/python-syntax'
 call plug#end()
 
 
@@ -108,7 +103,7 @@ set belloff=all
 set nostartofline
 
 
-" Setup tabs
+" Setup default tabs
 set tabstop=4
 set shiftwidth=4
 set softtabstop=4
@@ -116,7 +111,7 @@ set noexpandtab
 
 
 " Setup textwidth
-set textwidth=80
+set textwidth=120
 set formatoptions-=t "don't indent text/code
 set wrap "virtual wrap to window size
 set linebreak "virtual wrap at full words
@@ -132,32 +127,9 @@ set nohlsearch
 set ignorecase
 set smartcase
 
-command Focus call ToggleSingleLineFocus()
-function ToggleSingleLineFocus()
-	if !exists("w:single_line_focus_on")
-		let w:single_line_focus_on = 0
-	endif
-
-	if w:single_line_focus_on
-		let w:single_line_focus_on = 0
-		let &conceallevel = w:old_conceallevel
-		2match
-		Goyo!
-	else
-		Goyo 80%x3
-		let w:single_line_focus_on = 1
-		let w:old_conceallevel = &conceallevel
-		let &conceallevel = 3
-		2match Conceal /^.*$/
-		norm z.
-		echo ""
-	endif
-endfunction
 
 " Use expanded % matching
 runtime! macros/matchit.vim
-
-
 
 
 " Set status, gui-options and decorations
@@ -172,19 +144,10 @@ if has('gui_running') && has('Win32')
 endif
 
 set statusline=
-" hi InsertColor guifg=Black guibg=Cyan ctermbg=51 ctermfg=0
-" hi ReplaceColor guifg=Black guibg=maroon1 ctermbg=165 ctermfg=0
-" hi VisualColor guifg=Black guibg=Orange ctermbg=202 ctermfg=0
-" set statusline+=%{%(mode()=='i')?'%#InsertColor#':''%}
-" set statusline+=%{%(mode()=='R')?'%#ReplaceColor#':''%}
-" set statusline+=%{%(mode()=='v')?'%#VisualColor#':''%}
 set statusline+=%m\ %n)\ %f\ %y\ [%{&ff}]\ [%{&encoding}]
 set statusline+=\ %{&spell?'[':''}%{&spell?&spelllang:''}%{&spell?']':''}
 set statusline+=%=
 set statusline+=Line:\ %l\/%L\ Col:\ %c\/%{strwidth(getline('.'))}\ "
-" set statusline+=---\ L:\ %l\/%L\ C:\ %c\/%{strwidth(getline('.'))}\ "
-" set statusline+=%=
-" set statusline+=%{string(argv())}
 
 
 
@@ -255,14 +218,6 @@ nnoremap <expr> <leader>q empty(filter(getwininfo(), 'v:val.quickfix')) ? ':cope
 " adding particular filetype
 nnoremap <C-g><C-G> :vimgrep /<C-r><C-w>/gj **/*
 
-" Vim-Slime
-let g:slime_no_mappings=1
-let g:slime_target="tmux"
-nmap <C-c>v <Plug>SlimeConfig
-nmap <C-c><C-p> <Plug>SlimeParagraphSend
-nnoremap <C-c><C-c> :SlimeSend<CR>
-xmap <C-c><C-c> <Plug>SlimeRegionSend
-
 
 " Pre/post processing
 augroup file_pre_post_processing
@@ -272,31 +227,12 @@ augroup file_pre_post_processing
 augroup END
 
 
-" netrw setup
-function LaunchExplore()
-	if expand("#") == ""
-		Explore
-	else
-		let olddir=expand("%:h")
-		b#
-		exec 'Explore 'olddir
-	endif
-endfunction
-nnoremap <leader>e :call LaunchExplore()<cr>
-let g:netrw_banner=0
-let g:netrw_liststyle = 1 " Would prefer style 3 but it has problems
-augroup netrw_key_bindings
-	autocmd!
-	autocmd FileType netrw nnoremap <buffer> <leader>e :b#<cr>
-	autocmd FileType netrw setlocal cc=0
-	autocmd FileType netrw nnoremap <buffer> cd :exec 'cd' b:netrw_curdir<CR>
-augroup END
-
 " Markdown
-augroup tex_and_markdown
+augroup markdown
 	autocmd!
 	autocmd FileType markdown setlocal spell formatoptions+=t
 augroup END
+
 
 " Latex
 let g:vimtex_view_automatic=0
@@ -343,7 +279,7 @@ endif
 let g:tex_stylish=1
 let g:tex_flavor='latex'
 let g:vimtex_indent_on_ampersands=0
-augroup tex_and_markdown
+augroup tex
 	autocmd!
 	autocmd BufRead,BufNewFile *.tex, setlocal filetype=tex
 	autocmd FileType latex,tex,plaintex setlocal textwidth=0 cc=0 spell
@@ -361,7 +297,6 @@ augroup julia_code
 	hi link juliaFunctionCall Identifier
 
 	autocmd FileType julia setlocal commentstring=#\ %s
-	autocmd FileType julia let b:slime_config = {"socket_name": "default", "target_pane": "Jmux:0"}
 augroup END
 
 

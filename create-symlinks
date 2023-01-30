@@ -4,12 +4,14 @@
 files="\
 	.bashrc \
 	.bash_profile \
+	.profile \
 	.gitconfig \
 	.vimrc \
 	.vim \
 	.i3 \
 	.julia/config/startup.jl \
 	.Xresources \
+	Xcolorschemes \
 	.urxvt \
 	.scripts \
 	.tmux.conf \
