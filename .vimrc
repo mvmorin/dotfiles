@@ -101,7 +101,12 @@ set autoread
 set scrolloff=3
 set belloff=all
 set nostartofline
+set spelllang=en_us,sv
 
+augroup remove_trailing_whitespaces
+	autocmd!
+	autocmd BufWritePre * %s/\s\+$//e
+augroup END
 
 " Setup default tabs
 set tabstop=4
@@ -128,6 +133,11 @@ set ignorecase
 set smartcase
 
 
+" Command/file auto completion
+set path+=**
+set wildmode=longest,list,full
+
+
 " Use expanded % matching
 runtime! macros/matchit.vim
 
@@ -150,14 +160,11 @@ set statusline+=%=
 set statusline+=Line:\ %l\/%L\ Col:\ %c\/%{strwidth(getline('.'))}\ "
 
 
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Remaps
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-" Command/file auto completion
-set path+=**
-set wildmode=longest,list,full
-
-
-" Spelling
-set spelllang=en_us,sv
+" Spelling toggle
 nnoremap <leader>s :set spell!<CR>
 
 
@@ -219,89 +226,8 @@ nnoremap <expr> <leader>q empty(filter(getwininfo(), 'v:val.quickfix')) ? ':cope
 nnoremap <C-g><C-G> :vimgrep /<C-r><C-w>/gj **/*
 
 
-" Pre/post processing
-augroup file_pre_post_processing
-	autocmd!
-	"Remove trailing whitespaces
-	autocmd BufWritePre * %s/\s\+$//e
-augroup END
-
-
-" Markdown
-augroup markdown
-	autocmd!
-	autocmd FileType markdown setlocal spell formatoptions+=t
-augroup END
-
-
-" Latex
-let g:vimtex_view_automatic=0
-let g:vimtex_quickfix_open_on_warning=0
-let g:vimtex_quickfix_autoclose_after_keystrokes=10
-" Disable custom warnings based on regexp
-let g:vimtex_quickfix_ignore_filters = [
-			\ 'I found no \(\\bibdata\|\\citation\) commands\?---while reading file \([^\S]*\).aux',
-			\]
-let g:vimtex_compiler_latexmk = {
-			\ 'options' : [
-			\   '-verbose',
-			\   '-file-line-error',
-			\   '-synctex=1',
-			\   '-interaction=nonstopmode',
-			\   '-shell-escape',
-			\ ],
-			\}
-let g:vimtex_compiler_latexmk_engines = {'_' : '-pdf'} " Set default. Obs! Latexmk and xelatex does not work well with SumatraPDF
-command LatexmkPdf
-			\ let g:vimtex_compiler_latexmk_engines = {'_' : '-pdf'} <bar> norm \lx<cr>\ll
-command LatexmkXe
-			\ let g:vimtex_compiler_latexmk_engines = {'_' : '-xelatex'} <bar> norm \lx<cr>\ll
-command LatexmkLua
-			\ let g:vimtex_compiler_latexmk_engines = {'_' : '-lualatex'} <bar> norm \lx<cr>\ll
-
-" These mappings conflicts/slows down the oridnary t{char} map
-let g:vimtex_mappings_disable = {
-			\ 'n': ['tsf', 'tsc', 'tse', 'tsd', 'tsD'],
-			\ 'x': ['tsf', 'tsd', 'tsD'],
-			\}
-
-if has('Win32') || has('Win32Unix')
-	let g:vimtex_view_method='general'
-	let g:vimtex_view_general_viewer = 'SumatraPDF'
-	let g:vimtex_view_general_options
-				\ = '-reuse-instance -forward-search @tex @line @pdf'
-	let g:vimtex_view_general_options_latexmk
-				\ = '-reuse-instance -forward-search @tex @line @pdf'
-else
-	let g:vimtex_view_method='zathura'
-endif
-
-let g:tex_stylish=1
-let g:tex_flavor='latex'
-let g:vimtex_indent_on_ampersands=0
-augroup tex
-	autocmd!
-	autocmd BufRead,BufNewFile *.tex, setlocal filetype=tex
-	autocmd FileType latex,tex,plaintex setlocal textwidth=0 cc=0 spell
-augroup END
-
-
-" Julia
-augroup julia_code
-	autocmd!
-
-	hi link Operator Delimiter
-	hi link juliaParDelim Statement
-	hi link juliaSemicolon Statment
-	hi link juliaComma Statement
-	hi link juliaFunctionCall Identifier
-
-	autocmd FileType julia setlocal commentstring=#\ %s
-augroup END
-
-
-" i3 config
-augroup i3_config_file
-	autocmd!
-	autocmd BufNewFile,BufRead *i3/config set filetype=i3config
-augroup END
+" Filetype settings, no real remaps should be done in these, simply style and plugin settings
+runtime markdown.vim
+runtime latex.vim
+runtime julia.vim
+runtime i3config.vim
