@@ -167,27 +167,22 @@ set statusline+=Line:\ %l\/%L\ Col:\ %c\/%{strwidth(getline('.'))}\ "
 " Spelling toggle
 nnoremap <leader>s :set spell!<CR>
 
-
 " Basic insertmode word completion
 set completeopt=longest,menuone
 inoremap <Tab>i <C-x><C-i>
 inoremap <Tab>o <C-x><C-o>
 inoremap <Tab>f <C-x><C-f>
 inoremap <Tab>s <C-x>s
-inoremap <Tab><Tab> <C-e>
 inoremap <C-Tab> <Tab>
+
+" popup menu navigation
 imap <expr> <CR> pumvisible() ? "\<C-y>" : "\<CR>"
 imap <expr> j pumvisible() ? "\<C-n>" : "j"
 imap <expr> k pumvisible() ? "\<C-p>" : "k"
 
-
 " Copy to system clipboard
 vnoremap <leader>y "*y :let @+=@*<CR>
 nnoremap <leader>p "*]p
-
-
-" Simple cd to file dir
-command Cd cd %:p:h
 
 " Window movement
 nnoremap <leader>h <C-w>h
@@ -203,30 +198,33 @@ nnoremap <leader>L <C-w>L
 nnoremap <leader>= <C-w>=
 nnoremap <leader><CR> <C-w><bar><C-w>_
 
+" Buffers
+set hidden
+nnoremap <leader>y :b#<CR>
+nnoremap <leader>u :bn<CR>
+nnoremap <leader>i :bp<CR>
+command Bd b#<bar>bd#
+" nnoremap <leader>y :silent! argument<CR>:args<CR>
+" nnoremap <leader>u :silent! prev<CR>:args<CR>
+" nnoremap <leader>i :silent! next<CR>:args<CR>
+" nnoremap <leader>a :$argedit %<CR>:args<CR>
+" nnoremap <leader>d :argdelete %<CR>:args<CR>
 
-" Buffers, file, and quickfix movement
-" set hidden
-" nnoremap <leader>y :b#<CR>
-" nnoremap <leader>u :bn<CR>
-" nnoremap <leader>i :bp<CR>
-" command Bd b#<bar>bd#
+" fuzzy finding
 nnoremap <leader>f :Files<CR>
-nnoremap <leader>y :silent! argument<CR>:args<CR>
-nnoremap <leader>u :silent! prev<CR>:args<CR>
-nnoremap <leader>i :silent! next<CR>:args<CR>
-nnoremap <leader>a :$argedit %<CR>:args<CR>
-nnoremap <leader>d :argdelete %<CR>:args<CR>
 
+" quickfix movement
 nnoremap [q :cprev<CR>
 nnoremap ]q :cnext<CR>
 nnoremap <expr> <leader>q empty(filter(getwininfo(), 'v:val.quickfix')) ? ':copen<CR>' : ':cclose<CR>'
 
-" Vimgrep for word under coursor. Does not complete the search to allow for
-" adding particular filetype
-nnoremap <C-g><C-G> :vimgrep /<C-r><C-w>/gj **/*
+" Vimgrep for word under coursor. Does not complete the search to allow for adding particular filetype
+nnoremap <C-g><C-w> :vimgrep /<C-r><C-w>/gj **/*
 
 
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Filetype settings, no real remaps should be done in these, simply style and plugin settings
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 runtime markdown.vim
 runtime latex.vim
 runtime julia.vim
