@@ -1,10 +1,10 @@
 ! Set colorscheme
-/* #include "Xcolorschemes/nord" */
-/* #include "Xcolorschemes/solarized" */
-#include "Xcolorschemes/gruvbox"
-/* #include "Xcolorschemes/onedark" */
-/* #include "Xcolorschemes/palenight" */
-/* #include "Xcolorschemes/tender" */
+/* #include ".Xcolorschemes/nord" */
+/* #include ".Xcolorschemes/solarized" */
+#include ".Xcolorschemes/gruvbox"
+/* #include ".Xcolorschemes/onedark" */
+/* #include ".Xcolorschemes/palenight" */
+/* #include ".Xcolorschemes/tender" */
 
 ! urxvt
 URxvt*font: xft:monospace:size=10:antialias=true:hinting=true
