@@ -9,14 +9,14 @@ files="\
 	.vimrc \
 	.vim \
 	.i3 \
-	.julia/config/startup.jl \
+	.julia/config \
 	.Xresources \
-	Xcolorschemes \
+	.Xcolorschemes \
 	.urxvt \
 	.scripts \
 	.tmux.conf \
 	.inputrc \
-	.config/zathura/zathurarc \
+	.config/zathura \
 	"
 
 df_dir=~/dotfiles
@@ -24,23 +24,24 @@ bak_dir=~/dotfiles_bak
 home_dir=~
 
 ########## Functions
-rmdir_rel()
+backup_backups()
 {
-	workdir="$(pwd -P)"
-	cd "$2" || return 1
-	reltarget=$(realpath --relative-to="$2" "$1")
-	[ "$reltarget" != "." ]	&& rmdir -p "$reltarget"
-	cd "$workdir" || return 1
+	if [ -d "$bak_dir" ]; then
+		old_bak_dir=${bak_dir}/${bak_dir##*/}
+		echo "Backing up previous backups to: ${old_bak_dir}"
+		mv "$bak_dir" tmp_bak_dir
+		mkdir -p "$old_bak_dir"
+		mv -T tmp_bak_dir "$old_bak_dir"
+	fi
 }
 
 backup_old_dotfile()
 {
 	dotfile=$home_dir/$1
 	bakpath=$bak_dir/$1
-	if [ -e "$dotfile" ] || [ -L "$dotfile" ]; then
+	if [ -e "$dotfile" ]; then
 		mkdir -p "${bakpath%/*}"
 		mv "$dotfile" "$bakpath"
-		rmdir_rel "${dotfile%/*}" "$home_dir"
 		return 0
 	fi
 	return 1
@@ -57,6 +58,7 @@ symlink_dotfile()
 
 backup_all()
 {
+	cd "$home_dir"
 	echo "Backing up existing dotfiles:"
 	for file in $files; do
 		backup_old_dotfile "$file" && echo "  $file"
@@ -65,6 +67,7 @@ backup_all()
 
 symlink_all()
 {
+	cd "$home_dir"
 	echo "Creating symlinks to:"
 	for file in $files; do
 		symlink_dotfile "$file" && echo "  $file"
@@ -72,5 +75,6 @@ symlink_all()
 }
 
 ########## Run installer
+backup_backups
 backup_all
 symlink_all
