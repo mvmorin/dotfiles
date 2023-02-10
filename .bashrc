@@ -49,6 +49,7 @@ alias ll='ls -Al'
 alias la='ls -A'
 
 alias glog='git log --graph --oneline -n30'
+alias glogs='git log --graph --oneline'
 alias gd='git diff'
 alias gs='git status'
 
@@ -82,7 +83,7 @@ zd() {
 
 # Launch tmux if it exists, not already in tmux, not logged in over ssh, and not
 # using i3
-if [ -n "$(which tmux 2>/dev/null)" ] && [ -z "$TMUX" ] && [ -z "$SSH_CLIENT" ] && [ "$XDG_SESSION_DESKTOP" != "i3" ]; then
+if [ -n "$(which tmux 2>/dev/null)" ] && [ -z "$TMUX" ] && [ -z "$SSH_CLIENT" ] && [ "${XDG_SESSION_DESKTOP:0:2}" != "i3" ]; then
 	# should do something more fance here to get easier session management
 	tmux new -A -s main
 fi

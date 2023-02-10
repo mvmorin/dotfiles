@@ -102,11 +102,12 @@ set scrolloff=3
 set belloff=all
 set nostartofline
 set spelllang=en_us,sv
+set noswapfile
 
-augroup remove_trailing_whitespaces
-	autocmd!
-	autocmd BufWritePre * %s/\s\+$//e
-augroup END
+" augroup remove_trailing_whitespaces
+" 	autocmd!
+" 	autocmd BufWritePre * %s/\s\+$//e
+" augroup END
 
 " Setup default tabs
 set tabstop=4
