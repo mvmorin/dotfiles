@@ -58,7 +58,7 @@ symlink_dotfile()
 
 backup_all()
 {
-	cd "$home_dir"
+	cd "$home_dir" || (echo "Failed to cd to home directory"; return)
 	echo "Backing up existing dotfiles:"
 	for file in $files; do
 		backup_old_dotfile "$file" && echo "  $file"
@@ -67,7 +67,7 @@ backup_all()
 
 symlink_all()
 {
-	cd "$home_dir"
+	cd "$home_dir" || (echo "Failed to cd to home directory"; return)
 	echo "Creating symlinks to:"
 	for file in $files; do
 		symlink_dotfile "$file" && echo "  $file"
@@ -75,6 +75,11 @@ symlink_all()
 }
 
 ########## Run installer
+cd $df_dir || (echo "Failed to cd into dotfiles diretory (${df_dir})"; exit)
+if [ ! -f "create-symlinks" ] || [ ! -f ".bashrc" ] || [ ! -f ".vimrc" ]; then
+	echo "Failed to indentify dotfiles directory fingerprint (create-symlinks, .bashrc, .vimrc)"
+	exit
+fi
 backup_backups
 backup_all
 symlink_all
