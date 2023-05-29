@@ -26,10 +26,6 @@ call plug#begin('~/.vim/plugged')
 	" Colorschemes to try out
 	Plug 'gruvbox-community/gruvbox'
 	Plug 'sainnhe/gruvbox-material'
-	Plug 'sainnhe/everforest'
-	Plug 'sainnhe/edge'
-	Plug 'sainnhe/sonokai'
-	Plug 'cocopon/iceberg.vim'
 
 	" Extensions
 	Plug 'tpope/vim-commentary' " gc+motion to comment/uncomment
@@ -56,32 +52,16 @@ elseif $TERM == "rxvt-unicode"
 	set t_Co=16 notermguicolors
 endif
 
-
 " Set colorscheme options
 set bg=dark
 
 let g:gruvbox_guisp_fallback='bg' " necessary to get spellcheck highlighting
-
-let g:gruvbox_material_palette = 'original'
-let g:gruvbox_material_enable_italic = 1
-
-let g:edge_style = 'aura'
-let g:edge_enable_italic = 1
-
-let g:everforest_background = 'hard'
-let g:everforest_enable_italic = 1
-
-" let g:sonokai_style = 'shusia'
-let g:sonokai_style = 'espresso'
-let g:sonokai_enable_italic = 1
+" let g:gruvbox_material_palette = 'original'
+" let g:gruvbox_material_enable_italic = 1
 
 " Set colorscheme
 colo gruvbox
 " colo gruvbox-material
-" colo everforest
-" colo edge
-" colo sonokai
-" colo iceberg
 
 " Read colorscheme from xresources if possible
 let xrdb_colorscheme = system(
@@ -89,7 +69,6 @@ let xrdb_colorscheme = system(
 if xrdb_colorscheme != ""
 	exec 'colo 'xrdb_colorscheme
 endif
-
 
 " Basics
 set fileformats=unix,dos "Set default fileformat order
@@ -155,11 +134,24 @@ if has('gui_running') && has('Win32')
 	set lines=45 columns=100 guifont=Consolas:h11
 endif
 
+augroup ActiveWindowModifiers " turn of cursorline on inactive windows
+autocmd!
+autocmd WinEnter * set cursorline
+autocmd WinLeave * set nocursorline
+augroup END
+
 set statusline=
 set statusline+=%m\ %n)\ %f\ %y\ [%{&ff}]\ [%{&encoding}]
 set statusline+=\ %{&spell?'[':''}%{&spell?&spelllang:''}%{&spell?']':''}
 set statusline+=%=
 set statusline+=Line:\ %l\/%L\ Col:\ %c\/%{strwidth(getline('.'))}\ "
+
+" modify default gruvbox statusline colors slightly
+" slightly sharper contrast between active and inactive windows, active: bg2->bg3, inactive: bg1->bg0_s and fg4->bg4
+hi StatusLine   ctermbg=241  guibg=#665c54 ctermfg=223 guifg=#ebdbb2 cterm=none gui=none
+hi StatusLineNC ctermbg=236 guibg=#32302f ctermfg=243 guifg=#7c6f64 cterm=none gui=none
+" make quickfix line slightly less bright yellow and invert bg and fg
+hi QuickFixLine ctermbg=235 guibg=#282828 ctermfg=172 guifg=#d79921 cterm=bold gui=bold
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
