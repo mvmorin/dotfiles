@@ -211,22 +211,40 @@ command Bd b#<bar>bd#
 " nnoremap <leader>a :$argedit %<CR>:args<CR>
 " nnoremap <leader>d :argdelete %<CR>:args<CR>
 
-" fuzzy finding
+" fuzzy finding, (fzf plugin)
 nnoremap <leader>f :Files<CR>
+nnoremap <leader>b :BLines<CR>
+
+" Vimgrep for word under coursor
+nnoremap <C-p><C-f> :lvimgrep /\<<C-r><C-w>\>/j %<CR>
+nnoremap <C-p><C-p> :lvimgrep /<C-r><C-w>/j **/*
 
 " quickfix movement
-nnoremap [q :cprev<CR>
-nnoremap ]q :cnext<CR>
-nnoremap <expr> <leader>q empty(filter(getwininfo(), 'v:val.quickfix')) ? ':copen<CR>' : ':cclose<CR>'
+" nnoremap [q :cprev<CR>
+" nnoremap ]q :cnext<CR>
+nnoremap <esc>Q :cprev<CR>
+nnoremap <esc>q :cnext<CR>
+nnoremap <leader>q :copen15<CR>
+nnoremap <leader>Q :cclose<CR>
+" this toggle functions doesnt work well with multiple loc-lists open
+" nnoremap <expr> <leader>q empty(filter(getwininfo(), 'v:val.quickfix')) ? ':copen<CR>' : ':cclose<CR>'
 
-" Vimgrep for word under coursor. Does not complete the search to allow for adding particular filetype
-nnoremap <C-g><C-w> :vimgrep /<C-r><C-w>/gj **/*
+" loc-list movement
+" nnoremap [w :lprev<CR>
+" nnoremap ]w :lnext<CR>
+nnoremap <esc>W :lprev<CR>
+nnoremap <esc>w :lnext<CR>
+nnoremap <leader>w :lopen15<CR>
+nnoremap <leader>W :lclose<CR>
+
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Filetype settings, no real remaps should be done in these, simply style and plugin settings
+" Maybe I should just do it correctly and put this stuff in proper ftplugins
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 runtime markdown.vim
 runtime latex.vim
 runtime julia.vim
 runtime i3config.vim
+runtime python.vim
