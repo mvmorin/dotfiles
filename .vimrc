@@ -103,6 +103,7 @@ set belloff=all
 set nostartofline
 set spelllang=en_us,sv
 set noswapfile
+set foldopen-=search " don't open folds when going through search results
 
 " augroup remove_trailing_whitespaces
 " 	autocmd!
@@ -170,7 +171,8 @@ nnoremap <leader>s :set spell!<CR>
 
 " Basic insertmode word completion
 set completeopt=longest,menuone
-inoremap <Tab>i <C-x><C-i>
+inoremap <Tab>i <C-x><C-n>
+" inoremap <Tab>i <C-x><C-i>
 inoremap <Tab>o <C-x><C-o>
 inoremap <Tab>f <C-x><C-f>
 inoremap <Tab>s <C-x>s
@@ -196,8 +198,15 @@ nnoremap <leader>J <C-w>J
 nnoremap <leader>K <C-w>K
 nnoremap <leader>L <C-w>L
 
-nnoremap <leader>= <C-w>=
-nnoremap <leader><CR> <C-w><bar><C-w>_
+nnoremap <Esc>, <C-w>>
+nnoremap <Esc>m <C-w><
+nnoremap <Esc>; <C-w>+
+nnoremap <Esc>M <C-w>-
+nnoremap <Esc><CR> <C-w>=
+
+nnoremap <leader>v <C-w>v
+nnoremap <leader>s <C-w>s
+nnoremap <leader>c <C-w>c
 
 " Buffers
 set hidden
