@@ -199,6 +199,7 @@ nnoremap <Esc><CR> <C-w>=
 nnoremap <leader>v <C-w>v
 nnoremap <leader>s <C-w>s
 nnoremap <leader>c <C-w>c
+nnoremap <leader>o <C-w>o
 
 " Buffers
 set hidden
