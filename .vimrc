@@ -77,7 +77,7 @@ filetype plugin indent on
 syntax on
 set backspace=indent,eol,start
 set autoread
-set scrolloff=3
+set scrolloff=2
 set belloff=all
 set nostartofline
 set spelllang=en_us,sv
@@ -190,10 +190,10 @@ nnoremap <leader>J <C-w>J
 nnoremap <leader>K <C-w>K
 nnoremap <leader>L <C-w>L
 
-nnoremap <Esc>, <C-w>>
-nnoremap <Esc>m <C-w><
-nnoremap <Esc>; <C-w>+
-nnoremap <Esc>M <C-w>-
+nnoremap <Esc>, <C-w>><C-W>>
+nnoremap <Esc>m <C-w><<C-w><
+nnoremap <Esc>; <C-w>+<C-w>+
+nnoremap <Esc>M <C-w>-<C-w>-
 nnoremap <Esc><CR> <C-w>=
 
 nnoremap <leader>v <C-w>v
