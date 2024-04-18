@@ -25,7 +25,6 @@ endif
 call plug#begin('~/.vim/plugged')
 	" Colorschemes to try out
 	Plug 'gruvbox-community/gruvbox'
-	Plug 'sainnhe/gruvbox-material'
 
 	" Extensions
 	Plug 'tpope/vim-commentary' " gc+motion to comment/uncomment
@@ -39,6 +38,7 @@ call plug#begin('~/.vim/plugged')
 	Plug 'JuliaEditorSupport/julia-vim'
 	Plug 'lervag/vimtex'
 	Plug 'vim-python/python-syntax'
+	Plug 'anntzer/vim-cython'
 call plug#end()
 
 
@@ -54,14 +54,8 @@ endif
 
 " Set colorscheme options
 set bg=dark
-
 let g:gruvbox_guisp_fallback='bg' " necessary to get spellcheck highlighting
-" let g:gruvbox_material_palette = 'original'
-" let g:gruvbox_material_enable_italic = 1
-
-" Set colorscheme
 colo gruvbox
-" colo gruvbox-material
 
 " Read colorscheme from xresources if possible
 let xrdb_colorscheme = system(
@@ -219,7 +213,7 @@ nnoremap <leader>b :BLines<CR>
 
 " Vimgrep for word under coursor
 nnoremap <C-p><C-f> :lvimgrep /\<<C-r><C-w>\>/j %<CR>
-nnoremap <C-p><C-p> :lvimgrep /<C-r><C-w>/j **/*
+nnoremap <C-p><C-p> :lvimgrep /\<<C-r><C-w>\>/j **/*
 
 " quickfix movement
 " nnoremap [q :cprev<CR>
@@ -250,3 +244,5 @@ runtime latex.vim
 runtime julia.vim
 runtime i3config.vim
 runtime python.vim
+runtime cython.vim
+runtime dockerfile.vim
