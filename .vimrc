@@ -38,7 +38,6 @@ call plug#begin('~/.vim/plugged')
 	Plug 'JuliaEditorSupport/julia-vim'
 	Plug 'lervag/vimtex'
 	Plug 'vim-python/python-syntax'
-	Plug 'anntzer/vim-cython'
 	Plug 'udalov/kotlin-vim'
 call plug#end()
 
