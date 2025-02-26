@@ -48,7 +48,7 @@ alias l='ls -l'
 alias ll='ls -Al'
 alias la='ls -A'
 
-alias glog='git log --graph --oneline --pretty=format:"%C(auto)%h %C(blue)%ad %C(auto)%d %s" --date=relative -n30'
+alias glog='git log --graph --oneline --pretty=format:"%C(auto)%h %C(blue)%ad %C(auto)%d %s" --date=relative -n10'
 alias glogs='git log --graph --oneline --pretty=format:"%C(auto)%h %C(blue)%ad %C(auto)%d %s" --date=relative'
 alias gd='git diff'
 alias gs='git status'
