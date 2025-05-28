@@ -1,5 +1,10 @@
 export PATH=~/.scripts:$PATH
-export PATH=~/.cargo/bin:$PATH # rustup places rust here, remove when not using rust
+export PATH=$PATH:~/.cargo/bin # rustup places rust here, remove when not using rust
+export PATH=$PATH:/usr/local/go/bin:/$HOME/go/bin
+export PATH=$PATH:~/.protobuf/v25.1/bin
+
+# Generated for k9s
+[ -s "$HOME/.config/envman/load.sh" ] && source "$HOME/.config/envman/load.sh"
 
 export TERMINAL=st
 export EDITOR=vim
