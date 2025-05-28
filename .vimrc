@@ -23,22 +23,27 @@ endif
 " Load plugins, using vim-plug, see github.com/junegunn/vim-plug. Script located
 " in .vim/autoload. Commands :PlugInstall, :PlugUpdate, :PlugClean
 call plug#begin('~/.vim/plugged')
-	" Colorschemes to try out
-	Plug 'gruvbox-community/gruvbox'
+    " Colorschemes
+    Plug 'gruvbox-community/gruvbox'
 
-	" Extensions
-	Plug 'tpope/vim-commentary' " gc+motion to comment/uncomment
-	Plug 'tpope/vim-fugitive' " :Git <command> to run git commands from vim
+    " Extensions
+    Plug 'tpope/vim-commentary' " gc+motion to comment/uncomment
+    Plug 'tpope/vim-fugitive' " :Git <command> to run git commands from vim
 
-	Plug 'junegunn/fzf', { 'do': { -> fzf#install() } } " If fzf is not installed or is too out of date the first will download it locally to the plugged/fzf folder
-	Plug 'junegunn/fzf.vim' " I might remove this, need better command names anyway so might as well write the whole thing myself
+    Plug 'junegunn/fzf', { 'do': { -> fzf#install() } } " If fzf is not installed or is too out of date the first will download it locally to the plugged/fzf folder
+    Plug 'junegunn/fzf.vim'
+    Plug 'dense-analysis/ale'
 
-	" Formatting and Syntax
-	Plug 'mboughaba/i3config.vim' " May need some help identifying the filetype
-	Plug 'JuliaEditorSupport/julia-vim'
-	Plug 'lervag/vimtex'
-	Plug 'vim-python/python-syntax'
-	Plug 'udalov/kotlin-vim'
+    " Formatting and Syntax
+    Plug 'mboughaba/i3config.vim' " May need some help identifying the filetype
+    Plug 'JuliaEditorSupport/julia-vim'
+    Plug 'lervag/vimtex'
+    Plug 'vim-python/python-syntax'
+    Plug 'udalov/kotlin-vim'
+
+    " bug fix for getting FocusGained/FocusLost events to work, needed for correct autoread functionallity
+    " see: https://unix.stackexchange.com/questions/149209/refresh-changed-content-of-file-opened-in-vim/383044#383044
+    Plug 'tmux-plugins/vim-tmux-focus-events'
 call plug#end()
 
 
@@ -57,13 +62,6 @@ set bg=dark
 let g:gruvbox_guisp_fallback='bg' " necessary to get spellcheck highlighting
 colo gruvbox
 
-" Read colorscheme from xresources if possible
-let xrdb_colorscheme = system(
-			\ "xrdb -query | sed -n -e 's/\\(^vim.colorscheme\\):\t\\(.*\\)/\\2/p'" )
-if xrdb_colorscheme != ""
-	exec 'colo 'xrdb_colorscheme
-endif
-
 " Basics
 set fileformats=unix,dos "Set default fileformat order
 set encoding=utf-8
@@ -78,10 +76,15 @@ set spelllang=en_us,sv
 set noswapfile
 set foldopen-=search " don't open folds when going through search results
 
-" augroup remove_trailing_whitespaces
-" 	autocmd!
-" 	autocmd BufWritePre * %s/\s\+$//e
-" augroup END
+" Triger `autoread` when files changes on disk
+" see: https://unix.stackexchange.com/questions/149209/refresh-changed-content-of-file-opened-in-vim/383044#383044
+set autoread
+autocmd FocusGained,BufEnter,CursorHold,CursorHoldI *
+        \ if mode() !~ '\v(c|r.?|!|t)' && getcmdwintype() == '' | checktime | endif
+" Notification after file change
+autocmd FileChangedShellPost *
+  \ echohl WarningMsg | echo "File changed on disk. Buffer reloaded." | echohl None
+
 
 " Setup default tabs
 set tabstop=4
@@ -149,31 +152,57 @@ hi QuickFixLine ctermbg=235 guibg=#282828 ctermfg=172 guifg=#d79921 cterm=bold g
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Remaps
+" ALE Config
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-" Spelling toggle
-nnoremap <leader>s :set spell!<CR>
+" wanted behavoir:
+" per language and per project linter setups, everything disabled by default
+" run fixer on save
+" build/make to location/quickfix list (not really ale but related)
+"
 
-" Basic insertmode word completion
-set completeopt=longest,menuone
-inoremap <Tab>i <C-x><C-n>
-" inoremap <Tab>i <C-x><C-i>
-inoremap <Tab>o <C-x><C-o>
-inoremap <Tab>f <C-x><C-f>
-inoremap <Tab>s <C-x>s
-inoremap <C-Tab> <Tab>
+let g:ale_linters_ignore={'cython': ['cython'], 'pyrex': ['cython'], 'python': ['flake8','ruff','mypy','pyright','pylint']}
 
-" popup menu navigation
-imap <expr> <CR> pumvisible() ? "\<C-y>" : "\<CR>"
-imap <expr> j pumvisible() ? "\<C-n>" : "j"
-imap <expr> k pumvisible() ? "\<C-p>" : "k"
+let g:ale_set_loclist=0
+let g:ale_set_quickfix=0
+let g:ale_sign_column_always=1 " don't flicker the sign column on and off
+let g:ale_keep_list_window_open=1
+
+let g:ale_hover_cursor=0
+let g:ale_set_balloons=0
+let g:ale_hover_to_preview=1 " always give hover info in preview window
+set previewheight=7
+
+let g:ale_completion_enabled = 1
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Remaps
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" helper functions to create mappings that toggle between two commands
+function! ToggleMap(name, bind, first, second)
+    execute 'let g:toggle_map_' . a:name . '="' . a:bind .'"'
+    execute 'nnoremap <silent>' a:bind ':call ToggleMapFirst("g:toggle_map_' . a:name . '", "' . a:first . '", "' . a:second . '")<CR>'
+endfunction
+
+function! ToggleMapFirst(global_var, first, second) abort
+    execute a:first
+    execute 'let l:local_var=' . a:global_var
+    execute 'nnoremap <silent>' l:local_var ' :call ToggleMapSecond("' . a:global_var . '", "' . a:first . '", "' . a:second . '")<CR>'
+endfunction
+
+function! ToggleMapSecond(global_var, first, second) abort
+    execute a:second
+    execute 'let l:local_var=' . a:global_var
+    execute 'nnoremap <silent>' l:local_var ' :call ToggleMapFirst("' . a:global_var . '", "' . a:first . '", "' . a:second . '")<CR>'
+endfunction
 
 " Copy to system clipboard
 vnoremap <leader>y "*y :let @+=@*<CR>
 nnoremap <leader>p "*]p
 
 " Window movement
+" TODO: try remove these and just use the default window movements to free up some prime leader bindings
 nnoremap <leader>h <C-w>h
 nnoremap <leader>j <C-w>j
 nnoremap <leader>k <C-w>k
@@ -195,44 +224,42 @@ nnoremap <leader>s <C-w>s
 nnoremap <leader>c <C-w>c
 nnoremap <leader>o <C-w>o
 
-" Buffers
-set hidden
-nnoremap <leader>y :b#<CR>
-nnoremap <leader>u :bn<CR>
-nnoremap <leader>i :bp<CR>
-command Bd b#<bar>bd#
-" nnoremap <leader>y :silent! argument<CR>:args<CR>
-" nnoremap <leader>u :silent! prev<CR>:args<CR>
-" nnoremap <leader>i :silent! next<CR>:args<CR>
-" nnoremap <leader>a :$argedit %<CR>:args<CR>
-" nnoremap <leader>d :argdelete %<CR>:args<CR>
-
-" fuzzy finding, (fzf plugin)
-nnoremap <leader>f :Files<CR>
-nnoremap <leader>b :BLines<CR>
-
-" Vimgrep for word under coursor
-nnoremap <C-p><C-f> :lvimgrep /\<<C-r><C-w>\>/j %<CR>
-nnoremap <C-p><C-p> :lvimgrep /\<<C-r><C-w>\>/j **/*
-
 " quickfix movement
-" nnoremap [q :cprev<CR>
-" nnoremap ]q :cnext<CR>
 nnoremap <esc>Q :cprev<CR>
 nnoremap <esc>q :cnext<CR>
-nnoremap <leader>q :copen15<CR>
-nnoremap <leader>Q :cclose<CR>
-" this toggle functions doesnt work well with multiple loc-lists open
-" nnoremap <expr> <leader>q empty(filter(getwininfo(), 'v:val.quickfix')) ? ':copen<CR>' : ':cclose<CR>'
+call ToggleMap("quickfix_list_open_close", "<leader>q", "copen15", "cclose")
 
 " loc-list movement
-" nnoremap [w :lprev<CR>
-" nnoremap ]w :lnext<CR>
 nnoremap <esc>W :lprev<CR>
 nnoremap <esc>w :lnext<CR>
-nnoremap <leader>w :lopen15<CR>
-nnoremap <leader>W :lclose<CR>
+call ToggleMap("loc_list_open_close", "<leader>w", "lopen15", "lclose")
 
+" ale
+call ToggleMap("ale_hover_open_close", "<leader>fh", "ALEHover", "pclose")
+nnoremap <leader>fd :ALEGoToDefinition<CR>
+nnoremap <leader>fs :ALEGoToTypeDefinition<CR>
+nnoremap <leader>fe :ALEPopulateQuickfix<CR>
+nnoremap <leader>fr :ALEFindReferences -quickfix<CR>
+
+" fuzzy finding, (fzf plugin)
+nnoremap <leader>ff :Files<CR>
+nnoremap <leader>fb :BLines<CR>
+
+" Vimgrep for word under coursor
+nnoremap <leader>fg :lvimgrep /\<<C-r><C-w>\>/j %<CR>
+nnoremap <leader>fp :lvimgrep /\<<C-r><C-w>\>/j **/*
+
+" Basic insertmode word completion
+set completeopt=longest,menuone
+inoremap <C-i><C-i> <C-x><C-n>
+inoremap <C-i><C-o> <C-x><C-o>
+inoremap <C-i><C-f> <C-x><C-f>
+inoremap <C-i><C-p> <C-x>s
+
+" popup menu navigation
+imap <expr> <CR> pumvisible() ? "\<C-y>" : "\<CR>"
+imap <expr> <C-j> pumvisible() ? "\<C-n>" : "\<C-j>"
+imap <expr> <C-k> pumvisible() ? "\<C-p>" : "\<C-k>"
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
