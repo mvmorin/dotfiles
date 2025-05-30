@@ -251,10 +251,11 @@ nnoremap <leader>fp :lvimgrep /\<<C-r><C-w>\>/j **/*
 
 " Basic insertmode word completion
 set completeopt=longest,menuone
-inoremap <C-i><C-i> <C-x><C-n>
-inoremap <C-i><C-o> <C-x><C-o>
-inoremap <C-i><C-f> <C-x><C-f>
-inoremap <C-i><C-p> <C-x>s
+inoremap <C-n> <C-x><C-n>
+inoremap <C-n><C-n> <C-x><C-n>
+inoremap <C-n><C-o> <C-x><C-o>
+inoremap <C-n><C-f> <C-x><C-f>
+inoremap <C-n><C-p> <C-x>s
 
 " popup menu navigation
 imap <expr> <CR> pumvisible() ? "\<C-y>" : "\<CR>"

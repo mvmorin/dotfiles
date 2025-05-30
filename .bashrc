@@ -62,6 +62,40 @@ alias jbare='julia --startup-file=no'
 alias zathura='zathura --fork'
 alias tmuxa='tmux attach'
 
+planner501() {
+	echo "python3 planner5.py ${*@Q}"
+	ssh -T se-la-be-01 "cd electrictripplanner-web-devel/pylib; python3 planner5.py ${*@Q}"
+}
+
+be01() {
+	echo "${*@Q}"
+	ssh -T se-la-be-01 "cd electrictripplanner-web-devel/pylib; ${*@Q}"
+}
+
+deploy_morin_aws() {
+    if [[ -n "$(git status --porcelain)" ]]; then
+        echo "Git index is dirty, stash before deploying"
+        return
+    fi
+
+    branchname="$(git rev-parse --abbrev-ref HEAD)"
+    git checkout morinaws/deploy
+    git pull
+    git read-tree --reset -u ${branchname}
+    git commit -m "Deploy ${branchname} to morin aws"
+    git push
+    git checkout ${branchname}
+}
+
+comp() {
+    params=''
+    ./plannerpod.sh -n prod -f -z $1 -- python3 planner5.py $2 $params
+    ./plannerpod.sh -n morin -z $1 -- python3 planner5.py $2 $params
+}
+
+alias vpnon='sudo systemctl start gpd.service ; systemctl status gpd.service ; systemctl --user start gpa.service ; systemctl --user status gpa.service'
+alias vpnoff='systemctl --user stop gpa.service ; systemctl --user status gpa.service ; sudo systemctl stop gpd.service ; systemctl status gpd.service'
+
 ## fuzzy commands
 zd() {
 	DEFAULT=( \
