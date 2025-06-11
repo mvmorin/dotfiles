@@ -25,6 +25,7 @@ endif
 call plug#begin('~/.vim/plugged')
     " Colorschemes
     Plug 'gruvbox-community/gruvbox'
+    Plug 'christoomey/vim-tmux-navigator'
 
     " Extensions
     Plug 'tpope/vim-commentary' " gc+motion to comment/uncomment
@@ -201,17 +202,18 @@ endfunction
 vnoremap <leader>y "*y :let @+=@*<CR>
 nnoremap <leader>p "*]p
 
-" Window movement
-" TODO: try remove these and just use the default window movements to free up some prime leader bindings
-nnoremap <leader>h <C-w>h
-nnoremap <leader>j <C-w>j
-nnoremap <leader>k <C-w>k
-nnoremap <leader>l <C-w>l
+" Window mevement that allow for movement outside to tmux
+let g:tmux_navigator_disable_when_zoomed = 1
+let g:tmux_navigator_no_mappings = 1
+nnoremap <silent> <Esc>h :<C-U>TmuxNavigateLeft<CR>
+nnoremap <silent> <Esc>j :<C-U>TmuxNavigateDown<CR>
+nnoremap <silent> <Esc>k :<C-U>TmuxNavigateUp<CR>
+nnoremap <silent> <Esc>l :<C-U>TmuxNavigateRight<CR>
 
-nnoremap <leader>H <C-w>H
-nnoremap <leader>J <C-w>J
-nnoremap <leader>K <C-w>K
-nnoremap <leader>L <C-w>L
+nnoremap <Esc>H <C-w>H
+nnoremap <Esc>J <C-w>J
+nnoremap <Esc>K <C-w>K
+nnoremap <Esc>L <C-w>L
 
 nnoremap <Esc>, <C-w>><C-W>>
 nnoremap <Esc>m <C-w><<C-w><
