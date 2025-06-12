@@ -210,10 +210,10 @@ nnoremap <silent> <Esc>j :<C-U>TmuxNavigateDown<CR>
 nnoremap <silent> <Esc>k :<C-U>TmuxNavigateUp<CR>
 nnoremap <silent> <Esc>l :<C-U>TmuxNavigateRight<CR>
 
-nnoremap <Esc>H <C-w>H
-nnoremap <Esc>J <C-w>J
-nnoremap <Esc>K <C-w>K
-nnoremap <Esc>L <C-w>L
+nnoremap <leader><Esc>h <C-w>H
+nnoremap <leader><Esc>j <C-w>J
+nnoremap <leader><Esc>k <C-w>K
+nnoremap <leader><Esc>l <C-w>L
 
 nnoremap <Esc>, <C-w>><C-W>>
 nnoremap <Esc>m <C-w><<C-w><
