@@ -88,9 +88,8 @@ deploy_morin_aws() {
 }
 
 comp() {
-    params=''
-    ./plannerpod.sh -n prod -f -z $1 -- python3 planner5.py $2 $params
-    ./plannerpod.sh -n morin -z $1 -- python3 planner5.py $2 $params
+    ./plannerpod.sh -n prod -f -z $1 -- python3 planner5.py $2 $3
+    ./plannerpod.sh -n morin -z $1 -- python3 planner5.py $2 $3
 }
 
 alias vpnon='sudo systemctl start gpd.service ; systemctl status gpd.service ; systemctl --user start gpa.service ; systemctl --user status gpa.service'
@@ -117,7 +116,7 @@ zd() {
 
 # Launch tmux if it exists, not already in tmux, not logged in over ssh, and not
 # using i3
-if [ -n "$(which tmux 2>/dev/null)" ] && [ -z "$TMUX" ] && [ -z "$SSH_CLIENT" ] && [ "${XDG_SESSION_DESKTOP:0:2}" != "i3" ]; then
+if [ -n "$(which tmux 2>/dev/null)" ] && [ -z "$TMUX" ] && [ -z "$SSH_CLIENT" ] && [ "${XDG_SESSION_DESKTOP:0:2}" != "i3" ] && [ "${TERM_PROGRAM}" != "vscode" ]; then
 	# should do something more fance here to get easier session management
 	tmux new -A -s main
 fi

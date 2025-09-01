@@ -237,19 +237,19 @@ nnoremap <esc>w :lnext<CR>
 call ToggleMap("loc_list_open_close", "<leader>w", "lopen15", "lclose")
 
 " ale
-call ToggleMap("ale_hover_open_close", "<leader>fh", "ALEHover", "pclose")
-nnoremap <leader>fd :ALEGoToDefinition<CR>
-nnoremap <leader>fs :ALEGoToTypeDefinition<CR>
-nnoremap <leader>fe :ALEPopulateQuickfix<CR>
-nnoremap <leader>fr :ALEFindReferences -quickfix<CR>
+call ToggleMap("ale_hover_open_close", "<leader>h", "ALEHover", "pclose")
+nnoremap <leader>d :ALEGoToDefinition<CR>
+nnoremap <leader>t :ALEGoToTypeDefinition<CR>
+nnoremap <leader>e :ALEPopulateQuickfix<CR>
+nnoremap <leader>r :ALEFindReferences -quickfix<CR>
 
 " fuzzy finding, (fzf plugin)
-nnoremap <leader>ff :Files<CR>
-nnoremap <leader>fb :BLines<CR>
+nnoremap <leader>f :Files<CR>
+nnoremap <leader>b :BLines<CR>
 
 " Vimgrep for word under coursor
-nnoremap <leader>fg :lvimgrep /\<<C-r><C-w>\>/j %<CR>
-nnoremap <leader>fp :lvimgrep /\<<C-r><C-w>\>/j **/*
+nnoremap <leader>g :lvimgrep /\<<C-r><C-w>\>/j %<CR>
+nnoremap <leader>p :lvimgrep /\<<C-r><C-w>\>/j **/*
 
 " Basic insertmode word completion
 set completeopt=longest,menuone
