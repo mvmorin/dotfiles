@@ -92,8 +92,26 @@ comp() {
     ./plannerpod.sh -n morin -z $1 -- python3 planner5.py $2 $3
 }
 
-alias vpnon='sudo systemctl start gpd.service ; systemctl status gpd.service ; systemctl --user start gpa.service ; systemctl --user status gpa.service'
-alias vpnoff='systemctl --user stop gpa.service ; systemctl --user status gpa.service ; sudo systemctl stop gpd.service ; systemctl status gpd.service'
+vpnon() {
+    sudo systemctl start gpd.service
+    systemctl status gpd.service
+    systemctl --user start gpa.service
+    systemctl --user status gpa.service
+    globalprotect connect
+    globalprotect show --details
+}
+vpnoff() {
+    globalprotect disconnect
+    systemctl --user stop gpa.service
+    systemctl --user status gpa.service
+    sudo systemctl stop gpd.service
+    systemctl status gpd.service
+}
+vpnstatus() {
+    systemctl status gpd.service
+    systemctl --user status gpa.service
+    globalprotect show --details
+}
 
 ## fuzzy commands
 zd() {
