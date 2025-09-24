@@ -205,7 +205,7 @@ endfunction
 
 function! ToggleLocList()
     if !get(getloclist(0, {'winid': 0}), 'winid', 0)
-        lopen 15
+        silent! lopen 15
     else
         lclose
     endif
