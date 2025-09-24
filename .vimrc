@@ -180,23 +180,37 @@ let g:ale_completion_enabled = 1
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Remaps
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" helper functions to create mappings that toggle between two commands
-function! ToggleMap(name, bind, first, second)
-    execute 'let g:toggle_map_' . a:name . '="' . a:bind .'"'
-    execute 'nnoremap <silent>' a:bind ':call ToggleMapFirst("g:toggle_map_' . a:name . '", "' . a:first . '", "' . a:second . '")<CR>'
+function! ToggleAlePreview()
+    " let save_pos = getpos(".")
+    silent! wincmd P " jump to preview window
+    if &previewwindow " if we really get there...
+        silent! wincmd p " jump back
+        pclose
+    else
+        ALEHover
+    endif
+    " call setpos('.', save_pos)
 endfunction
 
-function! ToggleMapFirst(global_var, first, second) abort
-    execute a:first
-    execute 'let l:local_var=' . a:global_var
-    execute 'nnoremap <silent>' l:local_var ' :call ToggleMapSecond("' . a:global_var . '", "' . a:first . '", "' . a:second . '")<CR>'
+function! ToggleQuickList()
+    if !get(getqflist({'winid': 0}), 'winid', 0)
+        " calling copen 15 directly will for some reason double the window height if the location list also is open
+        " a workaround is to first open it and then resize it...
+        copen
+        copen 15
+    else
+        cclose
+    endif
 endfunction
 
-function! ToggleMapSecond(global_var, first, second) abort
-    execute a:second
-    execute 'let l:local_var=' . a:global_var
-    execute 'nnoremap <silent>' l:local_var ' :call ToggleMapFirst("' . a:global_var . '", "' . a:first . '", "' . a:second . '")<CR>'
+function! ToggleLocList()
+    if !get(getloclist(0, {'winid': 0}), 'winid', 0)
+        lopen 15
+    else
+        lclose
+    endif
 endfunction
+
 
 " Copy to system clipboard
 vnoremap <leader>y "*y :let @+=@*<CR>
@@ -229,19 +243,19 @@ nnoremap <leader>o <C-w>o
 " quickfix movement
 nnoremap <esc>Q :cprev<CR>
 nnoremap <esc>q :cnext<CR>
-call ToggleMap("quickfix_list_open_close", "<leader>q", "copen15", "cclose")
+nnoremap <leader>q :call ToggleQuickList()<CR>
 
 " loc-list movement
 nnoremap <esc>W :lprev<CR>
 nnoremap <esc>w :lnext<CR>
-call ToggleMap("loc_list_open_close", "<leader>w", "lopen15", "lclose")
+nnoremap <leader>w :call ToggleLocList()<CR>
 
 " ale
-call ToggleMap("ale_hover_open_close", "<leader>h", "ALEHover", "pclose")
 nnoremap <leader>d :ALEGoToDefinition<CR>
 nnoremap <leader>t :ALEGoToTypeDefinition<CR>
 nnoremap <leader>e :ALEPopulateQuickfix<CR>
 nnoremap <leader>r :ALEFindReferences -quickfix<CR>
+nnoremap <leader>h :call ToggleAlePreview()<CR>
 
 " fuzzy finding, (fzf plugin)
 nnoremap <leader>f :Files<CR>

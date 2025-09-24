@@ -97,8 +97,6 @@ vpnon() {
     systemctl status gpd.service
     systemctl --user start gpa.service
     systemctl --user status gpa.service
-    globalprotect connect
-    globalprotect show --details
 }
 vpnoff() {
     globalprotect disconnect
@@ -110,7 +108,6 @@ vpnoff() {
 vpnstatus() {
     systemctl status gpd.service
     systemctl --user status gpa.service
-    globalprotect show --details
 }
 
 ## fuzzy commands
